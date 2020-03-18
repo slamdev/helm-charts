@@ -13,7 +13,7 @@ jobs:
         id: lint
         uses: helm/chart-testing-action@v1.0.0-alpha.3
         env:
-          CT_CHART_DIRS: "${GITHUB_WORKSPACE}"
+          CT_CHART_DIRS: "/github/workspace"
         with:
           image: quay.io/helmpack/chart-testing:v3.0.0-beta.2
           command: lint
@@ -28,7 +28,7 @@ jobs:
       - name: Run chart-testing (install)
         uses: helm/chart-testing-action@v1.0.0-alpha.3
         env:
-          CT_CHART_DIRS: "${GITHUB_WORKSPACE}"
+          CT_CHART_DIRS: "/github/workspace"
         with:
           image: quay.io/helmpack/chart-testing:v3.0.0-beta.2
           command: install
