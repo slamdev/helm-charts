@@ -4,8 +4,6 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-set -x
-
 readonly CT_VERSION=latest
 readonly KIND_VERSION=v0.7.0
 readonly CLUSTER_NAME=chart-testing
@@ -57,7 +55,7 @@ create_kind_cluster() {
 }
 
 install_charts() {
-    docker_exec ct install --chart-dirs=.
+    docker_exec ct install
     echo
 }
 
