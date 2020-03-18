@@ -20,3 +20,5 @@ jobs:
         uses: helm/chart-releaser-action@v1.0.0-alpha.2
         env:
           CR_TOKEN: "${{ secrets.CHART_RELEASER_TOKEN }}"
+        with:
+          charts_dir: "."

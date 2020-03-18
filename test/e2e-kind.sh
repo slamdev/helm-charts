@@ -4,6 +4,8 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
+set -x
+
 readonly CT_VERSION=latest
 readonly KIND_VERSION=v0.7.0
 readonly CLUSTER_NAME=chart-testing
@@ -34,6 +36,7 @@ docker_exec() {
 create_kind_cluster() {
     echo 'Installing kind...'
 
+    mkdir -p build
     wget -nc -O build/kind "https://github.com/kubernetes-sigs/kind/releases/download/$KIND_VERSION/kind-$(uname)-amd64" || true
     chmod +x ./build/kind
 
