@@ -11,7 +11,7 @@ jobs:
 
       - name: Run chart-testing (lint)
         id: lint
-        uses: shield-9/chart-testing-action@master
+        uses: broadinstitute/chart-testing-action@master
         # https://github.com/helm/chart-testing-action/issues/19
         # uses: helm/chart-testing-action@v1.0.0-alpha.3
 #        env:
@@ -29,7 +29,7 @@ jobs:
         if: steps.lint.outputs.changed == 'true'
 
       - name: Run chart-testing (install)
-        uses: shield-9/chart-testing-action@master
+        uses: broadinstitute/chart-testing-action@master
         # https://github.com/helm/chart-testing-action/issues/19
         # uses: helm/chart-testing-action@v1.0.0-alpha.3
 #        env:
