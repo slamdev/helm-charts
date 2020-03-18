@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "nginx.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "nginx.labels" . | nindent 4 }}
+data:
+  nginx.conf: |-
+    {{ .Values.nginxConf | nindent 4 }}
+  entrypoint.sh: |-
+    {{ .Files.Get "files/entrypoint.sh" | nindent 4 }}
