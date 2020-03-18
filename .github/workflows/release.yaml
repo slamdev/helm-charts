@@ -17,8 +17,11 @@ jobs:
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
       - name: Run chart-releaser
-        uses: helm/chart-releaser-action@v1.0.0-alpha.2
+        # https://github.com/helm/chart-releaser/issues/56
+        # uses: helm/chart-releaser-action@v1.0.0-alpha.2
+        uses: mcuadros/chart-releaser-action@master
         env:
           CR_TOKEN: "${{ secrets.CHART_RELEASER_TOKEN }}"
         with:
           charts_dir: "."
+          version: "89c97cd5a8e28959ffe6c272b64c695d068f3f7f"
