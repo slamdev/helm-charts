@@ -13,7 +13,7 @@ jobs:
         id: lint
         uses: helm/chart-testing-action@v1.0.0-alpha.3
         with:
-          command: lint --chart-dirs=.
+          command: lint --chart-dirs=. --all
 
       - name: Create kind cluster
         uses: helm/kind-action@v1.0.0-alpha.3
@@ -25,4 +25,5 @@ jobs:
       - name: Run chart-testing (install)
         uses: helm/chart-testing-action@v1.0.0-alpha.3
         with:
-          command: install --chart-dirs=.
+          image: quay.io/helmpack/chart-testing:v3.0.0-beta.2
+          command: install --chart-dirs=. --all
