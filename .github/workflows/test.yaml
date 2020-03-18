@@ -12,5 +12,5 @@ jobs:
       - name: Run chart-testing (lint)
         run: make lint
 
-      - name: Create kind cluster
+      - name: Run chart-testing (install)
         run: make test
