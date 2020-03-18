@@ -11,7 +11,9 @@ jobs:
 
       - name: Run chart-testing (lint)
         id: lint
-        uses: helm/chart-testing-action@v1.0.0-alpha.3
+        uses: HexF/chart-testing-action@v3.0.0
+        # https://github.com/helm/chart-testing-action/issues/19
+        # uses: helm/chart-testing-action@v1.0.0-alpha.3
 #        env:
 #          CT_CHART_DIRS: "/github/workspace"
         with:
@@ -27,7 +29,9 @@ jobs:
         if: steps.lint.outputs.changed == 'true'
 
       - name: Run chart-testing (install)
-        uses: helm/chart-testing-action@v1.0.0-alpha.3
+        uses: HexF/chart-testing-action@v3.0.0
+        # https://github.com/helm/chart-testing-action/issues/19
+        # uses: helm/chart-testing-action@v1.0.0-alpha.3
 #        env:
 #          CT_CHART_DIRS: "/github/workspace"
         with:
