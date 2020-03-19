@@ -3,6 +3,21 @@ entries:
   nginx:
   - apiVersion: v2
     appVersion: 1.17.9
+    created: "2020-03-19T15:10:25.55388349Z"
+    description: Nginx Helm chart for Kubernetes
+    digest: ee7628b8e0772c82891f26a20a73ad72215cf8ae1353be4b3220c6cc8f000e97
+    home: https://github.com/slamdev/helm-charts
+    icon: https://www.nginx.com/wp-content/uploads/2019/10/favicon-48x48.ico
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: nginx
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/nginx-0.0.3/nginx-0.0.3.tgz
+    version: 0.0.3
+  - apiVersion: v2
+    appVersion: 1.17.9
     created: "2020-03-18T21:35:59.07106018Z"
     description: Nginx Helm chart for Kubernetes
     digest: a9f76db160e21c7a7d45a68f5a16cd262d1b8954a16bf61fb96fdfc9d2df8f55
