@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: external-secrets-operator
+  repository: slamdev/external-secrets-operator
   # Tag from chart's appVersion value will be used if not set
   tag: ""
   pullPolicy: IfNotPresent
