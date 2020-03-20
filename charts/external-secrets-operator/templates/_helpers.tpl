@@ -55,5 +55,5 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 Create the tag for the docker image to use
 */}}
 {{- define "external-secrets-operator.tag" -}}
-{{- .Values.image.tag | default (printf "%s-%s" .Chart.AppVersion "alpine-perl") -}}
+{{- .Values.image.tag | default .Chart.AppVersion -}}
 {{- end -}}
