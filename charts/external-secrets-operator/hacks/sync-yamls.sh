@@ -16,13 +16,13 @@ fi
 
 REPO_URL="https://github.com/slamdev/external-secrets-operator/archive/${APP_VERSION}.zip"
 
-#wget -O ${BUILD_PATH}/repo.zip ${REPO_URL}
-#unzip -n "${BUILD_PATH}/repo.zip" -d ${BUILD_PATH}
-#rm "${BUILD_PATH}/repo.zip"
+wget -O ${BUILD_PATH}/repo.zip ${REPO_URL}
+unzip -n "${BUILD_PATH}/repo.zip" -d ${BUILD_PATH}
+rm "${BUILD_PATH}/repo.zip"
 
 REPO_PATH="${BUILD_PATH}/external-secrets-operator-${APP_VERSION}"
 
-#cp -R "${REPO_PATH}/config/samples/" "${CHART_PATH}/examples/"
+cp -R "${REPO_PATH}/config/samples/" "${CHART_PATH}/examples/"
 
 rm -rf xx* && csplit -s -k ${REPO_PATH}/k8s/k8s.yaml '/^---/' '{99}' || true
 
