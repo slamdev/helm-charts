@@ -3,8 +3,6 @@
 set -o errexit
 set -o nounset
 
-set -x
-
 CHART_PATH=../
 BUILD_PATH="${CHART_PATH}/../../build"
 
