@@ -17,3 +17,6 @@ lint:
 .PHONY: test
 test:
 	./test/e2e-kind.sh
+
+docs:
+	helm-docs
