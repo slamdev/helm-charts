@@ -2,8 +2,8 @@
 
 This repository contains [Helm](https://helm.sh) charts for various projects
 
-* [External Secrets Operator](charts/external-secrets-operator/)
-* [Nginx](charts/nginx/)
+* [External Secrets Operator](https://github.com/slamdev/helm-charts/tree/master/charts/external-secrets-operator)
+* [Nginx](https://github.com/slamdev/helm-charts/tree/master/charts/nginx)
 
 ## Installing Charts from this Repository
 
