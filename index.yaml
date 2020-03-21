@@ -3,6 +3,21 @@ entries:
   external-secrets-operator:
   - apiVersion: v2
     appVersion: latest
+    created: "2020-03-21T12:47:20.08177324Z"
+    description: external-secrets-operator Helm chart for Kubernetes
+    digest: 997e158d3717ff2cd8ace34671cb696b6d76bf37c922d7e031bd9b92fedeb22a
+    home: https://github.com/slamdev/external-secrets-operator
+    icon: https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Emblem-question.svg/1200px-Emblem-question.svg.png
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: external-secrets-operator
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/external-secrets-operator-0.0.2/external-secrets-operator-0.0.2.tgz
+    version: 0.0.2
+  - apiVersion: v2
+    appVersion: latest
     created: "2020-03-20T22:28:41.325620365Z"
     description: external-secrets-operator Helm chart for Kubernetes
     digest: 2b01a209e3b2b00a3d7d9e65a137a95ba5a207c061d3428b065069b22982cd81
