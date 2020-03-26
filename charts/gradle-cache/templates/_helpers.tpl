@@ -66,5 +66,5 @@ Create the name of the service account to use
 Create the tag for the docker image to use
 */}}
 {{- define "gradle-cache.tag" -}}
-{{- .Values.image.tag | default (printf "%s-%s" .Chart.AppVersion "alpine-perl") -}}
+{{- .Values.image.tag | default .Chart.AppVersion -}}
 {{- end -}}

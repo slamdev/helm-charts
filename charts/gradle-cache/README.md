@@ -2,7 +2,7 @@ gradle-cache
 ============
 Helm chart to deploy [gradle-cache](https://docs.gradle.com/build-cache-node/).
 
-Current chart version is `0.0.2`
+Current chart version is `0.0.3`
 
 Source code can be found [here](https://github.com/slamdev/helm-charts/tree/master/charts/gradle-cache)
 
