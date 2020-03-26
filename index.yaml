@@ -74,6 +74,21 @@ entries:
   gradle-cache:
   - apiVersion: v2
     appVersion: "9"
+    created: "2020-03-26T11:00:56.246277055Z"
+    description: Helm chart to deploy [gradle-cache](https://docs.gradle.com/build-cache-node/).
+    digest: 1858bb0f81192c4ec5471ef48d777c74b36262ab6f848a2ca89a20006572a4a3
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/gradle-cache
+    icon: https://gradle.org/icon/favicon-32x32.png
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: gradle-cache
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/gradle-cache-0.0.3/gradle-cache-0.0.3.tgz
+    version: 0.0.3
+  - apiVersion: v2
+    appVersion: "9"
     created: "2020-03-26T10:33:36.295977804Z"
     description: Helm chart to deploy [gradle-cache](https://docs.gradle.com/build-cache-node/).
     digest: fee198c1da04a626fcaba80b253365db1ebcade869322bb4feb267b17636a9d9
