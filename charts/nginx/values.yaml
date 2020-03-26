@@ -2,7 +2,7 @@
 replicaCount: 1
 
 image:
-  # image.repository -- external-secrets-operator image.
+  # image.repository -- image repository
   repository: nginx
   # image.tag -- image tag (chart's appVersion value will be used if not set)
   tag: ""

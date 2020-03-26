@@ -4,7 +4,7 @@ Helm chart to deploy [nginx](https://www.nginx.com).
 
 Chart supports environment variables inside of the nginx.conf file.
 
-Current chart version is `0.0.4`
+Current chart version is `0.0.5`
 
 Source code can be found [here](https://github.com/slamdev/helm-charts/tree/master/charts/nginx)
 
@@ -18,7 +18,7 @@ Source code can be found [here](https://github.com/slamdev/helm-charts/tree/mast
 | env | list | `[]` | additional environment variables for the deployment |
 | fullnameOverride | string | `""` | full name of the chart. |
 | image.pullPolicy | string | `"IfNotPresent"` | image pull policy |
-| image.repository | string | `"nginx"` | external-secrets-operator image. |
+| image.repository | string | `"nginx"` | image repository |
 | image.tag | string | `""` | image tag (chart's appVersion value will be used if not set) |
 | imagePullSecrets | list | `[]` | image pull secret for private images |
 | ingress.annotations | object | `{}` | ingress annotations |
