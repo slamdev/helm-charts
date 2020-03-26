@@ -4,7 +4,7 @@ Helm chart to deploy [nginx](https://www.nginx.com).
 
 Chart supports environment variables inside of the nginx.conf file.
 
-Current chart version is `0.0.5`
+Current chart version is `0.0.6`
 
 Source code can be found [here](https://github.com/slamdev/helm-charts/tree/master/charts/nginx)
 
