@@ -3,6 +3,26 @@ entries:
   external-secrets-operator:
   - apiVersion: v2
     appVersion: 0.0.1
+    created: "2020-03-26T10:33:36.155666714Z"
+    description: |-
+      Helm chart to deploy [external-secrets-operator](https://github.com/slamdev/external-secrets-operator).
+
+      External Secrets Operator watches changes in external key-value backends to sync them with Kubernetes Secrets and ConfigMaps.
+
+      Refer to operator repo for additional information.
+    digest: 85ae265716a954db24d445035da8c3e81684806c7bf9f0c2520776ae477224ac
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/external-secrets-operator
+    icon: https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Emblem-question.svg/1200px-Emblem-question.svg.png
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: external-secrets-operator
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/external-secrets-operator-0.0.5/external-secrets-operator-0.0.5.tgz
+    version: 0.0.5
+  - apiVersion: v2
+    appVersion: 0.0.1
     created: "2020-03-21T14:10:31.540557659Z"
     description: |-
       Helm chart to deploy [external-secrets-operator](https://github.com/slamdev/external-secrets-operator).
@@ -51,7 +71,41 @@ entries:
     urls:
     - https://github.com/slamdev/helm-charts/releases/download/external-secrets-operator-0.0.1/external-secrets-operator-0.0.1.tgz
     version: 0.0.1
+  gradle-cache:
+  - apiVersion: v2
+    appVersion: "9"
+    created: "2020-03-26T10:33:36.295977804Z"
+    description: Helm chart to deploy [gradle-cache](https://docs.gradle.com/build-cache-node/).
+    digest: fee198c1da04a626fcaba80b253365db1ebcade869322bb4feb267b17636a9d9
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/gradle-cache
+    icon: https://gradle.org/icon/favicon-32x32.png
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: gradle-cache
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/gradle-cache-0.0.2/gradle-cache-0.0.2.tgz
+    version: 0.0.2
   nginx:
+  - apiVersion: v2
+    appVersion: 1.17.9
+    created: "2020-03-26T10:33:36.377328227Z"
+    description: |-
+      Helm chart to deploy [nginx](https://www.nginx.com).
+
+      Chart supports environment variables inside of the nginx.conf file.
+    digest: 17d0877afdb461eb34fb45b9be9ff10e9def0807d7d3f9e4e2e459ed23cbf0a6
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/nginx
+    icon: https://www.nginx.com/wp-content/uploads/2019/10/favicon-48x48.ico
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: nginx
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/nginx-0.0.6/nginx-0.0.6.tgz
+    version: 0.0.6
   - apiVersion: v2
     appVersion: 1.17.9
     created: "2020-03-21T14:10:31.698068138Z"
