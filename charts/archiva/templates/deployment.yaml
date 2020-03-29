@@ -1,0 +1,94 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "archiva.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "archiva.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "archiva.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "archiva.selectorLabels" . | nindent 8 }}
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      serviceAccountName: {{ include "archiva.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+        - name: init
+          image: busybox
+          command:
+            - sh
+            - -c
+          args:
+            - cp /tmp-conf/archiva.xml /archiva-templates/conf/archiva.xml;
+              echo "<configuration />" > /archiva-templates/conf/shared.xml;
+              chown -R 1000:1000 /archiva-templates;
+              chown -R 1000:1000 /archiva-data;
+          volumeMounts:
+            - name: {{ include "archiva.fullname" . }}
+              mountPath: /tmp-conf/archiva.xml
+              subPath: archiva.xml
+            - name: {{ include "archiva.fullname" . }}-shared
+              mountPath: /archiva-templates/conf/
+        {{- with .Values.volumeMounts }}
+            {{- toYaml . | nindent 12 }}
+        {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ include "archiva.tag" . }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          livenessProbe:
+            {{- toYaml .Values.livenessProbe | nindent 12 }}
+          readinessProbe:
+            {{- toYaml .Values.readinessProbe | nindent 12 }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+        {{- with .Values.env }}
+          env:
+            {{- toYaml . | nindent 12 }}
+        {{- end }}
+          volumeMounts:
+            - name: {{ include "archiva.fullname" . }}-shared
+              mountPath: /archiva-templates/conf/
+        {{- with .Values.volumeMounts }}
+            {{- toYaml . | nindent 12 }}
+        {{- end }}
+      volumes:
+        - name: {{ include "archiva.fullname" . }}-shared
+          emptyDir: {}
+        - name: {{ include "archiva.fullname" . }}
+          configMap:
+            name: {{ include "archiva.fullname" . }}
+            items:
+              - key: archiva.xml
+                path: archiva.xml
+    {{- with .Values.volumes }}
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
