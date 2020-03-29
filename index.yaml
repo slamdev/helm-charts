@@ -1,5 +1,21 @@
 apiVersion: v1
 entries:
+  archiva:
+  - apiVersion: v2
+    appVersion: v2.2.4-1
+    created: "2020-03-29T21:51:41.125937418Z"
+    description: Helm chart to deploy [archiva](https://hub.docker.com/r/xetusoss/archiva/).
+    digest: 2f93e25920dea6b3d32faa15db3263bd26c5de7b7b18b3b45a1d9ced72bee499
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/archiva
+    icon: http://archiva.apache.org/images/archiva.png
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: archiva
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/archiva-0.0.1/archiva-0.0.1.tgz
+    version: 0.0.1
   external-secrets-operator:
   - apiVersion: v2
     appVersion: 0.0.3
