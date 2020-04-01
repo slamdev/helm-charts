@@ -19,6 +19,26 @@ entries:
   external-secrets-operator:
   - apiVersion: v2
     appVersion: 0.0.3
+    created: "2020-04-01T19:06:20.799384425Z"
+    description: |-
+      Helm chart to deploy [external-secrets-operator](https://github.com/slamdev/external-secrets-operator).
+
+      External Secrets Operator watches changes in external key-value backends to sync them with Kubernetes Secrets and ConfigMaps.
+
+      Refer to operator repo for additional information.
+    digest: 9dc6f2ea2e7843f52528ea4f95b1bf8a0fed1ef93df7980218fda977ca3163f1
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/external-secrets-operator
+    icon: https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Emblem-question.svg/1200px-Emblem-question.svg.png
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: external-secrets-operator
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/external-secrets-operator-0.0.8/external-secrets-operator-0.0.8.tgz
+    version: 0.0.8
+  - apiVersion: v2
+    appVersion: 0.0.3
     created: "2020-03-27T09:22:34.294817013Z"
     description: |-
       Helm chart to deploy [external-secrets-operator](https://github.com/slamdev/external-secrets-operator).
@@ -240,4 +260,20 @@ entries:
     urls:
     - https://github.com/slamdev/helm-charts/releases/download/nginx-0.0.2/nginx-0.0.2.tgz
     version: 0.0.2
+  weblate:
+  - apiVersion: v2
+    appVersion: 3.11.3-1
+    created: "2020-04-01T19:06:20.894289195Z"
+    description: Helm chart to deploy [weblate](https://hub.docker.com/r/weblate/weblate/).
+    digest: 9cf990f0ab36ddddffa6e49fff9fe5ecc7630462c1e7a6f1e402483bc36088a0
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/weblate
+    icon: https://weblate.org/static/weblate-180.png
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: weblate
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/weblate-0.0.1/weblate-0.0.1.tgz
+    version: 0.0.1
 generated: "2020-03-18T21:35:58.993159574Z"
