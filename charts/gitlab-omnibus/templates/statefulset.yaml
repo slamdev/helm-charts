@@ -1,0 +1,99 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "gitlab.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "gitlab.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "gitlab.selectorLabels" . | nindent 6 }}
+  serviceName: {{ include "gitlab.fullname" . }}
+  template:
+    metadata:
+      labels:
+        {{- include "gitlab.selectorLabels" . | nindent 8 }}
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      serviceAccountName: {{ include "gitlab.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ include "gitlab.tag" . }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 80
+            - name: https
+              containerPort: 443
+            - name: ssh
+              containerPort: 22
+            - name: http-gitlab-exp
+              containerPort: 9168
+            - name: http-node-exp
+              containerPort: 9100
+            - name: http-nginx-exp
+              containerPort: 8060
+          livenessProbe:
+            {{- toYaml .Values.livenessProbe | nindent 12 }}
+          readinessProbe:
+            {{- toYaml .Values.readinessProbe | nindent 12 }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          env:
+            - name: GITLAB_OMNIBUS_CONFIG
+              value: 'from_file "/etc/gitlab-provisioned-config.rb"'
+          {{- with .Values.env }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+        {{- with .Values.envFrom }}
+          envFrom:
+        {{- end }}
+          volumeMounts:
+            - name: data
+              mountPath: "/var/opt/gitlab"
+            - name: logs
+              mountPath: "/var/log/gitlab"
+            - name: config
+              mountPath: "/etc/gitlab"
+            - name: provisioned-config
+              mountPath: /etc/gitlab-provisioned-config.rb
+              subPath: gitlab.rb
+        {{- with .Values.volumeMounts }}
+            {{- toYaml . | nindent 12 }}
+        {{- end }}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      volumes:
+        - name: provisioned-config
+          secret:
+            secretName: {{ include "gitlab.fullname" . }}
+            items:
+              - key: gitlab.rb
+                path: gitlab.rb
+                mode: 292 # 0444
+      {{- with .Values.volumes }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+{{- with .Values.volumeClaimTemplates }}
+  volumeClaimTemplates:
+    {{- toYaml . | nindent 4 }}
+{{- end }}

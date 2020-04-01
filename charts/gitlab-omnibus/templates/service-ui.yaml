@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "gitlab.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "gitlab.labels" . | nindent 4 }}
+    component: 'monitoring'
+  {{- with .Values.service.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  type: {{ .Values.service.type }}
+  {{- if .Values.service.loadBalancerIP }}
+  loadBalancerIP: "{{ .Values.service.loadBalancerIP }}"
+  {{- end }}
+  ports:
+  {{- with .Values.service.ports }}
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  selector:
+    {{- include "gitlab.selectorLabels" . | nindent 4 }}
