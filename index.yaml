@@ -147,6 +147,22 @@ entries:
     urls:
     - https://github.com/slamdev/helm-charts/releases/download/external-secrets-operator-0.0.1/external-secrets-operator-0.0.1.tgz
     version: 0.0.1
+  gitlab-omnibus:
+  - apiVersion: v2
+    appVersion: 12.9.2-ee.0
+    created: "2020-04-01T21:17:44.164234438Z"
+    description: Helm chart to deploy [Omnibus Gitlab](https://docs.gitlab.com/omnibus/).
+    digest: 240177068e7436f2d3a3a1f48a8730fb4a38ae802177c30f68eb6dfc9dccf5f4
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/gitlab-omnibus
+    icon: https://docs.gitlab.com/assets/images/gitlab-logo.svg
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: gitlab-omnibus
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/gitlab-omnibus-0.0.1/gitlab-omnibus-0.0.1.tgz
+    version: 0.0.1
   gradle-cache:
   - apiVersion: v2
     appVersion: "9.0"
