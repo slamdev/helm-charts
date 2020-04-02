@@ -1,0 +1,41 @@
+{{- if .Values.backupCronJob.enabled -}}
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ include "gitlab.fullname" . }}-backup
+  namespace: {{ .Release.Namespace }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: {{ include "gitlab.fullname" . }}-backup
+  namespace: {{ .Release.Namespace }}
+rules:
+  - apiGroups:
+      - ''
+    resources:
+      - pods
+    verbs:
+      - get
+      - list
+  - apiGroups:
+      - ''
+    resources:
+      - pods/exec
+    verbs:
+      - create
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ include "gitlab.fullname" . }}-backup
+  namespace: {{ .Release.Namespace }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: {{ include "gitlab.fullname" . }}-backup
+subjects:
+  - kind: ServiceAccount
+    name: {{ include "gitlab.fullname" . }}-backup
+
+{{- end -}}

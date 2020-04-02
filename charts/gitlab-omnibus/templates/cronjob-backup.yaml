@@ -1,0 +1,42 @@
+{{- if .Values.backupCronJob.enabled -}}
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: {{ include "gitlab.fullname" . }}-backup
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "gitlab.labels" . | nindent 4 }}
+    component: 'backup'
+spec:
+  concurrencyPolicy: Forbid
+  schedule: {{ .Values.backupCronJob.schedule | quote }}
+  jobTemplate:
+    metadata:
+      labels:
+        {{- include "gitlab.selectorLabels" . | nindent 8 }}
+        component: 'backup'
+    spec:
+      template:
+        metadata:
+          labels:
+            {{- include "gitlab.selectorLabels" . | nindent 12 }}
+            component: 'backup'
+        spec:
+        {{- with .Values.imagePullSecrets }}
+          imagePullSecrets:
+          {{- toYaml . | nindent 12 }}
+        {{- end }}
+          serviceAccountName: {{ include "gitlab.serviceAccountName" . }}
+          restartPolicy: Never
+          containers:
+            - name: {{ .Chart.Name }}
+              image: {{ .Values.backupCronJob.image }}
+              args:
+                - exec
+                - sts/{{ include "gitlab.fullname" . }}
+                - -n{{ .Release.Namespace }}
+                - --
+                {{- with .Values.backupCronJob.command }}
+                {{- toYaml . | nindent 16 }}
+                {{- end }}
+{{- end -}}

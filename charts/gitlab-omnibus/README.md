@@ -2,7 +2,7 @@ gitlab-omnibus
 ==============
 Helm chart to deploy [Omnibus Gitlab](https://docs.gitlab.com/omnibus/).
 
-Current chart version is `0.0.1`
+Current chart version is `0.0.2`
 
 Source code can be found [here](https://github.com/slamdev/helm-charts/tree/master/charts/gitlab-omnibus)
 
@@ -13,6 +13,10 @@ Source code can be found [here](https://github.com/slamdev/helm-charts/tree/mast
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | affinity | object | `{}` | affinity for scheduler pod assignment |
+| backupCronJob.command | list | `["gitlab-backup","create","SKIP=uploads,builds,artifacts,registry,pages","GZIP_RSYNCABLE=yes","STRATEGY=copy"]` | command to execute in gitlab container |
+| backupCronJob.enabled | bool | `true` | enable scheduled backups |
+| backupCronJob.image | string | `"wernight/kubectl"` | image |
+| backupCronJob.schedule | string | `"@daily"` | how often to run backaup job |
 | env | list | `[]` | environment variables for the container |
 | envFrom | list | `[]` | environment variable sources for the container |
 | fullnameOverride | string | `""` | full name of the chart. |

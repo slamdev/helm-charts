@@ -127,3 +127,18 @@ envFrom: []
 gitlabConf: |-
   external_url 'https://gitlab.example.com'
   gitlab_rails['initial_root_password'] = ENV['GITLAB_INITIAL_ROOT_PASSWORD']
+
+backupCronJob:
+  # backupCronJob.enabled -- enable scheduled backups
+  enabled: true
+  # backupCronJob.schedule -- how often to run backaup job
+  schedule: "@daily"
+  # backupCronJob.image -- image
+  image: wernight/kubectl
+  # backupCronJob.command -- command to execute in gitlab container
+  command:
+    - gitlab-backup
+    - create
+    - SKIP=uploads,builds,artifacts,registry,pages
+    - GZIP_RSYNCABLE=yes
+    - STRATEGY=copy
