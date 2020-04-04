@@ -83,16 +83,16 @@ volumes:
 
 # volumeClaimTemplates -- volume claim templates
 volumeClaimTemplates: []
-#  apiVersion: v1
-#  kind: PersistentVolumeClaim
-#  metadata:
-#    name: data
-#  spec:
-#    accessModes:
-#      - ReadWriteOnce
-#    resources:
-#      requests:
-#        storage: 10Gi
+#  - apiVersion: v1
+#    kind: PersistentVolumeClaim
+#    metadata:
+#      name: data
+#    spec:
+#      accessModes:
+#        - ReadWriteOnce
+#      resources:
+#        requests:
+#          storage: 10Gi
 
 livenessProbe:
   httpGet:
