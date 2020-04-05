@@ -150,6 +150,21 @@ entries:
   gitlab-omnibus:
   - apiVersion: v2
     appVersion: 12.9.2-ee.0
+    created: "2020-04-05T12:56:24.792761105Z"
+    description: Helm chart to deploy [Omnibus Gitlab](https://docs.gitlab.com/omnibus/).
+    digest: 22776f9704b8b53cf7f43c789155a4601d43035dedb11380c9faf11526ec854c
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/gitlab-omnibus
+    icon: https://docs.gitlab.com/assets/images/gitlab-logo.svg
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: gitlab-omnibus
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/gitlab-omnibus-0.0.4/gitlab-omnibus-0.0.4.tgz
+    version: 0.0.4
+  - apiVersion: v2
+    appVersion: 12.9.2-ee.0
     created: "2020-04-04T14:53:17.185696831Z"
     description: Helm chart to deploy [Omnibus Gitlab](https://docs.gitlab.com/omnibus/).
     digest: 17ca7bfadaf5860c3409faccf918ae63e8d1a26d53b6ffe56155c7f7cbd70058
