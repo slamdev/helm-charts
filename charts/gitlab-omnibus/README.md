@@ -2,7 +2,7 @@ gitlab-omnibus
 ==============
 Helm chart to deploy [Omnibus Gitlab](https://docs.gitlab.com/omnibus/).
 
-Current chart version is `0.0.4`
+Current chart version is `0.0.5`
 
 Source code can be found [here](https://github.com/slamdev/helm-charts/tree/master/charts/gitlab-omnibus)
 

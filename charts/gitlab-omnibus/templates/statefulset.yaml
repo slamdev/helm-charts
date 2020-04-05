@@ -56,6 +56,7 @@ spec:
           {{- end }}
         {{- with .Values.envFrom }}
           envFrom:
+          {{- toYaml . | nindent 12 }}
         {{- end }}
           volumeMounts:
             - name: data
