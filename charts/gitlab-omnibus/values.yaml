@@ -95,6 +95,8 @@ volumeClaimTemplates: []
 #          storage: 10Gi
 
 livenessProbe:
+  # livenessProbe.initialDelaySeconds -- initial delay in seconds
+  initialDelaySeconds: 90
   httpGet:
     # livenessProbe.httpGet.path -- path for liveness probe
     path: /-/liveness
@@ -102,6 +104,8 @@ livenessProbe:
     port: http
 
 readinessProbe:
+  # readinessProbe.initialDelaySeconds -- initial delay in seconds
+  initialDelaySeconds: 90
   httpGet:
     # readinessProbe.httpGet.path -- path for readiness probe
     path: /-/readiness

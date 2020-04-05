@@ -2,7 +2,7 @@ gitlab-omnibus
 ==============
 Helm chart to deploy [Omnibus Gitlab](https://docs.gitlab.com/omnibus/).
 
-Current chart version is `0.0.5`
+Current chart version is `0.0.6`
 
 Source code can be found [here](https://github.com/slamdev/helm-charts/tree/master/charts/gitlab-omnibus)
 
@@ -27,11 +27,13 @@ Source code can be found [here](https://github.com/slamdev/helm-charts/tree/mast
 | imagePullSecrets | list | `[]` | image pull secret for private images |
 | livenessProbe.httpGet.path | string | `"/-/liveness"` | path for liveness probe |
 | livenessProbe.httpGet.port | string | `"http"` | port for liveness probe |
+| livenessProbe.initialDelaySeconds | int | `90` | initial delay in seconds |
 | nameOverride | string | `""` | override name of the chart |
 | nodeSelector | object | `{}` | node for scheduler pod assignment |
 | podSecurityContext | object | `{}` | specifies security settings for a pod |
 | readinessProbe.httpGet.path | string | `"/-/readiness"` | path for readiness probe |
 | readinessProbe.httpGet.port | string | `"http"` | port for readiness probe |
+| readinessProbe.initialDelaySeconds | int | `90` | initial delay in seconds |
 | resources | object | `{}` | custom resource configuration |
 | securityContext | object | `{"privileged":true}` | specifies security settings for a container |
 | service.annotations | object | `{}` | service annotations |
