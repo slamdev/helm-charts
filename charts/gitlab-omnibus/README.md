@@ -2,7 +2,7 @@ gitlab-omnibus
 ==============
 Helm chart to deploy [Omnibus Gitlab](https://docs.gitlab.com/omnibus/).
 
-Current chart version is `0.0.2`
+Current chart version is `0.0.4`
 
 Source code can be found [here](https://github.com/slamdev/helm-charts/tree/master/charts/gitlab-omnibus)
 
@@ -22,7 +22,7 @@ Source code can be found [here](https://github.com/slamdev/helm-charts/tree/mast
 | fullnameOverride | string | `""` | full name of the chart. |
 | gitlabConf | string | `"external_url 'https://gitlab.example.com'\ngitlab_rails['initial_root_password'] = ENV['GITLAB_INITIAL_ROOT_PASSWORD']"` | config for gitlab.rb https://docs.gitlab.com/omnibus/settings/configuration.html |
 | image.pullPolicy | string | `"IfNotPresent"` | image pull policy |
-| image.repository | string | `"gitlab/gitlab"` | image repository |
+| image.repository | string | `"gitlab/gitlab-ee"` | image repository |
 | image.tag | string | `""` | image tag (chart's appVersion value will be used if not set) |
 | imagePullSecrets | list | `[]` | image pull secret for private images |
 | livenessProbe.httpGet.path | string | `"/-/liveness"` | path for liveness probe |

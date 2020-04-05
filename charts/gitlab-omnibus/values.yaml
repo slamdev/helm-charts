@@ -1,6 +1,6 @@
 image:
   # image.repository -- image repository
-  repository: gitlab/gitlab
+  repository: gitlab/gitlab-ee
   # image.tag -- image tag (chart's appVersion value will be used if not set)
   tag: ""
   # image.pullPolicy -- image pull policy
