@@ -31,6 +31,8 @@ spec:
           containers:
             - name: {{ .Chart.Name }}
               image: {{ .Values.backupCronJob.image }}
+              command:
+                - kubectl
               args:
                 - exec
                 - sts/{{ include "gitlab.fullname" . }}

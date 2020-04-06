@@ -138,7 +138,7 @@ backupCronJob:
   # backupCronJob.schedule -- how often to run backaup job
   schedule: "@daily"
   # backupCronJob.image -- image
-  image: wernight/kubectl
+  image: daedalusproject/base_kubectl
   # backupCronJob.command -- command to execute in gitlab container
   command:
     - gitlab-backup
