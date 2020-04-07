@@ -6,7 +6,7 @@ External Secrets Operator watches changes in external key-value backends to sync
 
 Refer to operator repo for additional information.
 
-Current chart version is `0.0.8`
+Current chart version is `0.0.9`
 
 Source code can be found [here](https://github.com/slamdev/helm-charts/tree/master/charts/external-secrets-operator)
 
