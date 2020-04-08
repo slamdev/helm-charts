@@ -18,6 +18,26 @@ entries:
     version: 0.0.1
   external-secrets-operator:
   - apiVersion: v2
+    appVersion: 0.0.4
+    created: "2020-04-08T17:07:26.172438086Z"
+    description: |-
+      Helm chart to deploy [external-secrets-operator](https://github.com/slamdev/external-secrets-operator).
+
+      External Secrets Operator watches changes in external key-value backends to sync them with Kubernetes Secrets and ConfigMaps.
+
+      Refer to operator repo for additional information.
+    digest: 23f5df7fe6b88e109a3974100a27180498495f4a5cfe07c396e78b8b881da1a4
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/external-secrets-operator
+    icon: https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Emblem-question.svg/1200px-Emblem-question.svg.png
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: external-secrets-operator
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/external-secrets-operator-0.0.10/external-secrets-operator-0.0.10.tgz
+    version: 0.0.10
+  - apiVersion: v2
     appVersion: 0.0.3
     created: "2020-04-07T14:15:52.651575832Z"
     description: |-
@@ -402,6 +422,21 @@ entries:
     - https://github.com/slamdev/helm-charts/releases/download/nginx-0.0.2/nginx-0.0.2.tgz
     version: 0.0.2
   weblate:
+  - apiVersion: v2
+    appVersion: 3.11.3-1
+    created: "2020-04-08T17:07:26.259960216Z"
+    description: Helm chart to deploy [weblate](https://hub.docker.com/r/weblate/weblate/).
+    digest: 093c06b009cd5a4d94e419cea0d591b8968b23aa3995dd9499fdb15e13dee706
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/weblate
+    icon: https://weblate.org/static/weblate-180.png
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: weblate
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/weblate-0.0.2/weblate-0.0.2.tgz
+    version: 0.0.2
   - apiVersion: v2
     appVersion: 3.11.3-1
     created: "2020-04-01T19:06:20.894289195Z"
