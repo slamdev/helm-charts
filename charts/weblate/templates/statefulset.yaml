@@ -23,6 +23,17 @@ spec:
       serviceAccountName: {{ include "weblate.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+        - name: init
+          image: busybox
+          command:
+            - sh
+            - -c
+          args:
+            - chown -R {{ .Values.chownDataVolumeAs }} /app/data;
+          volumeMounts:
+            - mountPath: "/app/data"
+              name: data
       containers:
         - name: {{ .Chart.Name }}
           securityContext:

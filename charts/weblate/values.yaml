@@ -22,8 +22,12 @@ serviceAccount:
   name:
 
 # podSecurityContext -- specifies security settings for a pod
-podSecurityContext: {}
-#  fsGroup: 2000
+podSecurityContext:
+  runAsUser: 1000
+  fsGroup: 1000
+
+# chownDataVolumeAs -- specifies an owner of data volume
+chownDataVolumeAs: "1000:1000"
 
 # securityContext -- specifies security settings for a container
 securityContext: {}

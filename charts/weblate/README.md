@@ -2,7 +2,7 @@ weblate
 =======
 Helm chart to deploy [weblate](https://hub.docker.com/r/weblate/weblate/).
 
-Current chart version is `0.0.1`
+Current chart version is `0.0.2`
 
 Source code can be found [here](https://github.com/slamdev/helm-charts/tree/master/charts/weblate)
 
@@ -13,6 +13,7 @@ Source code can be found [here](https://github.com/slamdev/helm-charts/tree/mast
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | affinity | object | `{}` | affinity for scheduler pod assignment |
+| chownDataVolumeAs | string | `"1000:1000"` | specifies an owner of data volume |
 | env | list | `[]` | environment variables for the container |
 | envFrom | list | `[]` | environment variable sources for the container |
 | fullnameOverride | string | `""` | full name of the chart. |
@@ -28,7 +29,7 @@ Source code can be found [here](https://github.com/slamdev/helm-charts/tree/mast
 | livenessProbe.httpGet.port | string | `"http"` | port for liveness probe |
 | nameOverride | string | `""` | override name of the chart |
 | nodeSelector | object | `{}` | node for scheduler pod assignment |
-| podSecurityContext | object | `{}` | specifies security settings for a pod |
+| podSecurityContext | object | `{"fsGroup":1000,"runAsUser":1000}` | specifies security settings for a pod |
 | readinessProbe.httpGet.path | string | `"/healthz/"` | path for readiness probe |
 | readinessProbe.httpGet.port | string | `"http"` | port for readiness probe |
 | resources | object | `{}` | custom resource configuration |
