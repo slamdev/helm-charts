@@ -22,9 +22,8 @@ serviceAccount:
   name:
 
 # podSecurityContext -- specifies security settings for a pod
-podSecurityContext:
-  runAsUser: 1000
-  fsGroup: 1000
+podSecurityContext: {}
+#  fsGroup: 2000
 
 # chownDataVolumeAs -- specifies an owner of data volume
 chownDataVolumeAs: "1000:1000"
@@ -106,6 +105,7 @@ volumeClaimTemplates: []
 #        storage: 10Gi
 
 livenessProbe:
+  initialDelaySeconds: 45
   httpGet:
     # livenessProbe.httpGet.path -- path for liveness probe
     path: /healthz/
@@ -113,6 +113,7 @@ livenessProbe:
     port: http
 
 readinessProbe:
+  initialDelaySeconds: 45
   httpGet:
     # readinessProbe.httpGet.path -- path for readiness probe
     path: /healthz/

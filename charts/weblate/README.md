@@ -2,7 +2,7 @@ weblate
 =======
 Helm chart to deploy [weblate](https://hub.docker.com/r/weblate/weblate/).
 
-Current chart version is `0.0.2`
+Current chart version is `0.0.3`
 
 Source code can be found [here](https://github.com/slamdev/helm-charts/tree/master/charts/weblate)
 
@@ -27,11 +27,13 @@ Source code can be found [here](https://github.com/slamdev/helm-charts/tree/mast
 | ingress.tls | list | `[]` | ingress TLS configuration |
 | livenessProbe.httpGet.path | string | `"/healthz/"` | path for liveness probe |
 | livenessProbe.httpGet.port | string | `"http"` | port for liveness probe |
+| livenessProbe.initialDelaySeconds | int | `45` |  |
 | nameOverride | string | `""` | override name of the chart |
 | nodeSelector | object | `{}` | node for scheduler pod assignment |
-| podSecurityContext | object | `{"fsGroup":1000,"runAsUser":1000}` | specifies security settings for a pod |
+| podSecurityContext | object | `{}` | specifies security settings for a pod |
 | readinessProbe.httpGet.path | string | `"/healthz/"` | path for readiness probe |
 | readinessProbe.httpGet.port | string | `"http"` | port for readiness probe |
+| readinessProbe.initialDelaySeconds | int | `45` |  |
 | resources | object | `{}` | custom resource configuration |
 | securityContext | object | `{}` | specifies security settings for a container |
 | service.annotations | object | `{}` | service annotations |
