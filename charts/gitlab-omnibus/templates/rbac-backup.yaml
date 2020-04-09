@@ -1,10 +1,4 @@
 {{- if .Values.backupCronJob.enabled -}}
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: {{ include "gitlab.fullname" . }}-backup
-  namespace: {{ .Release.Namespace }}
----
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
@@ -43,6 +37,6 @@ roleRef:
   name: {{ include "gitlab.fullname" . }}-backup
 subjects:
   - kind: ServiceAccount
-    name: {{ include "gitlab.fullname" . }}-backup
+    name: {{ include "gitlab.fullname" . }}
 
 {{- end -}}
