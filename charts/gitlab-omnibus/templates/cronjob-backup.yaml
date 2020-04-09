@@ -26,7 +26,7 @@ spec:
           imagePullSecrets:
           {{- toYaml . | nindent 12 }}
         {{- end }}
-          serviceAccountName: {{ include "gitlab.serviceAccountName" . }}
+          serviceAccountName: {{ include "gitlab.fullname" . }}-backup
           restartPolicy: Never
           containers:
             - name: {{ .Chart.Name }}
