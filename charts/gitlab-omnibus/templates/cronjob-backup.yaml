@@ -28,6 +28,18 @@ spec:
         {{- end }}
           serviceAccountName: {{ include "gitlab.fullname" . }}-backup
           restartPolicy: Never
+        {{- with .Values.nodeSelector }}
+          nodeSelector:
+            {{- toYaml . | nindent 12 }}
+        {{- end }}
+        {{- with .Values.affinity }}
+          affinity:
+            {{- toYaml . | nindent 12 }}
+        {{- end }}
+        {{- with .Values.tolerations }}
+          tolerations:
+            {{- toYaml . | nindent 12 }}
+        {{- end }}
           containers:
             - name: {{ .Chart.Name }}
               image: {{ .Values.backupCronJob.image }}
@@ -41,4 +53,6 @@ spec:
                 {{- with .Values.backupCronJob.command }}
                 {{- toYaml . | nindent 16 }}
                 {{- end }}
+              resources:
+                {{- toYaml .Values.backupCronJob.resources | nindent 16 }}
 {{- end -}}

@@ -146,3 +146,11 @@ backupCronJob:
     - SKIP=uploads,builds,artifacts,registry,pages
     - GZIP_RSYNCABLE=yes
     - STRATEGY=copy
+  # backupCronJob.resources -- custom resource configuration
+  resources:
+    requests:
+      cpu: 10m
+      memory: 32Mi
+  #  limits:
+  #    cpu: 100m
+  #    memory: 128Mi
