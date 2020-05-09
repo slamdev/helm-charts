@@ -414,6 +414,22 @@ entries:
     urls:
     - https://github.com/slamdev/helm-charts/releases/download/gradle-cache-0.0.2/gradle-cache-0.0.2.tgz
     version: 0.0.2
+  haproxy:
+  - apiVersion: v2
+    appVersion: 2.1.4
+    created: "2020-05-09T10:33:27.579300838Z"
+    description: Helm chart to deploy [haproxy](http://www.haproxy.org/).
+    digest: ad6bfcb1fef536ef775c424d9882b61f940c57bfff92d3b8f314eed8d9d3103e
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/haproxy
+    icon: http://www.haproxy.org/img/HAProxyCommunityEdition_60px.png
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: haproxy
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/haproxy-0.0.1/haproxy-0.0.1.tgz
+    version: 0.0.1
   nginx:
   - apiVersion: v2
     appVersion: 1.17.9
