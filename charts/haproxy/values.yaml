@@ -1,0 +1,118 @@
+# replicaCount -- number of replicas for haproxy deployment.
+replicaCount: 1
+
+image:
+  # image.repository -- image repository
+  repository: haproxy
+  # image.tag -- image tag (chart's appVersion value will be used if not set)
+  tag: ""
+  # image.pullPolicy -- image pull policy
+  pullPolicy: IfNotPresent
+
+# imagePullSecrets -- image pull secret for private images
+imagePullSecrets: []
+# nameOverride -- override name of the chart
+nameOverride: ""
+# fullnameOverride -- full name of the chart.
+fullnameOverride: ""
+
+serviceAccount:
+  # serviceAccount.create -- specifies whether a service account should be created
+  create: false
+  # serviceAccount.annotations -- annotations to add to the service account
+  annotations: {}
+  # serviceAccount.name -- the name of the service account to use; if not set and create is true, a name is generated using the fullname template
+  name:
+
+# podSecurityContext -- specifies security settings for a pod
+podSecurityContext: {}
+  # fsGroup: 2000
+
+# securityContext -- specifies security settings for a container
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+# containerPorts -- ports exposed by container
+containerPorts:
+  - name: http
+    containerPort: 8000
+    protocol: TCP
+
+service:
+  # service.type -- service type
+  type: ClusterIP
+  # service.ports -- service ports
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+      protocol: TCP
+
+# resources -- custom resource configuration
+resources: {}
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+# nodeSelector -- node for scheduler pod assignment
+nodeSelector: {}
+
+# tolerations -- tolerations for scheduler pod assignment
+tolerations: []
+
+# affinity -- affinity for scheduler pod assignment
+affinity: {}
+
+# volumeMounts -- additional volume mounts
+volumeMounts: []
+  # - name: cache
+  #   mountPath: /data/haproxy/cache
+
+# volumes -- additional volumes
+volumes: []
+  # - name: cache
+  #   emptyDir: {}
+
+livenessProbe:
+  httpGet:
+    # livenessProbe.httpGet.path -- path for liveness probe
+    path: /
+    # livenessProbe.httpGet.port -- port for liveness probe
+    port: http
+
+readinessProbe:
+  httpGet:
+    # readinessProbe.httpGet.path -- path for readiness probe
+    path: /
+    # readinessProbe.httpGet.port -- port for readiness probe
+    port: http
+
+# env -- additional environment variables for the deployment
+env: []
+  # - name: SAMPLE
+  #   value: text
+
+# haproxyConf -- haproxy config to provision inside of the container
+haproxyConf: |-
+  global
+      log stdout format raw local0 info
+
+  defaults
+      timeout connect 1s
+      timeout client  1s
+      timeout server  1s
+      log     global
+      option  httplog
+
+  frontend        status-monitor
+      mode        http
+      bind        :8000
+      monitor-uri /

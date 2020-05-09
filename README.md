@@ -6,6 +6,7 @@ This repository contains [Helm](https://helm.sh) charts for various projects
 * [External Secrets Operator](https://github.com/slamdev/helm-charts/tree/master/charts/external-secrets-operator)
 * [Gitlab Omnibus](https://github.com/slamdev/helm-charts/tree/master/charts/gitlab-omnibus)
 * [Gradle Cache](https://github.com/slamdev/helm-charts/tree/master/charts/gradle-cache)
+* [HAProxy](https://github.com/slamdev/helm-charts/tree/master/charts/haproxy)
 * [Nginx](https://github.com/slamdev/helm-charts/tree/master/charts/nginx)
 * [Weblate](https://github.com/slamdev/helm-charts/tree/master/charts/weblate)
 

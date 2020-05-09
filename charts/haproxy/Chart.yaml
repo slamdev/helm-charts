@@ -1,0 +1,12 @@
+apiVersion: v2
+name: haproxy
+description: |-
+  Helm chart to deploy [haproxy](http://www.haproxy.org/).
+type: application
+version: 0.0.1
+appVersion: 2.1.4
+home: https://github.com/slamdev/helm-charts/tree/master/charts/haproxy
+icon: http://www.haproxy.org/img/HAProxyCommunityEdition_60px.png
+maintainers:
+  - name: slamdev
+    email: valentin.fedoskin@gmail.com
