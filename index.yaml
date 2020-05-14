@@ -368,6 +368,21 @@ entries:
     urls:
     - https://github.com/slamdev/helm-charts/releases/download/gitlab-omnibus-0.0.1/gitlab-omnibus-0.0.1.tgz
     version: 0.0.1
+  gke-preemptible-notifier:
+  - apiVersion: v2
+    appVersion: v0.0.2
+    created: "2020-05-14T20:22:27.415583702Z"
+    description: Helm chart to deploy [gke-preemptible-notifier](https://github.com/slamdev/gke-preemptible-notifier/).
+    digest: 58cdeb47c67a51f818835eaeba23cc532bae6017e1c0862dd38bf0de20c32b8b
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/gke-preemptible-notifier
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: gke-preemptible-notifier
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/gke-preemptible-notifier-0.0.1/gke-preemptible-notifier-0.0.1.tgz
+    version: 0.0.1
   gradle-cache:
   - apiVersion: v2
     appVersion: "9.0"
