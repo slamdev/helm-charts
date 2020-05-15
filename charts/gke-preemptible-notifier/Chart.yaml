@@ -3,7 +3,7 @@ name: gke-preemptible-notifier
 description: |-
   Helm chart to deploy [gke-preemptible-notifier](https://github.com/slamdev/gke-preemptible-notifier/).
 type: application
-version: 0.0.2
+version: 0.0.3
 appVersion: "v0.0.3"
 home: https://github.com/slamdev/helm-charts/tree/master/charts/gke-preemptible-notifier
 maintainers:

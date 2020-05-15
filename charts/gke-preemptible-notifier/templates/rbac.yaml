@@ -25,3 +25,4 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: {{ include "gke-preemptible-notifier.serviceAccountName" . }}
+    namespace: {{ .Release.Namespace }}

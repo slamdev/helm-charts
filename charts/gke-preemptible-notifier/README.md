@@ -2,7 +2,7 @@ gke-preemptible-notifier
 ========================
 Helm chart to deploy [gke-preemptible-notifier](https://github.com/slamdev/gke-preemptible-notifier/).
 
-Current chart version is `0.0.2`
+Current chart version is `0.0.3`
 
 Source code can be found [here](https://github.com/slamdev/helm-charts/tree/master/charts/gke-preemptible-notifier)
 
