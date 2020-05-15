@@ -370,6 +370,20 @@ entries:
     version: 0.0.1
   gke-preemptible-notifier:
   - apiVersion: v2
+    appVersion: v0.0.3
+    created: "2020-05-15T09:17:44.814279449Z"
+    description: Helm chart to deploy [gke-preemptible-notifier](https://github.com/slamdev/gke-preemptible-notifier/).
+    digest: 7b3c0e037a173aeb2ccf9f928facca987067f00683c66c398ddce205ffc5498c
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/gke-preemptible-notifier
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: gke-preemptible-notifier
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/gke-preemptible-notifier-0.0.2/gke-preemptible-notifier-0.0.2.tgz
+    version: 0.0.2
+  - apiVersion: v2
     appVersion: v0.0.2
     created: "2020-05-14T20:22:27.415583702Z"
     description: Helm chart to deploy [gke-preemptible-notifier](https://github.com/slamdev/gke-preemptible-notifier/).
