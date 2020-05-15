@@ -14,11 +14,9 @@ nameOverride: ""
 fullnameOverride: ""
 
 serviceAccount:
-  # serviceAccount.create -- specifies whether a service account should be created
-  create: false
   # serviceAccount.annotations -- annotations to add to the service account
   annotations: {}
-  # serviceAccount.name -- the name of the service account to use; if not set and create is true, a name is generated using the fullname template
+  # serviceAccount.name -- the name of the service account to use; if not set, a name is generated using the fullname template
   name:
 
 # podSecurityContext -- specifies security settings for a pod

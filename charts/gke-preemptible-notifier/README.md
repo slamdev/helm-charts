@@ -2,7 +2,7 @@ gke-preemptible-notifier
 ========================
 Helm chart to deploy [gke-preemptible-notifier](https://github.com/slamdev/gke-preemptible-notifier/).
 
-Current chart version is `0.0.1`
+Current chart version is `0.0.2`
 
 Source code can be found [here](https://github.com/slamdev/helm-charts/tree/master/charts/gke-preemptible-notifier)
 
@@ -26,8 +26,7 @@ Source code can be found [here](https://github.com/slamdev/helm-charts/tree/mast
 | resources | object | `{}` | custom resource configuration |
 | securityContext | object | `{}` | specifies security settings for a container |
 | serviceAccount.annotations | object | `{}` | annotations to add to the service account |
-| serviceAccount.create | bool | `false` | specifies whether a service account should be created |
-| serviceAccount.name | string | `nil` | the name of the service account to use; if not set and create is true, a name is generated using the fullname template |
+| serviceAccount.name | string | `nil` | the name of the service account to use; if not set, a name is generated using the fullname template |
 | tolerations | list | `[]` | tolerations for scheduler pod assignment |
 | volumeMounts | list | `[]` | additional volume mounts |
 | volumes | list | `[]` | volumes |

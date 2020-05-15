@@ -55,11 +55,7 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 Create the name of the service account to use
 */}}
 {{- define "gke-preemptible-notifier.serviceAccountName" -}}
-{{- if .Values.serviceAccount.create -}}
     {{ default (include "gke-preemptible-notifier.fullname" .) .Values.serviceAccount.name }}
-{{- else -}}
-    {{ default "default" .Values.serviceAccount.name }}
-{{- end -}}
 {{- end -}}
 
 {{/*
