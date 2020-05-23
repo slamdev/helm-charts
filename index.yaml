@@ -3,6 +3,21 @@ entries:
   archiva:
   - apiVersion: v2
     appVersion: v2.2.4-1
+    created: "2020-05-23T15:14:54.480676756Z"
+    description: Helm chart to deploy [archiva](https://hub.docker.com/r/xetusoss/archiva/).
+    digest: 0536e2486d041c0116bb46c0da25e0ad7e81c1654bda9e97dddc626911f20b75
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/archiva
+    icon: http://archiva.apache.org/images/archiva.png
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: archiva
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/archiva-0.0.2/archiva-0.0.2.tgz
+    version: 0.0.2
+  - apiVersion: v2
+    appVersion: v2.2.4-1
     created: "2020-03-29T21:51:41.125937418Z"
     description: Helm chart to deploy [archiva](https://hub.docker.com/r/xetusoss/archiva/).
     digest: 2f93e25920dea6b3d32faa15db3263bd26c5de7b7b18b3b45a1d9ced72bee499
@@ -189,6 +204,21 @@ entries:
     version: 0.0.1
   flux-notifier:
   - apiVersion: v2
+    appVersion: v0.0.4
+    created: "2020-05-23T15:14:54.56492117Z"
+    description: Helm chart to deploy [flux-notifier](https://github.com/slamdev/flux-notifier/).
+    digest: decf1aae9dfb59f486f5f4e98e72820a1eb334dd0b6aec5f9741cc7face5a556
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/flux-notifier
+    icon: https://docs.fluxcd.io/en/1.19.0/_files/flux-icon@2x.png
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: flux-notifier
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/flux-notifier-0.0.2/flux-notifier-0.0.2.tgz
+    version: 0.0.2
+  - apiVersion: v2
     appVersion: v0.0.1
     created: "2020-05-23T14:17:14.694710692Z"
     description: Helm chart to deploy [flux-notifier](https://github.com/slamdev/flux-notifier/).
@@ -204,6 +234,21 @@ entries:
     - https://github.com/slamdev/helm-charts/releases/download/flux-notifier-0.0.1/flux-notifier-0.0.1.tgz
     version: 0.0.1
   gitlab-omnibus:
+  - apiVersion: v2
+    appVersion: 13.0.0-ee.0
+    created: "2020-05-23T15:14:54.635032347Z"
+    description: Helm chart to deploy [Omnibus Gitlab](https://docs.gitlab.com/omnibus/).
+    digest: 18eecc10ae8ff763d0353cd8be6914990957dffc368630d4440154542a615650
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/gitlab-omnibus
+    icon: https://docs.gitlab.com/assets/images/gitlab-logo.svg
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: gitlab-omnibus
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/gitlab-omnibus-0.0.13/gitlab-omnibus-0.0.13.tgz
+    version: 0.0.13
   - apiVersion: v2
     appVersion: 12.10.1-ee.0
     created: "2020-04-29T15:59:02.545036278Z"
