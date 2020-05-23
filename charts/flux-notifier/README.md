@@ -2,7 +2,7 @@ flux-notifier
 =============
 Helm chart to deploy [flux-notifier](https://github.com/slamdev/flux-notifier/).
 
-Current chart version is `0.0.1`
+Current chart version is `0.0.2`
 
 Source code can be found [here](https://github.com/slamdev/helm-charts/tree/master/charts/flux-notifier)
 
@@ -13,7 +13,7 @@ Source code can be found [here](https://github.com/slamdev/helm-charts/tree/mast
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | affinity | object | `{}` | affinity for scheduler pod assignment |
-| env | list | `[]` | additional environment variables for the deployment |
+| env | list | `[{"name":"FLUX_NOTIFIER_LOG_FORMAT","value":"json"}]` | additional environment variables for the deployment |
 | fullnameOverride | string | `""` | full name of the chart. |
 | image.pullPolicy | string | `"IfNotPresent"` | image pull policy |
 | image.repository | string | `"slamdev/flux-notifier"` | image repository |

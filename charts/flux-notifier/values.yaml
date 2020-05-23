@@ -90,6 +90,6 @@ readinessProbe:
     port: http
 
 # env -- additional environment variables for the deployment
-env: []
-  # - name: SAMPLE
-  #   value: text
+env:
+  - name: FLUX_NOTIFIER_LOG_FORMAT
+    value: json
