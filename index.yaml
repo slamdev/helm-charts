@@ -204,6 +204,21 @@ entries:
     version: 0.0.1
   flux-notifier:
   - apiVersion: v2
+    appVersion: v0.0.6
+    created: "2020-05-23T16:13:46.426327893Z"
+    description: Helm chart to deploy [flux-notifier](https://github.com/slamdev/flux-notifier/).
+    digest: fceca38d6710527c5339f4cfcec431b5f2e0a0259d45b322b2ad14e97db59f89
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/flux-notifier
+    icon: https://docs.fluxcd.io/en/1.19.0/_files/flux-icon@2x.png
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: flux-notifier
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/flux-notifier-0.0.3/flux-notifier-0.0.3.tgz
+    version: 0.0.3
+  - apiVersion: v2
     appVersion: v0.0.4
     created: "2020-05-23T15:14:54.56492117Z"
     description: Helm chart to deploy [flux-notifier](https://github.com/slamdev/flux-notifier/).
