@@ -4,6 +4,7 @@ This repository contains [Helm](https://helm.sh) charts for various projects
 
 * [Archiva](https://github.com/slamdev/helm-charts/tree/master/charts/archiva)
 * [External Secrets Operator](https://github.com/slamdev/helm-charts/tree/master/charts/external-secrets-operator)
+* [Flux Notifier](https://github.com/slamdev/helm-charts/tree/master/charts/flux-notifier)
 * [Gitlab Omnibus](https://github.com/slamdev/helm-charts/tree/master/charts/gitlab-omnibus)
 * [GKE Preemptible Notifier](https://github.com/slamdev/helm-charts/tree/master/charts/gke-preemptible-notifier)
 * [Gradle Cache](https://github.com/slamdev/helm-charts/tree/master/charts/gradle-cache)

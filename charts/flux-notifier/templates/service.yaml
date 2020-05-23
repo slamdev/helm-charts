@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "flux-notifier.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "flux-notifier.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+{{- with .Values.service.ports }}
+  ports:
+    {{- toYaml . | nindent 4 }}
+{{- end }}
+  selector:
+    {{- include "flux-notifier.selectorLabels" . | nindent 4 }}
