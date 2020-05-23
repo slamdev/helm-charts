@@ -187,6 +187,22 @@ entries:
     urls:
     - https://github.com/slamdev/helm-charts/releases/download/external-secrets-operator-0.0.1/external-secrets-operator-0.0.1.tgz
     version: 0.0.1
+  flux-notifier:
+  - apiVersion: v2
+    appVersion: v0.0.1
+    created: "2020-05-23T14:17:14.694710692Z"
+    description: Helm chart to deploy [flux-notifier](https://github.com/slamdev/flux-notifier/).
+    digest: b2d0315b00bade0470294dce080f4cc57557b7a29d51f08509646018bf04f684
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/flux-notifier
+    icon: https://docs.fluxcd.io/en/1.19.0/_files/flux-icon@2x.png
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: flux-notifier
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/flux-notifier-0.0.1/flux-notifier-0.0.1.tgz
+    version: 0.0.1
   gitlab-omnibus:
   - apiVersion: v2
     appVersion: 12.10.1-ee.0
