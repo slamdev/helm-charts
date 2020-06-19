@@ -15,6 +15,8 @@ spec:
     metadata:
       labels:
         {{- include "gitlab.selectorLabels" . | nindent 8 }}
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
     spec:
     {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
