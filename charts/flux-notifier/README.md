@@ -2,7 +2,7 @@ flux-notifier
 =============
 Helm chart to deploy [flux-notifier](https://github.com/slamdev/flux-notifier/).
 
-Current chart version is `0.0.3`
+Current chart version is `0.0.4`
 
 Source code can be found [here](https://github.com/slamdev/helm-charts/tree/master/charts/flux-notifier)
 
