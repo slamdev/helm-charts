@@ -204,6 +204,21 @@ entries:
     version: 0.0.1
   flux-notifier:
   - apiVersion: v2
+    appVersion: v0.0.8
+    created: "2020-06-19T19:13:26.488431611Z"
+    description: Helm chart to deploy [flux-notifier](https://github.com/slamdev/flux-notifier/).
+    digest: 22941283d7b5f6742adb4870e4c9dbb43e9c87ae9c62bb74e738f5c30e82775a
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/flux-notifier
+    icon: https://docs.fluxcd.io/en/1.19.0/_files/flux-icon@2x.png
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: flux-notifier
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/flux-notifier-0.0.4/flux-notifier-0.0.4.tgz
+    version: 0.0.4
+  - apiVersion: v2
     appVersion: v0.0.6
     created: "2020-05-23T16:13:46.426327893Z"
     description: Helm chart to deploy [flux-notifier](https://github.com/slamdev/flux-notifier/).
@@ -249,6 +264,21 @@ entries:
     - https://github.com/slamdev/helm-charts/releases/download/flux-notifier-0.0.1/flux-notifier-0.0.1.tgz
     version: 0.0.1
   gitlab-omnibus:
+  - apiVersion: v2
+    appVersion: 13.0.6-ee.0
+    created: "2020-06-19T19:13:26.582521109Z"
+    description: Helm chart to deploy [Omnibus Gitlab](https://docs.gitlab.com/omnibus/).
+    digest: 41800acb429becf01c7c20cd6b0a6e12bc4aedd9122984be5967e421a8d5e4b8
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/gitlab-omnibus
+    icon: https://docs.gitlab.com/assets/images/gitlab-logo.svg
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: gitlab-omnibus
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/gitlab-omnibus-0.0.14/gitlab-omnibus-0.0.14.tgz
+    version: 0.0.14
   - apiVersion: v2
     appVersion: 13.0.0-ee.0
     created: "2020-05-23T15:14:54.635032347Z"
