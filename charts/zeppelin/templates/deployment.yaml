@@ -38,16 +38,24 @@ spec:
             {{- toYaml .Values.readinessProbe | nindent 12 }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-        {{- with .Values.env }}
           env:
+            - name: ZEPPELIN_PORT
+              value: "8080"
+            - name: ZEPPELIN_WAR_TEMPDIR
+              value: "/war-tmp"
+        {{- with .Values.env }}
             {{- toYaml . | nindent 12 }}
         {{- end }}
-        {{- with .Values.volumeMounts }}
           volumeMounts:
+            - name: {{ include "zeppelin.fullname" . }}-war-tmp
+              mountPath: /war-tmp
+        {{- with .Values.volumeMounts }}
             {{- toYaml . | nindent 12 }}
         {{- end }}
-    {{- with .Values.volumes }}
       volumes:
+        - name: {{ include "zeppelin.fullname" . }}-war-tmp
+          emptyDir: {}
+    {{- with .Values.volumes }}
         {{- toYaml . | nindent 8 }}
     {{- end }}
     {{- with .Values.nodeSelector }}

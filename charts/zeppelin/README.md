@@ -2,7 +2,7 @@ zeppelin
 ========
 Helm chart to deploy [zeppelin](http://zeppelin.apache.org/).
 
-Current chart version is `0.0.1`
+Current chart version is `0.0.2`
 
 Source code can be found [here](https://github.com/slamdev/helm-charts/tree/master/charts/zeppelin)
 
@@ -35,7 +35,7 @@ Source code can be found [here](https://github.com/slamdev/helm-charts/tree/mast
 | service.port | int | `80` | service port |
 | service.type | string | `"ClusterIP"` | service type |
 | serviceAccount.annotations | object | `{}` | annotations to add to the service account |
-| serviceAccount.create | bool | `false` | specifies whether a service account should be created |
+| serviceAccount.create | bool | `true` | specifies whether a service account should be created |
 | serviceAccount.name | string | `nil` | the name of the service account to use; if not set and create is true, a name is generated using the fullname template |
 | tolerations | list | `[]` | tolerations for scheduler pod assignment |
 | volumeMounts | list | `[]` | additional volume mounts |
