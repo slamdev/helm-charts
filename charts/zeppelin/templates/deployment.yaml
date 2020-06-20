@@ -7,6 +7,8 @@ metadata:
     {{- include "zeppelin.labels" . | nindent 4 }}
 spec:
   replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       {{- include "zeppelin.selectorLabels" . | nindent 6 }}
@@ -31,6 +33,9 @@ spec:
           ports:
             - name: http
               containerPort: 8080
+              protocol: TCP
+            - name: rpc
+              containerPort: 12320
               protocol: TCP
           livenessProbe:
             {{- toYaml .Values.livenessProbe | nindent 12 }}
