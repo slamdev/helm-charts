@@ -2,7 +2,7 @@ zeppelin
 ========
 Helm chart to deploy [zeppelin](http://zeppelin.apache.org/).
 
-Current chart version is `0.0.2`
+Current chart version is `0.0.3`
 
 Source code can be found [here](https://github.com/slamdev/helm-charts/tree/master/charts/zeppelin)
 

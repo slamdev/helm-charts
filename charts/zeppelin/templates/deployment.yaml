@@ -42,18 +42,18 @@ spec:
             - name: ZEPPELIN_PORT
               value: "8080"
             - name: ZEPPELIN_WAR_TEMPDIR
-              value: "/war-tmp"
+              value: "/zeppelin-tmp/war"
         {{- with .Values.env }}
             {{- toYaml . | nindent 12 }}
         {{- end }}
           volumeMounts:
-            - name: {{ include "zeppelin.fullname" . }}-war-tmp
-              mountPath: /war-tmp
+            - name: {{ include "zeppelin.fullname" . }}-tmp
+              mountPath: /zeppelin-tmp
         {{- with .Values.volumeMounts }}
             {{- toYaml . | nindent 12 }}
         {{- end }}
       volumes:
-        - name: {{ include "zeppelin.fullname" . }}-war-tmp
+        - name: {{ include "zeppelin.fullname" . }}-tmp
           emptyDir: {}
     {{- with .Values.volumes }}
         {{- toYaml . | nindent 8 }}
