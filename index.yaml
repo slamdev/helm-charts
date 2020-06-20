@@ -692,4 +692,20 @@ entries:
     urls:
     - https://github.com/slamdev/helm-charts/releases/download/weblate-0.0.1/weblate-0.0.1.tgz
     version: 0.0.1
+  zeppelin:
+  - apiVersion: v2
+    appVersion: 0.9.0
+    created: "2020-06-20T14:34:37.5387911Z"
+    description: Helm chart to deploy [zeppelin](http://zeppelin.apache.org/).
+    digest: 07eac12c1f7225ca56208ffc3913f905c37d52adbad1ed8caf66fb09c06b673a
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/zeppelin
+    icon: https://zeppelin.apache.org/docs/latest/assets/themes/zeppelin/img/zeppelin_logo.png
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: zeppelin
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/zeppelin-0.0.1/zeppelin-0.0.1.tgz
+    version: 0.0.1
 generated: "2020-03-18T21:35:58.993159574Z"
