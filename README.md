@@ -11,6 +11,7 @@ This repository contains [Helm](https://helm.sh) charts for various projects
 * [HAProxy](https://github.com/slamdev/helm-charts/tree/master/charts/haproxy)
 * [Nginx](https://github.com/slamdev/helm-charts/tree/master/charts/nginx)
 * [Weblate](https://github.com/slamdev/helm-charts/tree/master/charts/weblate)
+* [Zeppelin](https://github.com/slamdev/helm-charts/tree/master/charts/zeppelin)
 
 ## Installing Charts from this Repository
 

@@ -1,0 +1,12 @@
+apiVersion: v2
+name: zeppelin
+description: |-
+  Helm chart to deploy [zeppelin](http://zeppelin.apache.org/).
+type: application
+version: 0.0.1
+appVersion: "0.9.0"
+home: https://github.com/slamdev/helm-charts/tree/master/charts/zeppelin
+icon: https://zeppelin.apache.org/docs/latest/assets/themes/zeppelin/img/zeppelin_logo.png
+maintainers:
+  - name: slamdev
+    email: valentin.fedoskin@gmail.com
