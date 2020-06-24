@@ -2,7 +2,7 @@ zeppelin
 ========
 Helm chart to deploy [zeppelin](http://zeppelin.apache.org/).
 
-Current chart version is `0.0.7`
+Current chart version is `0.0.8`
 
 Source code can be found [here](https://github.com/slamdev/helm-charts/tree/master/charts/zeppelin)
 
@@ -29,9 +29,6 @@ Source code can be found [here](https://github.com/slamdev/helm-charts/tree/mast
 | nodeSelector | object | `{}` | node for scheduler pod assignment |
 | podSecurityContext | object | `{}` | specifies security settings for a pod |
 | postStart | string | `"echo 'additional dependencies can be installed here'"` | script that is executed via container's lifecycle.postStart hook |
-| postStartCommand[0] | string | `"ls"` |  |
-| postStartCommand[1] | string | `"-la"` |  |
-| postStartCommand[2] | string | `"/"` |  |
 | readinessProbe.httpGet.path | string | `"/api/version"` | path for readiness probe |
 | readinessProbe.httpGet.port | string | `"http"` | port for readiness probe |
 | resources | object | `{}` | custom resource configuration |

@@ -104,11 +104,6 @@ env: []
   # - name: SAMPLE
   #   value: text
 
-postStartCommand:
-  - ls
-  - -la
-  - /
-
 # postStart -- script that is executed via container's lifecycle.postStart hook
 postStart: |-
   echo 'additional dependencies can be installed here'
