@@ -695,6 +695,21 @@ entries:
   zeppelin:
   - apiVersion: v2
     appVersion: 0.9.0
+    created: "2020-06-24T12:36:50.770173513Z"
+    description: Helm chart to deploy [zeppelin](http://zeppelin.apache.org/).
+    digest: 3f59bc940b154069354b4bcde76e8f364175728039c259bcacf2f2d0ff718bf1
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/zeppelin
+    icon: https://zeppelin.apache.org/docs/latest/assets/themes/zeppelin/img/zeppelin_logo.png
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: zeppelin
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/zeppelin-0.0.6/zeppelin-0.0.6.tgz
+    version: 0.0.6
+  - apiVersion: v2
+    appVersion: 0.9.0
     created: "2020-06-24T12:20:13.923129205Z"
     description: Helm chart to deploy [zeppelin](http://zeppelin.apache.org/).
     digest: b4789a74ff7425ba2354539d22e010bdb2f6c7506993ea44b52ab7a7d829b17b
