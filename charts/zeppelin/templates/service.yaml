@@ -16,5 +16,9 @@ spec:
       targetPort: rpc
       protocol: TCP
       name: rpc
+    - port: 4040
+      targetPort: http-spark
+      protocol: TCP
+      name: http-spark
   selector:
     {{- include "zeppelin.selectorLabels" . | nindent 4 }}

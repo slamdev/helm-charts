@@ -16,8 +16,6 @@ spec:
     metadata:
       labels:
         {{- include "zeppelin.selectorLabels" . | nindent 8 }}
-      annotations:
-        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
     spec:
     {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
@@ -39,16 +37,15 @@ spec:
             - name: rpc
               containerPort: 12320
               protocol: TCP
+            - name: http-spark
+              containerPort: 4040
+              protocol: TCP
           livenessProbe:
             {{- toYaml .Values.livenessProbe | nindent 12 }}
           readinessProbe:
             {{- toYaml .Values.readinessProbe | nindent 12 }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-          lifecycle:
-            postStart:
-              exec:
-                command: ["sh", "-c", "/postStart.sh > /tmp/postStart.log"]
           env:
             - name: ZEPPELIN_PORT
               value: "8080"
@@ -60,19 +57,12 @@ spec:
           volumeMounts:
             - name: {{ include "zeppelin.fullname" . }}-tmp
               mountPath: /zeppelin-tmp
-            - name: {{ include "zeppelin.fullname" . }}
-              mountPath: /postStart.sh
-              subPath: postStart.sh
         {{- with .Values.volumeMounts }}
             {{- toYaml . | nindent 12 }}
         {{- end }}
       volumes:
         - name: {{ include "zeppelin.fullname" . }}-tmp
           emptyDir: {}
-        - name: {{ include "zeppelin.fullname" . }}
-          configMap:
-            name: {{ include "zeppelin.fullname" . }}
-            defaultMode: 511 # 0777
     {{- with .Values.volumes }}
         {{- toYaml . | nindent 8 }}
     {{- end }}

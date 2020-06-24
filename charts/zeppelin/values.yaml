@@ -103,7 +103,3 @@ readinessProbe:
 env: []
   # - name: SAMPLE
   #   value: text
-
-# postStart -- script that is executed via container's lifecycle.postStart hook
-postStart: |-
-  echo 'additional dependencies can be installed here'
