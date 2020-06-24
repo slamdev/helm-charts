@@ -49,7 +49,9 @@ spec:
             postStart:
               exec:
                 command:
-                  - /postStart.sh
+              {{- with .Values.postStartCommand }}
+                  {{- toYaml . | nindent 18 }}
+              {{- end }}
           env:
             - name: ZEPPELIN_PORT
               value: "8080"
