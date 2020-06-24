@@ -2,7 +2,7 @@ zeppelin
 ========
 Helm chart to deploy [zeppelin](http://zeppelin.apache.org/).
 
-Current chart version is `0.0.4`
+Current chart version is `0.0.5`
 
 Source code can be found [here](https://github.com/slamdev/helm-charts/tree/master/charts/zeppelin)
 
@@ -23,6 +23,7 @@ Source code can be found [here](https://github.com/slamdev/helm-charts/tree/mast
 | ingress.enabled | bool | `false` | enables Ingress for zeppelin |
 | ingress.hosts | list | `[]` | ingress accepted hostnames |
 | ingress.tls | list | `[]` | ingress TLS configuration |
+| lifecycle | object | `{}` | container lifecycle hooks |
 | livenessProbe.httpGet.path | string | `"/api/version"` | path for liveness probe |
 | livenessProbe.httpGet.port | string | `"http"` | port for liveness probe |
 | nameOverride | string | `""` | override name of the chart |

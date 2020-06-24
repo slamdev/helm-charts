@@ -66,6 +66,9 @@ resources: {}
   #   cpu: 100m
   #   memory: 128Mi
 
+# lifecycle -- container lifecycle hooks
+lifecycle: {}
+
 # nodeSelector -- node for scheduler pod assignment
 nodeSelector: {}
 
