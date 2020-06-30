@@ -33,6 +33,26 @@ entries:
     version: 0.0.1
   external-secrets-operator:
   - apiVersion: v2
+    appVersion: 0.0.6
+    created: "2020-06-30T08:17:57.222478998Z"
+    description: |-
+      Helm chart to deploy [external-secrets-operator](https://github.com/slamdev/external-secrets-operator).
+
+      External Secrets Operator watches changes in external key-value backends to sync them with Kubernetes Secrets and ConfigMaps.
+
+      Refer to operator repo for additional information.
+    digest: dc6072ec644665487cc2c2b9376fb0c04c28624ac0d42a720f2c410b261a90a3
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/external-secrets-operator
+    icon: https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Emblem-question.svg/1200px-Emblem-question.svg.png
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: external-secrets-operator
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/external-secrets-operator-0.0.12/external-secrets-operator-0.0.12.tgz
+    version: 0.0.12
+  - apiVersion: v2
     appVersion: 0.0.5
     created: "2020-06-28T13:56:23.129570667Z"
     description: |-
