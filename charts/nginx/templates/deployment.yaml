@@ -49,17 +49,6 @@ spec:
         {{- with .Values.env }}
             {{- toYaml . | nindent 12 }}
         {{- end }}
-      {{- if .Values.dnsmasq.enabled -}}
-        - name: dnsmasq
-          image: "janeczku/go-dnsmasq:release-1.0.5"
-          args:
-            - --listen
-            - "127.0.0.1:53"
-            - --default-resolver
-            - --append-search-domains
-            - --hostsfile=/etc/hosts
-            - --verbose
-        {{- end }}
           volumeMounts:
             - name: {{ include "nginx.fullname" . }}
               mountPath: /etc/nginx/nginx.conf.tpl
@@ -70,6 +59,17 @@ spec:
         {{- with .Values.volumeMounts }}
             {{- toYaml . | nindent 12 }}
         {{- end }}
+      {{- if .Values.dnsmasq.enabled }}
+        - name: dnsmasq
+          image: "janeczku/go-dnsmasq:release-1.0.5"
+          args:
+            - --listen
+            - "127.0.0.1:53"
+            - --default-resolver
+            - --append-search-domains
+            - --hostsfile=/etc/hosts
+            - --verbose
+      {{- end }}
       volumes:
         - name: {{ include "nginx.fullname" . }}
           configMap:
