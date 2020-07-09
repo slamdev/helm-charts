@@ -141,3 +141,7 @@ nginxConf: |-
 
 # useDebugBinary -- run nginx-debug binary instead of normal one
 useDebugBinary: false
+
+dnsmasq:
+  # dnsmasq.enabled -- enable simple dns server for nginx
+  enabled: false
