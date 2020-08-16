@@ -3,6 +3,8 @@ kind: Deployment
 metadata:
   name: {{ include "nginx.fullname" . }}
   namespace: {{ .Release.Namespace }}
+  annotations:
+    {{- toYaml .Values.deploymentAnnotations | nindent 4 }}
   labels:
     {{- include "nginx.labels" . | nindent 4 }}
 spec:
@@ -16,6 +18,7 @@ spec:
         {{- include "nginx.selectorLabels" . | nindent 8 }}
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        {{- toYaml .Values.podAnnotations | nindent 8 }}
     spec:
     {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
