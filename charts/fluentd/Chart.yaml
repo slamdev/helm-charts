@@ -1,0 +1,12 @@
+apiVersion: v2
+name: fluentd
+description: |-
+  Helm chart to deploy [fluentd](http://www.fluentd.org/).
+type: application
+version: 0.0.1
+appVersion: v1.11.2
+home: https://github.com/slamdev/helm-charts/tree/master/charts/fluentd
+icon: https://www.fluentd.org/assets/img/miscellany/fluentd-logo_2x.png
+maintainers:
+  - name: slamdev
+    email: valentin.fedoskin@gmail.com
