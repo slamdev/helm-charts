@@ -1,6 +1,6 @@
-{{- if eq .Values.kind "Deployment" }}
+{{- if eq .Values.kind "StatefulSet" }}
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: {{ include "fluentd.fullname" . }}
   namespace: {{ .Release.Namespace }}
@@ -15,6 +15,11 @@ spec:
   selector:
     matchLabels:
       {{- include "fluentd.selectorLabels" . | nindent 6 }}
+  serviceName: {{ include "fluentd.fullname" . }}
   template:
     {{- include "fluentd.pod" . | nindent 4 }}
+{{- with .Values.volumeClaimTemplates }}
+  volumeClaimTemplates:
+    {{- toYaml . | nindent 4 }}
+{{- end }}
 {{- end }}

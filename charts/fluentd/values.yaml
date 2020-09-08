@@ -1,3 +1,6 @@
+# kind -- resource type to operate fluentd, can be StatefulSet or Deployment
+kind: Deployment
+
 # replicaCount -- number of replicas for fluentd deployment.
 replicaCount: 1
 
@@ -111,6 +114,19 @@ readinessProbe:
 env: []
   # - name: SAMPLE
   #   value: text
+
+# volumeClaimTemplates -- volume claim templates; used only when 'kind: StatefulSet'
+volumeClaimTemplates: []
+#  - apiVersion: v1
+#    kind: PersistentVolumeClaim
+#    metadata:
+#      name: data
+#    spec:
+#      accessModes:
+#        - ReadWriteOnce
+#      resources:
+#        requests:
+#          storage: 10Gi
 
 serviceMonitor:
   # serviceMonitor.enabled -- ServiceMonitor CRD is created for a prometheus operator

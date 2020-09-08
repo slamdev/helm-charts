@@ -2,7 +2,7 @@ fluentd
 =======
 Helm chart to deploy [fluentd](http://www.fluentd.org/).
 
-Current chart version is `0.0.1`
+Current chart version is `0.0.2`
 
 Source code can be found [here](https://github.com/slamdev/helm-charts/tree/master/charts/fluentd)
 
@@ -22,6 +22,7 @@ Source code can be found [here](https://github.com/slamdev/helm-charts/tree/mast
 | image.repository | string | `"fluent/fluentd-kubernetes-daemonset"` | image repository |
 | image.tag | string | `""` | image tag (chart's appVersion value will be used if not set) |
 | imagePullSecrets | list | `[]` | image pull secret for private images |
+| kind | string | `"Deployment"` | resource type to operate fluentd, can be StatefulSet or Deployment |
 | livenessProbe.httpGet.path | string | `"/metrics"` | path for liveness probe |
 | livenessProbe.httpGet.port | string | `"http-monitoring"` | port for liveness probe |
 | nameOverride | string | `""` | override name of the chart |
@@ -41,5 +42,6 @@ Source code can be found [here](https://github.com/slamdev/helm-charts/tree/mast
 | serviceMonitor.additionalLabels | object | `{}` | additional labels for service monitor |
 | serviceMonitor.enabled | bool | `false` | ServiceMonitor CRD is created for a prometheus operator |
 | tolerations | list | `[]` | tolerations for scheduler pod assignment |
+| volumeClaimTemplates | list | `[]` | volume claim templates; used only when 'kind: StatefulSet' |
 | volumeMounts | list | `[]` | additional volume mounts |
 | volumes | list | `[]` | additional volumes |
