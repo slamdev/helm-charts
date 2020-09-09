@@ -245,6 +245,21 @@ entries:
   fluentd:
   - apiVersion: v2
     appVersion: v1.11.2
+    created: "2020-09-09T11:34:23.559237244Z"
+    description: Helm chart to deploy [fluentd](http://www.fluentd.org/).
+    digest: 36ba883564a8790a4d63fe233fe3792f9d48a72bc36d5613f101dc14ee9c7988
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/fluentd
+    icon: https://www.fluentd.org/assets/img/miscellany/fluentd-logo_2x.png
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: fluentd
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/fluentd-0.0.2/fluentd-0.0.2.tgz
+    version: 0.0.2
+  - apiVersion: v2
+    appVersion: v1.11.2
     created: "2020-08-18T15:02:15.254838656Z"
     description: Helm chart to deploy [fluentd](http://www.fluentd.org/).
     digest: b1a6008839b71d6c03c0ea84de5b002bac2b730fd0c34421b67e1c702634941a
