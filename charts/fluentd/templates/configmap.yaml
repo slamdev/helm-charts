@@ -8,3 +8,9 @@ metadata:
 data:
   fluent.conf: |-
     {{ .Values.fluentdConf | nindent 4 }}
+  entrypoint.sh: |-
+    #!/bin/sh
+  {{- range $plugin := .Values.plugins }}
+    fluent-gem install {{ $plugin }}
+  {{- end }}
+    exec /fluentd/entrypoint.sh

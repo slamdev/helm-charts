@@ -2,7 +2,7 @@ fluentd
 =======
 Helm chart to deploy [fluentd](http://www.fluentd.org/).
 
-Current chart version is `0.0.2`
+Current chart version is `0.0.3`
 
 Source code can be found [here](https://github.com/slamdev/helm-charts/tree/master/charts/fluentd)
 
@@ -27,6 +27,7 @@ Source code can be found [here](https://github.com/slamdev/helm-charts/tree/mast
 | livenessProbe.httpGet.port | string | `"http-monitoring"` | port for liveness probe |
 | nameOverride | string | `""` | override name of the chart |
 | nodeSelector | object | `{}` | node for scheduler pod assignment |
+| plugins | list | `[]` | list of plugins to be installed when container starts |
 | podAnnotations | object | `{}` | annotations to add to the pod |
 | podSecurityContext | object | `{}` | specifies security settings for a pod |
 | readinessProbe.httpGet.path | string | `"/metrics"` | path for readiness probe |

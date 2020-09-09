@@ -20,6 +20,10 @@ spec:
       securityContext:
         {{- toYaml .Values.securityContext | nindent 8 }}
       image: "{{ .Values.image.repository }}:{{ include "fluentd.tag" . }}"
+      command:
+        - tini
+        - --
+        - /opt/entrypoint.sh
       imagePullPolicy: {{ .Values.image.pullPolicy }}
     {{- with .Values.containerPorts }}
       ports:
@@ -41,6 +45,9 @@ spec:
         - name: {{ include "fluentd.fullname" . }}
           mountPath: /fluentd/etc/custom/fluent.conf
           subPath: fluent.conf
+        - name: {{ include "fluentd.fullname" . }}
+          mountPath: /opt/entrypoint.sh
+          subPath: entrypoint.sh
     {{- with .Values.volumeMounts }}
         {{- toYaml . | nindent 8 }}
     {{- end }}
@@ -48,10 +55,7 @@ spec:
     - name: {{ include "fluentd.fullname" . }}
       configMap:
         name: {{ include "fluentd.fullname" . }}
-        items:
-          - key: fluent.conf
-            path: fluent.conf
-            mode: 292 # 0444
+        defaultMode: 0777
 {{- with .Values.volumes }}
     {{- toYaml . | nindent 4 }}
 {{- end }}

@@ -19,6 +19,10 @@ nameOverride: ""
 # fullnameOverride -- full name of the chart.
 fullnameOverride: ""
 
+# plugins -- list of plugins to be installed when container starts
+plugins: []
+#  - fluent-plugin-s3
+
 serviceAccount:
   # serviceAccount.create -- specifies whether a service account should be created
   create: false
