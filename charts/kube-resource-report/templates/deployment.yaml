@@ -35,10 +35,6 @@ spec:
             - --additional-cost-per-cluster=0
             - --pricing-file=/config/pricing.csv
             - /output
-          ports:
-            - name: http
-              containerPort: 8080
-              protocol: TCP
           resources:
             {{- toYaml .Values.app.resources | nindent 12 }}
         {{- with .Values.env }}
