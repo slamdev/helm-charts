@@ -668,6 +668,21 @@ entries:
   kube-resource-report:
   - apiVersion: v2
     appVersion: 20.10.0
+    created: "2021-01-07T22:42:53.993421349Z"
+    description: Helm chart to deploy [kube-resource-report](https://codeberg.org/hjacobs/kube-resource-report).
+    digest: a74fdb4932eb09f7d22adf57b253752fd7b023230f7c0179c4d283e628d47f2b
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/kube-resource-report
+    icon: https://i.stack.imgur.com/mwFzF.png
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: kube-resource-report
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/kube-resource-report-0.0.4/kube-resource-report-0.0.4.tgz
+    version: 0.0.4
+  - apiVersion: v2
+    appVersion: 20.10.0
     created: "2021-01-07T22:33:48.276063545Z"
     description: Helm chart to deploy [kube-resource-report](https://codeberg.org/hjacobs/kube-resource-report).
     digest: 9976297541351e685f18be2c1b847a52ce245fe348fac836eb49f679204aff18
