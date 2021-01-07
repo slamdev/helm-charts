@@ -1,6 +1,6 @@
 # kube-resource-report
 
-![Version: 0.0.3](https://img.shields.io/badge/Version-0.0.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 20.10.0](https://img.shields.io/badge/AppVersion-20.10.0-informational?style=flat-square)
+![Version: 0.0.4](https://img.shields.io/badge/Version-0.0.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 20.10.0](https://img.shields.io/badge/AppVersion-20.10.0-informational?style=flat-square)
 
 Helm chart to deploy [kube-resource-report](https://codeberg.org/hjacobs/kube-resource-report).
 
@@ -18,6 +18,7 @@ Helm chart to deploy [kube-resource-report](https://codeberg.org/hjacobs/kube-re
 |-----|------|---------|-------------|
 | affinity | object | `{}` | affinity for scheduler pod assignment |
 | app.resources | object | `{}` | custom resource configuration |
+| args | list | `[]` | extra args to pass to container |
 | env | string | `nil` | environment variables for the deployment |
 | fullnameOverride | string | `""` | full name of the chart. |
 | image.pullPolicy | string | `"IfNotPresent"` | image pull policy |

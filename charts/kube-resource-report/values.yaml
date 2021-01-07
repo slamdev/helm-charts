@@ -94,6 +94,9 @@ env:
 #  - name: NODE_LABEL_INSTANCE_TYPE
 #    value: "beta.kubernetes.io/instance-type"
 
+# args -- extra args to pass to container
+args: []
+
 # pricingData -- CSV with columns region,instance-type,monthly-price-usd
 pricingData: |-
   dc-1,master,30.000

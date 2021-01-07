@@ -34,6 +34,9 @@ spec:
             - --update-interval-minutes=1
             - --additional-cost-per-cluster=0
             - --pricing-file=/config/pricing.csv
+            {{- range .Values.args }}
+            - {{ . | quote }}
+            {{- end }}
             - /output
           resources:
             {{- toYaml .Values.app.resources | nindent 12 }}
