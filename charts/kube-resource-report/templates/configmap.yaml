@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "kube-resource-report.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "kube-resource-report.labels" . | nindent 4 }}
+data:
+  pricing.csv: |-
+    {{ .Values.pricingData | nindent 4 }}

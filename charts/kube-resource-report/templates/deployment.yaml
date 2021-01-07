@@ -1,0 +1,98 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "kube-resource-report.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "kube-resource-report.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "kube-resource-report.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "kube-resource-report.selectorLabels" . | nindent 8 }}
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      serviceAccountName: {{ include "kube-resource-report.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 1000
+          image: "{{ .Values.image.repository }}:{{ include "kube-resource-report.tag" . }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args:
+            - --update-interval-minutes=1
+            - --additional-cost-per-cluster=0
+            - --pricing-file=/config/pricing.csv
+            - /output
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          resources:
+            {{- toYaml .Values.app.resources | nindent 12 }}
+        {{- with .Values.env }}
+          env:
+            {{- toYaml . | nindent 12 }}
+        {{- end }}
+          volumeMounts:
+            - mountPath: /output
+              name: report-data
+            - mountPath: /config
+              name: config
+        {{- with .Values.volumeMounts }}
+            {{- toYaml . | nindent 12 }}
+        {{- end }}
+        - name: nginx
+          image: nginx:alpine
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+          resources:
+            {{- toYaml .Values.nginx.resources | nindent 12 }}
+          volumeMounts:
+            - mountPath: /usr/share/nginx/html
+              name: report-data
+              readOnly: true
+      volumes:
+        - name: report-data
+          emptyDir:
+            sizeLimit: 500Mi
+        - name: config
+          configMap:
+            name: {{ include "kube-resource-report.fullname" . }}
+    {{- with .Values.volumes }}
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}

@@ -1,0 +1,12 @@
+apiVersion: v2
+name: kube-resource-report
+description: |-
+  Helm chart to deploy [kube-resource-report](https://codeberg.org/hjacobs/kube-resource-report).
+type: application
+version: 0.0.1
+appVersion: "20.10.0"
+home: https://github.com/slamdev/helm-charts/tree/master/charts/kube-resource-report
+icon: https://i.stack.imgur.com/mwFzF.png
+maintainers:
+  - name: slamdev
+    email: valentin.fedoskin@gmail.com
