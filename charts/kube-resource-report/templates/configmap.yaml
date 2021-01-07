@@ -6,5 +6,4 @@ metadata:
   labels:
     {{- include "kube-resource-report.labels" . | nindent 4 }}
 data:
-  pricing.csv: |-
-    {{ .Values.pricingData | nindent 4 }}
+  pricing.csv: |- {{ .Values.pricingData | nindent 4 }}
