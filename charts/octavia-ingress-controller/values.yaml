@@ -53,7 +53,7 @@ tolerations: []
 affinity: {}
 
 # ingressConfigVolume -- volume with openstack config https://github.com/kubernetes/cloud-provider-openstack/blob/master/docs/octavia-ingress-controller/using-octavia-ingress-controller.md#prepare-octavia-ingress-controller-configuration
-ingressConfigVolume:
+ingressConfigVolume: {}
 #  configMap:
 #    name: octavia-ingress-controller-config
 #    items:
