@@ -1,6 +1,6 @@
 # octavia-ingress-controller
 
-![Version: 0.0.1](https://img.shields.io/badge/Version-0.0.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.20.0](https://img.shields.io/badge/AppVersion-v1.20.0-informational?style=flat-square)
+![Version: 0.0.2](https://img.shields.io/badge/Version-0.0.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.20.0](https://img.shields.io/badge/AppVersion-v1.20.0-informational?style=flat-square)
 
 Helm chart to deploy [octavia-ingress-controller](https://github.com/kubernetes/cloud-provider-openstack/blob/master/docs/octavia-ingress-controller/using-octavia-ingress-controller.md).
 
@@ -22,7 +22,7 @@ Helm chart to deploy [octavia-ingress-controller](https://github.com/kubernetes/
 | image.repository | string | `"k8scloudprovider/octavia-ingress-controller"` | image repository |
 | image.tag | string | `""` | image tag (chart's appVersion value will be used if not set) |
 | imagePullSecrets | list | `[]` | image pull secret for private images |
-| ingressConfigVolume | object | `{"configMap":{"items":[{"key":"config","path":"octavia-ingress-controller-config.yaml"}],"name":"octavia-ingress-controller-config"}}` | volume with openstack config https://github.com/kubernetes/cloud-provider-openstack/blob/master/docs/octavia-ingress-controller/using-octavia-ingress-controller.md#prepare-octavia-ingress-controller-configuration |
+| ingressConfigVolume | string | `nil` | volume with openstack config https://github.com/kubernetes/cloud-provider-openstack/blob/master/docs/octavia-ingress-controller/using-octavia-ingress-controller.md#prepare-octavia-ingress-controller-configuration |
 | nameOverride | string | `""` | override name of the chart |
 | nodeSelector | object | `{}` | node for scheduler pod assignment |
 | podSecurityContext | object | `{}` | specifies security settings for a pod |
