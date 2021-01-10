@@ -31,6 +31,7 @@ spec:
           args:
             - /bin/octavia-ingress-controller
             - --config=/etc/config/octavia-ingress-controller-config.yaml
+            - --debug={{ .Values.debug }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
