@@ -3,7 +3,7 @@ name: octavia-ingress-controller
 description: |-
   Helm chart to deploy [octavia-ingress-controller](https://github.com/kubernetes/cloud-provider-openstack/blob/master/docs/octavia-ingress-controller/using-octavia-ingress-controller.md).
 type: application
-version: 0.0.2
+version: 0.0.3
 appVersion: "v1.20.0"
 home: https://github.com/slamdev/helm-charts/tree/master/charts/octavia-ingress-controller
 icon: https://i.stack.imgur.com/mwFzF.png

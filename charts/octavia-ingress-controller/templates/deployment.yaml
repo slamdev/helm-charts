@@ -34,19 +34,14 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
-{{/*            - mountPath: /etc/kubernetes*/}}
-{{/*              name: kubernetes-config*/}}
-{{/*              readOnly: true*/}}
             - name: ingress-config
               mountPath: /etc/config
               readOnly: true
       volumes:
-{{/*        - name: kubernetes-config*/}}
-{{/*          hostPath:*/}}
-{{/*            path: /etc/kubernetes*/}}
-{{/*            type: Directory*/}}
         - name: ingress-config
-          {{- toYaml .Values.ingressConfigVolume | nindent 10 }}
+          {{- with .Values.ingressConfigVolume }}
+          {{- toYaml . | nindent 10 }}
+          {{- end }}
     {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
