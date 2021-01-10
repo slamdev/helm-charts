@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "octavia-ingress-controller.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "octavia-ingress-controller.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "octavia-ingress-controller.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "octavia-ingress-controller.selectorLabels" . | nindent 8 }}
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      serviceAccountName: {{ include "octavia-ingress-controller.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ include "octavia-ingress-controller.tag" . }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args:
+            - /bin/octavia-ingress-controller
+            - --config=/etc/config/octavia-ingress-controller-config.yaml
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+{{/*            - mountPath: /etc/kubernetes*/}}
+{{/*              name: kubernetes-config*/}}
+{{/*              readOnly: true*/}}
+            - name: ingress-config
+              mountPath: /etc/config
+              readOnly: true
+      volumes:
+{{/*        - name: kubernetes-config*/}}
+{{/*          hostPath:*/}}
+{{/*            path: /etc/kubernetes*/}}
+{{/*            type: Directory*/}}
+        - name: ingress-config
+          {{- toYaml .Values.ingressConfigVolume | nindent 10 }}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
