@@ -850,6 +850,21 @@ entries:
   octavia-ingress-controller:
   - apiVersion: v2
     appVersion: v1.20.0
+    created: "2021-01-10T14:40:42.786613689Z"
+    description: Helm chart to deploy [octavia-ingress-controller](https://github.com/kubernetes/cloud-provider-openstack/blob/master/docs/octavia-ingress-controller/using-octavia-ingress-controller.md).
+    digest: 314a81900c8be049eeed80833a9592c21b0a877d34205dda8e5709ad529a718a
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/octavia-ingress-controller
+    icon: https://i.stack.imgur.com/mwFzF.png
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: octavia-ingress-controller
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/octavia-ingress-controller-0.0.2/octavia-ingress-controller-0.0.2.tgz
+    version: 0.0.2
+  - apiVersion: v2
+    appVersion: v1.20.0
     created: "2021-01-10T14:34:05.999190863Z"
     description: Helm chart to deploy [octavia-ingress-controller](https://github.com/kubernetes/cloud-provider-openstack/blob/master/docs/octavia-ingress-controller/using-octavia-ingress-controller.md).
     digest: bbd134e2cab530504a378cff4987fb71f1b0afc53bb1587b206f030a5ade5b81
