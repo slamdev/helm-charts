@@ -3,6 +3,21 @@ entries:
   archiva:
   - apiVersion: v2
     appVersion: v2.2.4-1
+    created: "2021-01-10T14:48:21.685524495Z"
+    description: Helm chart to deploy [archiva](https://hub.docker.com/r/xetusoss/archiva/).
+    digest: 5d5662bc8e122959fe6c051d155d34c1560ee1d030645b887a40f69e55aa652b
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/archiva
+    icon: http://archiva.apache.org/images/archiva.png
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: archiva
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/archiva-0.0.3/archiva-0.0.3.tgz
+    version: 0.0.3
+  - apiVersion: v2
+    appVersion: v2.2.4-1
     created: "2020-05-23T15:14:54.480676756Z"
     description: Helm chart to deploy [archiva](https://hub.docker.com/r/xetusoss/archiva/).
     digest: 0536e2486d041c0116bb46c0da25e0ad7e81c1654bda9e97dddc626911f20b75
@@ -32,6 +47,26 @@ entries:
     - https://github.com/slamdev/helm-charts/releases/download/archiva-0.0.1/archiva-0.0.1.tgz
     version: 0.0.1
   external-secrets-operator:
+  - apiVersion: v2
+    appVersion: 0.0.6
+    created: "2021-01-10T14:48:21.745817468Z"
+    description: |-
+      Helm chart to deploy [external-secrets-operator](https://github.com/slamdev/external-secrets-operator).
+
+      External Secrets Operator watches changes in external key-value backends to sync them with Kubernetes Secrets and ConfigMaps.
+
+      Refer to operator repo for additional information.
+    digest: 88cb9c435e92ab39d2826d5bb0db3ce322a3f4a13e6309a08fe410b2e9615ef2
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/external-secrets-operator
+    icon: https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Emblem-question.svg/1200px-Emblem-question.svg.png
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: external-secrets-operator
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/external-secrets-operator-0.0.13/external-secrets-operator-0.0.13.tgz
+    version: 0.0.13
   - apiVersion: v2
     appVersion: 0.0.6
     created: "2020-06-30T08:17:57.222478998Z"
@@ -245,6 +280,21 @@ entries:
   fluentd:
   - apiVersion: v2
     appVersion: v1.11.2
+    created: "2021-01-10T14:48:21.815283935Z"
+    description: Helm chart to deploy [fluentd](http://www.fluentd.org/).
+    digest: 399901d3547f957d7ef79742e09755a6092383060467fa2464949363afa31c8d
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/fluentd
+    icon: https://www.fluentd.org/assets/img/miscellany/fluentd-logo_2x.png
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: fluentd
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/fluentd-0.0.4/fluentd-0.0.4.tgz
+    version: 0.0.4
+  - apiVersion: v2
+    appVersion: v1.11.2
     created: "2020-09-09T18:52:33.243054544Z"
     description: Helm chart to deploy [fluentd](http://www.fluentd.org/).
     digest: 643960307cc2ba46bb6fa072b9eea4a8ec2c0c0114947b41d88ef5bc61f6f934
@@ -289,6 +339,21 @@ entries:
     - https://github.com/slamdev/helm-charts/releases/download/fluentd-0.0.1/fluentd-0.0.1.tgz
     version: 0.0.1
   flux-notifier:
+  - apiVersion: v2
+    appVersion: v0.0.8
+    created: "2021-01-10T14:48:21.882869304Z"
+    description: Helm chart to deploy [flux-notifier](https://github.com/slamdev/flux-notifier/).
+    digest: 264d7f8ecfa5eb48eb6afdad64f6a0f74f8badbf1b4510735ec40f4785315b28
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/flux-notifier
+    icon: https://docs.fluxcd.io/en/1.19.0/_files/flux-icon@2x.png
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: flux-notifier
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/flux-notifier-0.0.5/flux-notifier-0.0.5.tgz
+    version: 0.0.5
   - apiVersion: v2
     appVersion: v0.0.8
     created: "2020-06-19T19:13:26.488431611Z"
@@ -350,6 +415,21 @@ entries:
     - https://github.com/slamdev/helm-charts/releases/download/flux-notifier-0.0.1/flux-notifier-0.0.1.tgz
     version: 0.0.1
   gitlab-omnibus:
+  - apiVersion: v2
+    appVersion: 13.0.6-ee.0
+    created: "2021-01-10T14:48:21.982727758Z"
+    description: Helm chart to deploy [Omnibus Gitlab](https://docs.gitlab.com/omnibus/).
+    digest: bd765e3fcdd34cc8f5ca946e0835285665f5adfed746b2792f5bd2c62be7bd06
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/gitlab-omnibus
+    icon: https://docs.gitlab.com/assets/images/gitlab-logo.svg
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: gitlab-omnibus
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/gitlab-omnibus-0.0.15/gitlab-omnibus-0.0.15.tgz
+    version: 0.0.15
   - apiVersion: v2
     appVersion: 13.0.6-ee.0
     created: "2020-06-19T19:13:26.582521109Z"
@@ -563,6 +643,20 @@ entries:
   gke-preemptible-notifier:
   - apiVersion: v2
     appVersion: v0.0.3
+    created: "2021-01-10T14:48:22.049904329Z"
+    description: Helm chart to deploy [gke-preemptible-notifier](https://github.com/slamdev/gke-preemptible-notifier/).
+    digest: f455afd4e9f1a94d95ac883a4a7001fc0117014641563e10741e86734586d696
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/gke-preemptible-notifier
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: gke-preemptible-notifier
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/gke-preemptible-notifier-0.0.4/gke-preemptible-notifier-0.0.4.tgz
+    version: 0.0.4
+  - apiVersion: v2
+    appVersion: v0.0.3
     created: "2020-05-15T09:25:50.214392666Z"
     description: Helm chart to deploy [gke-preemptible-notifier](https://github.com/slamdev/gke-preemptible-notifier/).
     digest: d3334f33da130091126ba77dbc159adf73f57dda6daa55a34b426be279de8c96
@@ -604,6 +698,21 @@ entries:
     - https://github.com/slamdev/helm-charts/releases/download/gke-preemptible-notifier-0.0.1/gke-preemptible-notifier-0.0.1.tgz
     version: 0.0.1
   gradle-cache:
+  - apiVersion: v2
+    appVersion: "9.0"
+    created: "2021-01-10T14:48:22.123893397Z"
+    description: Helm chart to deploy [gradle-cache](https://docs.gradle.com/build-cache-node/).
+    digest: 7a3135a6639d593b0353b37067b113f087088402228a4b4ec376220f7b53b52b
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/gradle-cache
+    icon: https://gradle.org/icon/favicon-32x32.png
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: gradle-cache
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/gradle-cache-0.0.5/gradle-cache-0.0.5.tgz
+    version: 0.0.5
   - apiVersion: v2
     appVersion: "9.0"
     created: "2020-03-26T11:07:38.12405774Z"
@@ -650,6 +759,21 @@ entries:
     - https://github.com/slamdev/helm-charts/releases/download/gradle-cache-0.0.2/gradle-cache-0.0.2.tgz
     version: 0.0.2
   haproxy:
+  - apiVersion: v2
+    appVersion: 2.1.4
+    created: "2021-01-10T14:48:22.201093663Z"
+    description: Helm chart to deploy [haproxy](http://www.haproxy.org/).
+    digest: 0dcba94a2e206e89daabe0b3a2c5bb442600f762687fdb9979354d7e7d4c1425
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/haproxy
+    icon: http://www.haproxy.org/img/HAProxyCommunityEdition_60px.png
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: haproxy
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/haproxy-0.0.2/haproxy-0.0.2.tgz
+    version: 0.0.2
   - apiVersion: v2
     appVersion: 2.1.4
     created: "2020-05-09T10:33:27.579300838Z"
@@ -727,6 +851,24 @@ entries:
     - https://github.com/slamdev/helm-charts/releases/download/kube-resource-report-0.0.1/kube-resource-report-0.0.1.tgz
     version: 0.0.1
   nginx:
+  - apiVersion: v2
+    appVersion: 1.17.9
+    created: "2021-01-10T14:48:22.295930222Z"
+    description: |-
+      Helm chart to deploy [nginx](https://www.nginx.com).
+
+      Chart supports environment variables inside of the nginx.conf file.
+    digest: 691a59bc6d493743f58c3aef720a2661770ab0d166ea37e83a9e0eb92321d0f4
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/nginx
+    icon: https://www.nginx.com/wp-content/uploads/2019/10/favicon-48x48.ico
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: nginx
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/nginx-0.0.10/nginx-0.0.10.tgz
+    version: 0.0.10
   - apiVersion: v2
     appVersion: 1.17.9
     created: "2020-08-16T11:19:48.469831446Z"
@@ -896,6 +1038,21 @@ entries:
   weblate:
   - apiVersion: v2
     appVersion: 3.11.3-1
+    created: "2021-01-10T14:48:22.355696696Z"
+    description: Helm chart to deploy [weblate](https://hub.docker.com/r/weblate/weblate/).
+    digest: b714aa1909e672e1651ba47967c6e2836770366469260fe34da381aad40eb118
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/weblate
+    icon: https://weblate.org/static/weblate-180.png
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: weblate
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/weblate-0.0.4/weblate-0.0.4.tgz
+    version: 0.0.4
+  - apiVersion: v2
+    appVersion: 3.11.3-1
     created: "2020-04-08T17:34:35.658108233Z"
     description: Helm chart to deploy [weblate](https://hub.docker.com/r/weblate/weblate/).
     digest: 0443217264e62bede5a709bf152230091fb94958af8e9d1e7d5e4a06f0fd8160
@@ -940,6 +1097,21 @@ entries:
     - https://github.com/slamdev/helm-charts/releases/download/weblate-0.0.1/weblate-0.0.1.tgz
     version: 0.0.1
   zeppelin:
+  - apiVersion: v2
+    appVersion: 0.9.0
+    created: "2021-01-10T14:48:22.430327964Z"
+    description: Helm chart to deploy [zeppelin](http://zeppelin.apache.org/).
+    digest: 0321e87ce7883c5e430de297efba3f6058ccccfdffec563c46f65b82c37b089c
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/zeppelin
+    icon: https://zeppelin.apache.org/docs/latest/assets/themes/zeppelin/img/zeppelin_logo.png
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: zeppelin
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/zeppelin-0.0.10/zeppelin-0.0.10.tgz
+    version: 0.0.10
   - apiVersion: v2
     appVersion: 0.9.0
     created: "2020-06-24T19:55:53.707768616Z"
