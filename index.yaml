@@ -3,6 +3,26 @@ entries:
   altinity-clickhouse-operator:
   - apiVersion: v2
     appVersion: 0.13.0
+    created: "2021-01-31T13:19:21.044779534Z"
+    description: |-
+      Helm chart to deploy [altinity-clickhouse-operator](https://github.com/Altinity/clickhouse-operator).
+
+      The ClickHouse Operator creates, configures and manages ClickHouse clusters running on Kubernetes.
+
+      Refer to operator repo for additional information.
+    digest: 00900046b13b186eae301678f9c52cdf266cd67442872ce36f4ce473a2236fb5
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/altinity-clickhouse-operator
+    icon: https://artifacthub.io/image/2d6aa29c-c74f-4bff-bede-ba7e6e0315a7@2x
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: altinity-clickhouse-operator
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/altinity-clickhouse-operator-0.0.2/altinity-clickhouse-operator-0.0.2.tgz
+    version: 0.0.2
+  - apiVersion: v2
+    appVersion: 0.13.0
     created: "2021-01-31T13:08:42.029293269Z"
     description: |-
       Helm chart to deploy [altinity-clickhouse-operator](https://github.com/Altinity/clickhouse-operator).
