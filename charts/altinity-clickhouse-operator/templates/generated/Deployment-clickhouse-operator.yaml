@@ -15,11 +15,11 @@ spec:
       labels:
         {{- include "altinity-clickhouse-operator.selectorLabels" . | nindent 8 }}
       annotations:
-        checksum/config/confd-files: {{ include (print $.Template.BasePath "/generated/ConfigMap-etc-clickhouse-operator-confd-files.yaml") . | sha256sum }}
-        checksum/config/configd-files: {{ include (print $.Template.BasePath "/generated/ConfigMap-etc-clickhouse-operator-configd-files.yaml") . | sha256sum }}
-        checksum/config/files: {{ include (print $.Template.BasePath "/generated/ConfigMap-etc-clickhouse-operator-files.yaml") . | sha256sum }}
-        checksum/config/templatesd-files: {{ include (print $.Template.BasePath "/generated/ConfigMap-etc-clickhouse-operator-templatesd-files.yaml") . | sha256sum }}
-        checksum/config/usersd-files: {{ include (print $.Template.BasePath "/generated/ConfigMap-etc-clickhouse-operator-usersd-files.yaml") . | sha256sum }}
+        checksum/confd-files: {{ include (print $.Template.BasePath "/generated/ConfigMap-etc-clickhouse-operator-confd-files.yaml") . | sha256sum }}
+        checksum/configd-files: {{ include (print $.Template.BasePath "/generated/ConfigMap-etc-clickhouse-operator-configd-files.yaml") . | sha256sum }}
+        checksum/files: {{ include (print $.Template.BasePath "/generated/ConfigMap-etc-clickhouse-operator-files.yaml") . | sha256sum }}
+        checksum/templatesd-files: {{ include (print $.Template.BasePath "/generated/ConfigMap-etc-clickhouse-operator-templatesd-files.yaml") . | sha256sum }}
+        checksum/usersd-files: {{ include (print $.Template.BasePath "/generated/ConfigMap-etc-clickhouse-operator-usersd-files.yaml") . | sha256sum }}
     spec:
     {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
