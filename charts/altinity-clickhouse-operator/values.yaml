@@ -1,10 +1,43 @@
-image:
-  # image.repository -- image repository
-  repository: altinity/clickhouse-operator
-  # image.tag -- image tag (chart's appVersion value will be used if not set)
-  tag: ""
-  # image.pullPolicy -- image pull policy
-  pullPolicy: IfNotPresent
+operator:
+  image:
+    # operator.image.repository -- image repository
+    repository: altinity/clickhouse-operator
+    # operator.image.tag -- image tag (chart's appVersion value will be used if not set)
+    tag: ""
+    # operator.image.pullPolicy -- image pull policy
+    pullPolicy: IfNotPresent
+  # operator.resources -- custom resource configuration
+  resources: {}
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+  # operator.env -- additional environment variables for the deployment
+  env: [ ]
+  # - name: SAMPLE
+  #   value: text
+metrics:
+  image:
+    # metrics.image.repository -- image repository
+    repository: altinity/metrics-exporter
+    # metrics.image.tag -- image tag (chart's appVersion value will be used if not set)
+    tag: ""
+    # metrics.image.pullPolicy -- image pull policy
+    pullPolicy: IfNotPresent
+  # metrics.resources -- custom resource configuration
+  resources: {}
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+  # metrics.env -- additional environment variables for the deployment
+  env: [ ]
+  # - name: SAMPLE
+  #   value: text
 
 # imagePullSecrets -- image pull secret for private images
 imagePullSecrets: []
@@ -15,20 +48,11 @@ fullnameOverride: ""
 
 serviceAccount:
   # serviceAccount.create -- specifies whether a service account should be created
-  create: false
+  create: true
   # serviceAccount.annotations -- annotations to add to the service account
   annotations: {}
   # serviceAccount.name -- the name of the service account to use; if not set and create is true, a name is generated using the fullname template
   name:
-
-# resources -- custom resource configuration
-resources: {}
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
 
 # nodeSelector -- node for scheduler pod assignment
 nodeSelector: {}
@@ -39,7 +63,26 @@ tolerations: []
 # affinity -- affinity for scheduler pod assignment
 affinity: {}
 
-# env -- additional environment variables for the deployment
-env: []
-  # - name: SAMPLE
-  #   value: text
+serviceMonitor:
+  # serviceMonitor.enabled -- ServiceMonitor CRD is created for a prometheus operator
+  enabled: false
+  # serviceMonitor.additionalLabels -- additional labels for service monitor
+  additionalLabels: {}
+
+# configs -- overrides operator default configmaps
+configs:
+  confdFiles: null
+#    some-file: |
+#      ...
+  configdFiles: null
+#    some-file: |
+#      ...
+  files: null
+#    some-file: |
+#      ...
+  templatesdFiles: null
+#    some-file: |
+#      ...
+  usersdFiles: null
+#    some-file: |
+#      ...

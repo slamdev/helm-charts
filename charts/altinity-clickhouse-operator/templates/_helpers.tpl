@@ -61,6 +61,13 @@ Create the name of the service account to use
 {{/*
 Create the tag for the docker image to use
 */}}
-{{- define "altinity-clickhouse-operator.tag" -}}
-{{- .Values.image.tag | default .Chart.AppVersion -}}
+{{- define "altinity-clickhouse-operator.operator.tag" -}}
+{{- .Values.operator.image.tag | default .Chart.AppVersion -}}
+{{- end -}}
+
+{{/*
+Create the tag for the docker image to use
+*/}}
+{{- define "altinity-clickhouse-operator.metrics.tag" -}}
+{{- .Values.metrics.image.tag | default .Chart.AppVersion -}}
 {{- end -}}

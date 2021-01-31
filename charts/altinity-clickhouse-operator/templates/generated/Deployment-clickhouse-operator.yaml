@@ -1,43 +1,51 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: clickhouse-operator
+  name: {{ include "altinity-clickhouse-operator.fullname" . }}
+  namespace: {{ .Release.Namespace }}
   labels:
-    app: clickhouse-operator
+    {{- include "altinity-clickhouse-operator.labels" . | nindent 4 }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: clickhouse-operator
+      {{- include "altinity-clickhouse-operator.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        app: clickhouse-operator
+        {{- include "altinity-clickhouse-operator.selectorLabels" . | nindent 8 }}
       annotations:
-        prometheus.io/port: "8888"
-        prometheus.io/scrape: "true"
+        checksum/config/confd-files: {{ include (print $.Template.BasePath "/generated/ConfigMap-etc-clickhouse-operator-confd-files.yaml") . | sha256sum }}
+        checksum/config/configd-files: {{ include (print $.Template.BasePath "/generated/ConfigMap-etc-clickhouse-operator-configd-files.yaml") . | sha256sum }}
+        checksum/config/files: {{ include (print $.Template.BasePath "/generated/ConfigMap-etc-clickhouse-operator-files.yaml") . | sha256sum }}
+        checksum/config/templatesd-files: {{ include (print $.Template.BasePath "/generated/ConfigMap-etc-clickhouse-operator-templatesd-files.yaml") . | sha256sum }}
+        checksum/config/usersd-files: {{ include (print $.Template.BasePath "/generated/ConfigMap-etc-clickhouse-operator-usersd-files.yaml") . | sha256sum }}
     spec:
-      serviceAccountName: clickhouse-operator
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+      {{- toYaml . | nindent 8 }}
+    {{- end }}
+      serviceAccountName: {{ include "altinity-clickhouse-operator.serviceAccountName" . }}
       volumes:
         - name: etc-clickhouse-operator-folder
           configMap:
-            name: etc-clickhouse-operator-files
+            name: {{ include "altinity-clickhouse-operator.fullname" . }}-files
         - name: etc-clickhouse-operator-confd-folder
           configMap:
-            name: etc-clickhouse-operator-confd-files
+            name: {{ include "altinity-clickhouse-operator.fullname" . }}-confd-files
         - name: etc-clickhouse-operator-configd-folder
           configMap:
-            name: etc-clickhouse-operator-configd-files
+            name: {{ include "altinity-clickhouse-operator.fullname" . }}-configd-files
         - name: etc-clickhouse-operator-templatesd-folder
           configMap:
-            name: etc-clickhouse-operator-templatesd-files
+            name: {{ include "altinity-clickhouse-operator.fullname" . }}-templatesd-files
         - name: etc-clickhouse-operator-usersd-folder
           configMap:
-            name: etc-clickhouse-operator-usersd-files
+            name: {{ include "altinity-clickhouse-operator.fullname" . }}-usersd-files
       containers:
-        - name: clickhouse-operator
-          image: altinity/clickhouse-operator:0.13.0
-          imagePullPolicy: Always
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.operator.image.repository }}:{{ include "altinity-clickhouse-operator.operator.tag" . }}"
+          imagePullPolicy: {{ .Values.operator.image.pullPolicy }}
           volumeMounts:
             - name: etc-clickhouse-operator-folder
               mountPath: /etc/clickhouse-operator
@@ -73,26 +81,34 @@ spec:
             - name: OPERATOR_CONTAINER_CPU_REQUEST
               valueFrom:
                 resourceFieldRef:
-                  containerName: clickhouse-operator
+                  containerName: {{ .Chart.Name }}
                   resource: requests.cpu
             - name: OPERATOR_CONTAINER_CPU_LIMIT
               valueFrom:
                 resourceFieldRef:
-                  containerName: clickhouse-operator
+                  containerName: {{ .Chart.Name }}
                   resource: limits.cpu
             - name: OPERATOR_CONTAINER_MEM_REQUEST
               valueFrom:
                 resourceFieldRef:
-                  containerName: clickhouse-operator
+                  containerName: {{ .Chart.Name }}
                   resource: requests.memory
             - name: OPERATOR_CONTAINER_MEM_LIMIT
               valueFrom:
                 resourceFieldRef:
-                  containerName: clickhouse-operator
+                  containerName: {{ .Chart.Name }}
                   resource: limits.memory
+          {{- with .Values.operator.env }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          resources:
+            {{- toYaml .Values.operator.resources | nindent 12 }}
         - name: metrics-exporter
-          image: altinity/metrics-exporter:0.13.0
-          imagePullPolicy: Always
+          image: "{{ .Values.metrics.image.repository }}:{{ include "altinity-clickhouse-operator.metrics.tag" . }}"
+          imagePullPolicy: {{ .Values.metrics.image.pullPolicy }}
+          ports:
+            - name: metrics
+              containerPort: 8888
           volumeMounts:
             - name: etc-clickhouse-operator-folder
               mountPath: /etc/clickhouse-operator
@@ -104,3 +120,9 @@ spec:
               mountPath: /etc/clickhouse-operator/templates.d
             - name: etc-clickhouse-operator-usersd-folder
               mountPath: /etc/clickhouse-operator/users.d
+        {{- with .Values.metrics.env }}
+          env:
+          {{- toYaml . | nindent 12 }}
+        {{- end }}
+          resources:
+            {{- toYaml .Values.metrics.resources | nindent 12 }}

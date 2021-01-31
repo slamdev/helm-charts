@@ -1,10 +1,14 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: etc-clickhouse-operator-files
+  name: {{ include "altinity-clickhouse-operator.fullname" . }}-files
+  namespace: {{ .Release.Namespace }}
   labels:
-    app: clickhouse-operator
+    {{- include "altinity-clickhouse-operator.labels" . | nindent 4 }}
 data:
+{{- if .Values.configs.files }}
+  {{- toYaml .Values.configs.files | nindent 2 }}
+{{ else }}
   config.yaml: |
     ################################################
     ##
@@ -127,3 +131,5 @@ data:
     reconcileThreadsNumber: 10
     reconcileWaitExclude: false
     reconcileWaitInclude: false
+
+{{ end }}

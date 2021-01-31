@@ -1,10 +1,14 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: etc-clickhouse-operator-configd-files
+  name: {{ include "altinity-clickhouse-operator.fullname" . }}-configd-files
+  namespace: {{ .Release.Namespace }}
   labels:
-    app: clickhouse-operator
+    {{- include "altinity-clickhouse-operator.labels" . | nindent 4 }}
 data:
+{{- if .Values.configs.configdFiles }}
+  {{- toYaml .Values.configs.configdFiles | nindent 2 }}
+{{ else }}
   01-clickhouse-listen.xml: |
     <yandex>
         <!-- Listen wildcard address to allow accepting connections from other containers and host network. -->
@@ -44,3 +48,5 @@ data:
         <flush_interval_milliseconds>7500</flush_interval_milliseconds>
     </part_log>
     </yandex>
+
+{{ end }}
