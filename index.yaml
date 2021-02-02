@@ -1124,6 +1124,22 @@ entries:
     urls:
     - https://github.com/slamdev/helm-charts/releases/download/octavia-ingress-controller-0.0.1/octavia-ingress-controller-0.0.1.tgz
     version: 0.0.1
+  pgweb:
+  - apiVersion: v2
+    appVersion: 0.11.7
+    created: "2021-02-02T16:22:22.359204099Z"
+    description: Helm chart to deploy [pgweb](https://hub.docker.com/r/sosedoff/pgweb).
+    digest: 7617809135a0df437d193842eb6c5d146e6e4611f55a193999e2a11e43019332
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/pgweb
+    icon: https://i.stack.imgur.com/mwFzF.png
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: pgweb
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/pgweb-0.0.1/pgweb-0.0.1.tgz
+    version: 0.0.1
   weblate:
   - apiVersion: v2
     appVersion: 3.11.3-1
