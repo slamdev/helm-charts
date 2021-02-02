@@ -2,6 +2,7 @@
 
 This repository contains [Helm](https://helm.sh) charts for various projects
 
+* [Altinity Clickhouse Operator](https://github.com/slamdev/helm-charts/tree/master/charts/altinity-clickhouse-operator)
 * [Archiva](https://github.com/slamdev/helm-charts/tree/master/charts/archiva)
 * [External Secrets Operator](https://github.com/slamdev/helm-charts/tree/master/charts/external-secrets-operator)
 * [FluentD](https://github.com/slamdev/helm-charts/tree/master/charts/fluentd)
@@ -10,7 +11,10 @@ This repository contains [Helm](https://helm.sh) charts for various projects
 * [GKE Preemptible Notifier](https://github.com/slamdev/helm-charts/tree/master/charts/gke-preemptible-notifier)
 * [Gradle Cache](https://github.com/slamdev/helm-charts/tree/master/charts/gradle-cache)
 * [HAProxy](https://github.com/slamdev/helm-charts/tree/master/charts/haproxy)
+* [Kube Resource Report](https://github.com/slamdev/helm-charts/tree/master/charts/kube-resource-report)
 * [Nginx](https://github.com/slamdev/helm-charts/tree/master/charts/nginx)
+* [Octavia Ingress Controller](https://github.com/slamdev/helm-charts/tree/master/charts/octavia-ingress-controller)
+* [Pgweb](https://github.com/slamdev/helm-charts/tree/master/charts/pgweb)
 * [Weblate](https://github.com/slamdev/helm-charts/tree/master/charts/weblate)
 * [Zeppelin](https://github.com/slamdev/helm-charts/tree/master/charts/zeppelin)
 
