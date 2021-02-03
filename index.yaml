@@ -87,6 +87,22 @@ entries:
     urls:
     - https://github.com/slamdev/helm-charts/releases/download/archiva-0.0.1/archiva-0.0.1.tgz
     version: 0.0.1
+  docker-registry-proxy:
+  - apiVersion: v2
+    appVersion: 0.6.2
+    created: "2021-02-03T16:59:07.683122781Z"
+    description: Helm chart to deploy [docker-registry-proxy](https://hub.docker.com/r/rpardini/docker-registry-proxy).
+    digest: 189a7a88e6efaf4207b7ef4c0f73b05abc141c573db6deed6d09b4932b0b52ff
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/docker-registry-proxy
+    icon: https://i.stack.imgur.com/mwFzF.png
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: docker-registry-proxy
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/docker-registry-proxy-0.0.1/docker-registry-proxy-0.0.1.tgz
+    version: 0.0.1
   external-secrets-operator:
   - apiVersion: v2
     appVersion: 0.0.6
