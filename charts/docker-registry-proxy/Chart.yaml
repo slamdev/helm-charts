@@ -1,0 +1,12 @@
+apiVersion: v2
+name: docker-registry-proxy
+description: |-
+  Helm chart to deploy [docker-registry-proxy](https://hub.docker.com/r/rpardini/docker-registry-proxy).
+type: application
+version: 0.0.1
+appVersion: "0.6.2"
+home: https://github.com/slamdev/helm-charts/tree/master/charts/docker-registry-proxy
+icon: https://i.stack.imgur.com/mwFzF.png
+maintainers:
+  - name: slamdev
+    email: valentin.fedoskin@gmail.com

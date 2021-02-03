@@ -4,6 +4,7 @@ This repository contains [Helm](https://helm.sh) charts for various projects
 
 * [Altinity Clickhouse Operator](https://github.com/slamdev/helm-charts/tree/master/charts/altinity-clickhouse-operator)
 * [Archiva](https://github.com/slamdev/helm-charts/tree/master/charts/archiva)
+* [Docker Registry Proxy](https://github.com/slamdev/helm-charts/tree/master/charts/docker-registry-proxy)
 * [External Secrets Operator](https://github.com/slamdev/helm-charts/tree/master/charts/external-secrets-operator)
 * [FluentD](https://github.com/slamdev/helm-charts/tree/master/charts/fluentd)
 * [Flux Notifier](https://github.com/slamdev/helm-charts/tree/master/charts/flux-notifier)
