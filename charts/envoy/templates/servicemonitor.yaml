@@ -11,9 +11,10 @@ metadata:
   {{- end }}
 spec:
   endpoints:
-    - port: http-admin
+    - port: http
       path: "/stats/prometheus"
   selector:
     matchLabels:
       {{- include "envoy.selectorLabels" . | nindent 6 }}
+      admin: "true"
 {{- end }}
