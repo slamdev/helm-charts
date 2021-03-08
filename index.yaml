@@ -120,6 +120,22 @@ entries:
     urls:
     - https://github.com/slamdev/helm-charts/releases/download/docker-registry-proxy-0.0.1/docker-registry-proxy-0.0.1.tgz
     version: 0.0.1
+  envoy:
+  - apiVersion: v2
+    appVersion: v1.17.1
+    created: "2021-03-08T12:20:14.86269875Z"
+    description: Helm chart to deploy [envoy](https://www.envoyproxy.io/).
+    digest: e4949270fda077cae93b6281dbc390585d5eebcd8e9a4ab92e290695471cccff
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/envoy
+    icon: https://www.envoyproxy.io/docs/envoy/latest/_static/envoy-logo.png
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: envoy
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/envoy-0.0.1/envoy-0.0.1.tgz
+    version: 0.0.1
   external-secrets-operator:
   - apiVersion: v2
     appVersion: 0.0.6
