@@ -123,6 +123,21 @@ entries:
   envoy:
   - apiVersion: v2
     appVersion: v1.17.1
+    created: "2021-04-13T08:34:09.950791088Z"
+    description: Helm chart to deploy [envoy](https://www.envoyproxy.io/).
+    digest: 3061c756cdb9747e973ad89a7c29b493f4d5a8a65760c3a945cdf3d4f4e34581
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/envoy
+    icon: https://www.envoyproxy.io/docs/envoy/latest/_static/envoy-logo.png
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: envoy
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/envoy-0.0.6/envoy-0.0.6.tgz
+    version: 0.0.6
+  - apiVersion: v2
+    appVersion: v1.17.1
     created: "2021-03-12T12:54:16.396044477Z"
     description: Helm chart to deploy [envoy](https://www.envoyproxy.io/).
     digest: 880997b0a0cbf5a70924cd8d4dacc98e04144054f53b44dd63c91ec3b0e80a59
