@@ -33,6 +33,8 @@ service:
   type: ClusterIP
   # service.port -- service port
   port: 80
+  # service.annotations -- annotations to add to the service
+  annotations: {}
 
 ingress:
   # ingress.enabled -- enables Ingress for envoy

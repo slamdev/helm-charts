@@ -1,6 +1,6 @@
 # envoy
 
-![Version: 0.0.5](https://img.shields.io/badge/Version-0.0.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.17.1](https://img.shields.io/badge/AppVersion-v1.17.1-informational?style=flat-square)
+![Version: 0.0.6](https://img.shields.io/badge/Version-0.0.6-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.17.1](https://img.shields.io/badge/AppVersion-v1.17.1-informational?style=flat-square)
 
 Helm chart to deploy [envoy](https://www.envoyproxy.io/).
 
@@ -40,6 +40,7 @@ Helm chart to deploy [envoy](https://www.envoyproxy.io/).
 | readinessProbe.httpGet.port | string | `"http"` | port for readiness probe |
 | replicaCount | int | `1` | number of replicas for haproxy deployment. |
 | resources | object | `{}` | custom resource configuration |
+| service.annotations | object | `{}` | annotations to add to the service |
 | service.port | int | `80` | service port |
 | service.type | string | `"ClusterIP"` | service type |
 | serviceAccount.annotations | object | `{}` | annotations to add to the service account |
