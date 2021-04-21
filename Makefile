@@ -19,4 +19,4 @@ test:
 	./test/e2e-kind.sh
 
 docs:
-	helm-docs
+	helm-docs -t $$(pwd)/README.md.gotmpl
