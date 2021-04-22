@@ -1,6 +1,6 @@
 # nginx
 
-![Version: 0.0.12](https://img.shields.io/badge/Version-0.0.12-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.19.10](https://img.shields.io/badge/AppVersion-1.19.10-informational?style=flat-square)
+![Version: 0.0.13](https://img.shields.io/badge/Version-0.0.13-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.19.10](https://img.shields.io/badge/AppVersion-1.19.10-informational?style=flat-square)
 
 Helm chart to deploy [nginx](https://www.nginx.com).
 
@@ -37,6 +37,7 @@ Chart supports environment variables inside of the nginx.conf file.
 | nginxConf | string | `"# nginx version: ENV_NGINX_VERSION_ENV\nuser             nginx;\nworker_processes auto;\nerror_log        /var/log/nginx/error.log warn;\npid              /var/run/nginx.pid;\nevents {\n    worker_connections 1024;\n}\nhttp {\n    include           /etc/nginx/mime.types;\n    default_type      application/octet-stream;\n    log_format        main '$remote_addr - $remote_user [$time_local] \"$request\" '\n                           '$status $body_bytes_sent \"$http_referer\" '\n                           '\"$http_user_agent\" \"$http_x_forwarded_for\" '\n                           '$request_time $upstream_response_time $pipe';\n    access_log        /var/log/nginx/access.log main;\n    sendfile          on;\n    keepalive_timeout 65;\n    server {\n        listen      80;\n        server_name localhost;\n        location / {\n            default_type text/plain;\n            access_log   off;\n            error_log    off;\n            return 200   'ok';\n        }\n    }\n}"` | nginx config to provision inside of the container |
 | nodeSelector | object | `{}` | node for scheduler pod assignment |
 | podAnnotations | object | `{}` | annotations to add to the pod |
+| podDisruptionBudget | object | `{}` | disruption budget for pod |
 | podSecurityContext | object | `{}` | specifies security settings for a pod |
 | readinessProbe.httpGet.path | string | `"/"` | path for readiness probe |
 | readinessProbe.httpGet.port | string | `"http"` | port for readiness probe |
