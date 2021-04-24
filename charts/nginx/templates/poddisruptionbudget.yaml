@@ -10,5 +10,5 @@ spec:
   selector:
     matchLabels:
       {{- include "nginx.selectorLabels" . | nindent 8 }}
-  {{ toYaml .Values.podDisruptionBudget | indent 2 }}
+  {{ toYaml .Values.podDisruptionBudget }}
 {{- end }}
