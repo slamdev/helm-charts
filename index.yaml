@@ -1202,6 +1202,22 @@ entries:
   nginx:
   - apiVersion: v2
     appVersion: 1.19.10
+    created: "2021-04-24T15:52:20.849447484Z"
+    description: Helm chart to deploy [nginx](https://www.nginx.com).  Chart supports
+      environment variables inside of the nginx.conf file.
+    digest: 32549abddbaa34d8a7567bde7689b700a3cf5f8eb4ab46ad3bcdfca1ed66554e
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/nginx
+    icon: https://www.nginx.com/wp-content/uploads/2019/10/favicon-48x48.ico
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: nginx
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/nginx-0.0.14/nginx-0.0.14.tgz
+    version: 0.0.14
+  - apiVersion: v2
+    appVersion: 1.19.10
     created: "2021-04-22T17:38:15.714671948Z"
     description: Helm chart to deploy [nginx](https://www.nginx.com).  Chart supports
       environment variables inside of the nginx.conf file.
