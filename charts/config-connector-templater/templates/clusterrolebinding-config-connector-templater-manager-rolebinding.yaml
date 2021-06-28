@@ -11,3 +11,4 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: {{ include "config-connector-templater.fullname" . }}-controller-manager
+    namespace: {{ .Release.Namespace }}
