@@ -139,6 +139,23 @@ entries:
   config-connector-templater:
   - apiVersion: v2
     appVersion: 0.0.3
+    created: "2021-06-28T12:13:51.690430128Z"
+    description: Helm chart to deploy [config-connector-templater](https://github.com/slamdev/config-connector-templater).  Kubernetes
+      operator that templates GCP Config Connector resources.  Refer to operator repo
+      for additional information.
+    digest: bcc852f5100c5d629e2772b1aa02042c43baee653b201ed2940df4e0a91a6fbb
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/config-connector-templater
+    icon: https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Emblem-question.svg/1200px-Emblem-question.svg.png
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: config-connector-templater
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/config-connector-templater-0.0.3/config-connector-templater-0.0.3.tgz
+    version: 0.0.3
+  - apiVersion: v2
+    appVersion: 0.0.3
     created: "2021-06-28T12:00:21.592963255Z"
     description: Helm chart to deploy [config-connector-templater](https://github.com/slamdev/config-connector-templater).  Kubernetes
       operator that templates GCP Config Connector resources.  Refer to operator repo
