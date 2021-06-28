@@ -1,0 +1,7 @@
+apiVersion: config-connector-templater.slamdev.net/v1alpha1
+kind: PubSubSubscriptionTemplate
+metadata:
+  name: pubsubsubscriptiontemplate-sample
+spec:
+  # Add fields here
+  foo: bar

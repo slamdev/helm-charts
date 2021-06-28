@@ -1,0 +1,84 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  creationTimestamp: null
+  name: {{ include "config-connector-templater.fullname" . }}-manager-role
+  labels:
+    {{- include "config-connector-templater.labels" . | nindent 4 }}
+rules:
+  - apiGroups:
+      - config-connector-templater.slamdev.net
+    resources:
+      - pubsubsubscriptiontemplates
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - config-connector-templater.slamdev.net
+    resources:
+      - pubsubsubscriptiontemplates/finalizers
+    verbs:
+      - update
+  - apiGroups:
+      - config-connector-templater.slamdev.net
+    resources:
+      - pubsubsubscriptiontemplates/status
+    verbs:
+      - get
+      - patch
+      - update
+  - apiGroups:
+      - config-connector-templater.slamdev.net
+    resources:
+      - pubsubtopictemplates
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - config-connector-templater.slamdev.net
+    resources:
+      - pubsubtopictemplates/finalizers
+    verbs:
+      - update
+  - apiGroups:
+      - config-connector-templater.slamdev.net
+    resources:
+      - pubsubtopictemplates/status
+    verbs:
+      - get
+      - patch
+      - update
+  - apiGroups:
+      - pubsub.cnrm.cloud.google.com
+    resources:
+      - pubsubsubscriptions
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - pubsub.cnrm.cloud.google.com
+    resources:
+      - pubsubtopics
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch

@@ -1,0 +1,37 @@
+image:
+  # image.repository -- image repository
+  repository: slamdev/config-connector-templater
+  # image.tag -- image tag (chart's appVersion value will be used if not set)
+  tag: ""
+  # image.pullPolicy -- image pull policy
+  pullPolicy: IfNotPresent
+
+# imagePullSecrets -- image pull secret for private images
+imagePullSecrets: []
+# nameOverride -- override name of the chart
+nameOverride: ""
+# fullnameOverride -- full name of the chart.
+fullnameOverride: ""
+
+# resources -- custom resource configuration
+resources: {}
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+# nodeSelector -- node for scheduler pod assignment
+nodeSelector: {}
+
+# tolerations -- tolerations for scheduler pod assignment
+tolerations: []
+
+# affinity -- affinity for scheduler pod assignment
+affinity: {}
+
+# env -- additional environment variables for the deployment
+env: []
+  # - name: SAMPLE
+  #   value: text
