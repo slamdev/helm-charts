@@ -39,6 +39,10 @@ service:
   type: ClusterIP
   # service.port -- service port
   port: 80
+  # service.annotations -- service annotations
+  annotations: {}
+    # app.k8s.io: gradle-cache
+    # example.kubernetes.io/internal: gradle.internal
 
 ingress:
   # ingress.enabled -- enables Ingress for gradle-cache
