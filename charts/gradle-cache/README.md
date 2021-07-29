@@ -38,6 +38,7 @@ Helm chart to deploy [gradle-cache](https://docs.gradle.com/build-cache-node/).
 | securityContext | object | `{}` | specifies security settings for a container |
 | service.port | int | `80` | service port |
 | service.type | string | `"ClusterIP"` | service type |
+| service.annotations | object | `{}` | annotations to add to the clusterIP service |
 | serviceAccount.annotations | object | `{}` | annotations to add to the service account |
 | serviceAccount.create | bool | `false` | specifies whether a service account should be created |
 | serviceAccount.name | string | `nil` | the name of the service account to use; if not set and create is true, a name is generated using the fullname template |
