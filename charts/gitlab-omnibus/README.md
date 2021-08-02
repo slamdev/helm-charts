@@ -1,6 +1,6 @@
 # gitlab-omnibus
 
-![Version: 0.0.16](https://img.shields.io/badge/Version-0.0.16-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 13.10.3-ee.0](https://img.shields.io/badge/AppVersion-13.10.3--ee.0-informational?style=flat-square)
+![Version: 0.0.17](https://img.shields.io/badge/Version-0.0.17-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 13.10.3-ee.0](https://img.shields.io/badge/AppVersion-13.10.3--ee.0-informational?style=flat-square)
 
 Helm chart to deploy [Omnibus Gitlab](https://docs.gitlab.com/omnibus/).
 
@@ -32,13 +32,11 @@ Helm chart to deploy [Omnibus Gitlab](https://docs.gitlab.com/omnibus/).
 | imagePullSecrets | list | `[]` | image pull secret for private images |
 | livenessProbe.httpGet.path | string | `"/-/liveness"` | path for liveness probe |
 | livenessProbe.httpGet.port | string | `"http"` | port for liveness probe |
-| livenessProbe.initialDelaySeconds | int | `90` | initial delay in seconds |
 | nameOverride | string | `""` | override name of the chart |
 | nodeSelector | object | `{}` | node for scheduler pod assignment |
 | podSecurityContext | object | `{}` | specifies security settings for a pod |
 | readinessProbe.httpGet.path | string | `"/-/readiness"` | path for readiness probe |
 | readinessProbe.httpGet.port | string | `"http"` | port for readiness probe |
-| readinessProbe.initialDelaySeconds | int | `90` | initial delay in seconds |
 | resources | object | `{}` | custom resource configuration |
 | securityContext | object | `{"privileged":true}` | specifies security settings for a container |
 | service.annotations | object | `{}` | service annotations |
@@ -48,6 +46,11 @@ Helm chart to deploy [Omnibus Gitlab](https://docs.gitlab.com/omnibus/).
 | serviceAccount.annotations | object | `{}` | annotations to add to the service account |
 | serviceAccount.create | bool | `false` | specifies whether a service account should be created |
 | serviceAccount.name | string | `nil` | the name of the service account to use; if not set and create is true, a name is generated using the fullname template |
+| startupProbe.failureThreshold | int | `300` |  |
+| startupProbe.httpGet.path | string | `"/-/readiness"` | path for startup probe |
+| startupProbe.httpGet.port | string | `"http"` | port for startup probe |
+| startupProbe.initialDelaySeconds | int | `30` |  |
+| startupProbe.periodSeconds | int | `2` |  |
 | tolerations | list | `[]` | tolerations for scheduler pod assignment |
 | volumeClaimTemplates | list | `[]` | volume claim templates |
 | volumeMounts | list | `[]` | additional volume mounts |
