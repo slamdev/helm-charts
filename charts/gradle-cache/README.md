@@ -1,6 +1,6 @@
 # gradle-cache
 
-![Version: 0.0.6](https://img.shields.io/badge/Version-0.0.6-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 9.7](https://img.shields.io/badge/AppVersion-9.7-informational?style=flat-square)
+![Version: 0.0.9](https://img.shields.io/badge/Version-0.0.9-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 9.9](https://img.shields.io/badge/AppVersion-9.9-informational?style=flat-square)
 
 Helm chart to deploy [gradle-cache](https://docs.gradle.com/build-cache-node/).
 
@@ -36,9 +36,9 @@ Helm chart to deploy [gradle-cache](https://docs.gradle.com/build-cache-node/).
 | readinessProbe.httpGet.port | string | `"http"` | port for readiness probe |
 | resources | object | `{}` | custom resource configuration |
 | securityContext | object | `{}` | specifies security settings for a container |
+| service.annotations | object | `{}` | service annotations |
 | service.port | int | `80` | service port |
 | service.type | string | `"ClusterIP"` | service type |
-| service.annotations | object | `{}` | annotations to add to the clusterIP service |
 | serviceAccount.annotations | object | `{}` | annotations to add to the service account |
 | serviceAccount.create | bool | `false` | specifies whether a service account should be created |
 | serviceAccount.name | string | `nil` | the name of the service account to use; if not set and create is true, a name is generated using the fullname template |

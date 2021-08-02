@@ -3,7 +3,7 @@ name: weblate
 description: |-
   Helm chart to deploy [weblate](https://hub.docker.com/r/weblate/weblate/).
 type: application
-version: 0.0.5
+version: 0.0.6
 appVersion: "3.11.3-1"
 home: https://github.com/slamdev/helm-charts/tree/master/charts/weblate
 icon: https://weblate.org/static/weblate-180.png
