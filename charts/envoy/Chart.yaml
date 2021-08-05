@@ -3,7 +3,7 @@ name: envoy
 description: |-
   Helm chart to deploy [envoy](https://www.envoyproxy.io/).
 type: application
-version: 0.0.8
+version: 0.0.9
 appVersion: "v1.18.2"
 home: https://github.com/slamdev/helm-charts/tree/master/charts/envoy
 icon: https://www.envoyproxy.io/docs/envoy/latest/_static/envoy-logo.png
