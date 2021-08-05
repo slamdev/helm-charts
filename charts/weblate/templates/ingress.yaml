@@ -36,16 +36,18 @@ spec:
         paths:
         {{- range .paths }}
           - path: {{ . }}
+          {{- if semverCompare "<1.19-0" $.Capabilities.KubeVersion.GitVersion }}
             backend:
-            {{- if semverCompare "<1.19-0" $.Capabilities.KubeVersion.GitVersion }}
               serviceName: {{ $fullName }}
               servicePort: {{ $svcPort }}
-            {{- else }}
+          {{- else }}
+            pathType: ImplementationSpecific
+            backend:
               service:
                 name: {{ $fullName }}
                 port:
                   number: {{ $svcPort }}
-            {{- end }}
+          {{- end }}
         {{- end }}
   {{- end }}
 {{- end }}

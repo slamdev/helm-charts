@@ -49,17 +49,21 @@ service:
   port: 80
 
 ingress:
-  enabled: true
-  annotations:
-    nginx.ingress.kubernetes.io/proxy-body-size: "0"
-  hosts:
-    - host: dev-cdn.adnz.co
-      paths:
-        - ""
-  tls:
-    - secretName: adnz-co-tls
-      hosts:
-        - dev-cdn.adnz.co
+  # ingress.enabled -- enables Ingress for nginx
+  enabled: false
+  # ingress.annotations -- ingress annotations
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  # ingress.hosts -- ingress accepted hostnames
+  hosts: []
+  #  - host: chart-example.local
+  #    paths: []
+  # ingress.tls -- ingress TLS configuration
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
 
 # resources -- custom resource configuration
 resources: {}
