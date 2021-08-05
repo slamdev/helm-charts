@@ -78,6 +78,21 @@ entries:
   archiva:
   - apiVersion: v2
     appVersion: v2.2.5
+    created: "2021-08-05T11:50:21.738682719Z"
+    description: Helm chart to deploy [archiva](https://hub.docker.com/r/xetusoss/archiva/).
+    digest: 1193568beb9e691da5c11dc524597fc43331011ba6447b87934280d624a6500f
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/archiva
+    icon: http://archiva.apache.org/images/archiva.png
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: archiva
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/archiva-0.0.6/archiva-0.0.6.tgz
+    version: 0.0.6
+  - apiVersion: v2
+    appVersion: v2.2.5
     created: "2021-08-02T13:53:31.444898532Z"
     description: Helm chart to deploy [archiva](https://hub.docker.com/r/xetusoss/archiva/).
     digest: ffe80ecb89bfecd0dc8cae1d8f4159dff031f84b1b1529d91829f44d3c0b93fd
@@ -223,6 +238,21 @@ entries:
   docker-registry-proxy:
   - apiVersion: v2
     appVersion: 0.6.3
+    created: "2021-08-05T11:50:21.808466761Z"
+    description: Helm chart to deploy [docker-registry-proxy](https://hub.docker.com/r/rpardini/docker-registry-proxy).
+    digest: 55cf2c1e9f58c1a568a632ffbdf82aa88a1c1926f35c1a81080d8caf114da0ca
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/docker-registry-proxy
+    icon: https://i.stack.imgur.com/mwFzF.png
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: docker-registry-proxy
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/docker-registry-proxy-0.0.4/docker-registry-proxy-0.0.4.tgz
+    version: 0.0.4
+  - apiVersion: v2
+    appVersion: 0.6.3
     created: "2021-08-02T13:53:31.519311452Z"
     description: Helm chart to deploy [docker-registry-proxy](https://hub.docker.com/r/rpardini/docker-registry-proxy).
     digest: 94055f0f8168cdfafa539d18bce58296fb915906f6841d11b185337bf710e36f
@@ -267,6 +297,21 @@ entries:
     - https://github.com/slamdev/helm-charts/releases/download/docker-registry-proxy-0.0.1/docker-registry-proxy-0.0.1.tgz
     version: 0.0.1
   envoy:
+  - apiVersion: v2
+    appVersion: v1.18.2
+    created: "2021-08-05T11:50:21.889913527Z"
+    description: Helm chart to deploy [envoy](https://www.envoyproxy.io/).
+    digest: e80714d236535b25ab759bb0f392ef1426dec5d7f7a651f0be377f2bdf7d4f56
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/envoy
+    icon: https://www.envoyproxy.io/docs/envoy/latest/_static/envoy-logo.png
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: envoy
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/envoy-0.0.9/envoy-0.0.9.tgz
+    version: 0.0.9
   - apiVersion: v2
     appVersion: v1.18.2
     created: "2021-08-02T13:53:31.6167742Z"
@@ -1133,6 +1178,21 @@ entries:
   gradle-cache:
   - apiVersion: v2
     appVersion: "9.9"
+    created: "2021-08-05T11:50:21.967188513Z"
+    description: Helm chart to deploy [gradle-cache](https://docs.gradle.com/build-cache-node/).
+    digest: 4af2eaf508ea6a1c78ad35ec0c8f2e6cb77f45b053f9e1d1515431cdaa16b1d6
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/gradle-cache
+    icon: https://gradle.org/icon/favicon-32x32.png
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: gradle-cache
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/gradle-cache-0.0.10/gradle-cache-0.0.10.tgz
+    version: 0.0.10
+  - apiVersion: v2
+    appVersion: "9.9"
     created: "2021-08-02T13:53:31.796556628Z"
     description: Helm chart to deploy [gradle-cache](https://docs.gradle.com/build-cache-node/).
     digest: e3bb23123bf94ebbfcd6db42cfb57b9b8c1f7b1be15f232171a5da2d26bdb4d6
@@ -1300,6 +1360,21 @@ entries:
   kube-resource-report:
   - apiVersion: v2
     appVersion: 21.2.1
+    created: "2021-08-05T11:50:22.048505077Z"
+    description: Helm chart to deploy [kube-resource-report](https://codeberg.org/hjacobs/kube-resource-report).
+    digest: 5de79dc70dc2e87198a0ef4a6ced8592b681fdd91011cc136cda35913ee39212
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/kube-resource-report
+    icon: https://i.stack.imgur.com/mwFzF.png
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: kube-resource-report
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/kube-resource-report-0.0.7/kube-resource-report-0.0.7.tgz
+    version: 0.0.7
+  - apiVersion: v2
+    appVersion: 21.2.1
     created: "2021-08-02T13:53:31.906659732Z"
     description: Helm chart to deploy [kube-resource-report](https://codeberg.org/hjacobs/kube-resource-report).
     digest: f126268a5eb7c55a5dd09bb8e2120ec9ff2b4e603ccac024b8406a99914f4fe0
@@ -1389,6 +1464,22 @@ entries:
     - https://github.com/slamdev/helm-charts/releases/download/kube-resource-report-0.0.1/kube-resource-report-0.0.1.tgz
     version: 0.0.1
   nginx:
+  - apiVersion: v2
+    appVersion: 1.19.10
+    created: "2021-08-05T11:50:22.136115561Z"
+    description: Helm chart to deploy [nginx](https://www.nginx.com).  Chart supports
+      environment variables inside of the nginx.conf file.
+    digest: 58437ad8b0bec8eefd6b2c6f758be79ce53623321681ce6ec8a09ecc91df1213
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/nginx
+    icon: https://www.nginx.com/wp-content/uploads/2019/10/favicon-48x48.ico
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: nginx
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/nginx-0.0.16/nginx-0.0.16.tgz
+    version: 0.0.16
   - apiVersion: v2
     appVersion: 1.19.10
     created: "2021-08-02T13:53:32.014643159Z"
@@ -1703,6 +1794,21 @@ entries:
   pgweb:
   - apiVersion: v2
     appVersion: 0.11.7
+    created: "2021-08-05T11:50:22.213287845Z"
+    description: Helm chart to deploy [pgweb](https://hub.docker.com/r/sosedoff/pgweb).
+    digest: 69de6f8d1d3b5618f31ad05256c755964f9beeb6c02e055c8a9ee4087fbefecf
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/pgweb
+    icon: https://i.stack.imgur.com/mwFzF.png
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: pgweb
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/pgweb-0.0.4/pgweb-0.0.4.tgz
+    version: 0.0.4
+  - apiVersion: v2
+    appVersion: 0.11.7
     created: "2021-08-02T13:53:32.10269442Z"
     description: Helm chart to deploy [pgweb](https://hub.docker.com/r/sosedoff/pgweb).
     digest: 477fac5234b08033afdf3505f99fc3a7fa9a80e99bb6cb8d9d60fb966f85ab80
@@ -1747,6 +1853,21 @@ entries:
     - https://github.com/slamdev/helm-charts/releases/download/pgweb-0.0.1/pgweb-0.0.1.tgz
     version: 0.0.1
   weblate:
+  - apiVersion: v2
+    appVersion: 3.11.3-1
+    created: "2021-08-05T11:50:22.301578343Z"
+    description: Helm chart to deploy [weblate](https://hub.docker.com/r/weblate/weblate/).
+    digest: 922e706ed256db97297cfc7f5efc74879627ab505fcdf67b823942d92dbf726e
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/weblate
+    icon: https://weblate.org/static/weblate-180.png
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: weblate
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/weblate-0.0.7/weblate-0.0.7.tgz
+    version: 0.0.7
   - apiVersion: v2
     appVersion: 3.11.3-1
     created: "2021-08-02T13:53:32.192846556Z"
@@ -1838,6 +1959,21 @@ entries:
     - https://github.com/slamdev/helm-charts/releases/download/weblate-0.0.1/weblate-0.0.1.tgz
     version: 0.0.1
   zeppelin:
+  - apiVersion: v2
+    appVersion: 0.9.0
+    created: "2021-08-05T11:50:22.387153588Z"
+    description: Helm chart to deploy [zeppelin](http://zeppelin.apache.org/).
+    digest: 2894354a127bfba59bda4b74920c46142208d9f52775c8418090ee3f6739085e
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/zeppelin
+    icon: https://zeppelin.apache.org/docs/latest/assets/themes/zeppelin/img/zeppelin_logo.png
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: zeppelin
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/zeppelin-0.0.13/zeppelin-0.0.13.tgz
+    version: 0.0.13
   - apiVersion: v2
     appVersion: 0.9.0
     created: "2021-08-02T13:53:32.271293914Z"
