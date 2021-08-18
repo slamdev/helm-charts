@@ -102,14 +102,14 @@ livenessProbe:
     # livenessProbe.httpGet.path -- path for liveness probe
     path: /ready
     # livenessProbe.httpGet.port -- port for liveness probe
-    port: 9901
+    port: http-admin
 
 readinessProbe:
   httpGet:
     # readinessProbe.httpGet.path -- path for readiness probe
     path: /ready
     # readinessProbe.httpGet.port -- port for readiness probe
-    port: 9901
+    port: http-admin
 
 # containerPort -- container port, should match static port_value from config.yaml
 containerPort: 10000
