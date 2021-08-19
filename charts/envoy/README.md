@@ -31,13 +31,13 @@ Helm chart to deploy [envoy](https://www.envoyproxy.io/).
 | ingress.enabled | bool | `false` | enables Ingress for envoy |
 | ingress.hosts | list | `[]` | ingress accepted hostnames |
 | ingress.tls | list | `[]` | ingress TLS configuration |
-| livenessProbe.httpGet.path | string | `"/"` | path for liveness probe |
-| livenessProbe.httpGet.port | string | `"http"` | port for liveness probe |
+| livenessProbe.httpGet.path | string | `"/ready"` | path for liveness probe |
+| livenessProbe.httpGet.port | string | `"http-admin"` | port for liveness probe |
 | nameOverride | string | `""` | override name of the chart |
 | nodeSelector | object | `{}` | node for scheduler pod assignment |
 | podSecurityContext | object | `{}` | specifies security settings for a pod |
-| readinessProbe.httpGet.path | string | `"/"` | path for readiness probe |
-| readinessProbe.httpGet.port | string | `"http"` | port for readiness probe |
+| readinessProbe.httpGet.path | string | `"/ready"` | path for readiness probe |
+| readinessProbe.httpGet.port | string | `"http-admin"` | port for readiness probe |
 | replicaCount | int | `1` | number of replicas for haproxy deployment. |
 | resources | object | `{}` | custom resource configuration |
 | service.annotations | object | `{}` | annotations to add to the service |
