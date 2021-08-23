@@ -3,7 +3,7 @@ name: flux-notifier
 description: |-
   Helm chart to deploy [flux-notifier](https://github.com/slamdev/flux-notifier/).
 type: application
-version: 0.0.5
+version: 0.0.6
 appVersion: "v0.0.8"
 home: https://github.com/slamdev/helm-charts/tree/master/charts/flux-notifier
 icon: https://docs.fluxcd.io/en/1.19.0/_files/flux-icon@2x.png

@@ -1,0 +1,16 @@
+apiVersion: v2
+name: config-connector-templater
+description: |-
+  Helm chart to deploy [config-connector-templater](https://github.com/slamdev/config-connector-templater).
+
+  Kubernetes operator that templates GCP Config Connector resources.
+
+  Refer to operator repo for additional information.
+type: application
+version: 0.0.4
+appVersion: 0.0.3
+home: https://github.com/slamdev/helm-charts/tree/master/charts/config-connector-templater
+icon: https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Emblem-question.svg/1200px-Emblem-question.svg.png
+maintainers:
+  - name: slamdev
+    email: valentin.fedoskin@gmail.com

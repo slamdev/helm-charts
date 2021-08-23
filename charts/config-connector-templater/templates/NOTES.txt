@@ -1,0 +1,6 @@
+Now it's time to create custom resources, like:
+{{ range $path, $_ := .Files.Glob "examples/**.yaml" }}
+---
+{{ $.Files.Get $path }}
+---
+{{ end }}

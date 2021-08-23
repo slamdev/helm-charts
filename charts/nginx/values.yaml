@@ -112,6 +112,9 @@ env: []
   # - name: SAMPLE
   #   value: text
 
+# podDisruptionBudget -- disruption budget for pod
+podDisruptionBudget: {}
+
 # nginxConf -- nginx config to provision inside of the container
 nginxConf: |-
   # nginx version: ENV_NGINX_VERSION_ENV

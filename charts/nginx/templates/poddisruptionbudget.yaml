@@ -1,0 +1,14 @@
+{{- if .Values.podDisruptionBudget }}
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ include "nginx.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "nginx.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "nginx.selectorLabels" . | nindent 8 }}
+  {{ toYaml .Values.podDisruptionBudget }}
+{{- end }}

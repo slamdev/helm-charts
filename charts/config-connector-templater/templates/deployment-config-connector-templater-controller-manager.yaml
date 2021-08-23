@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    {{- include "config-connector-templater.labels" . | nindent 4 }}
+  name: {{ include "config-connector-templater.fullname" . }}-controller-manager
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "config-connector-templater.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "config-connector-templater.selectorLabels" . | nindent 8 }}
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      containers:
+        - args:
+            - --leader-elect
+          command:
+            - /manager
+          image: "{{ .Values.image.repository }}:{{ include "config-connector-templater.tag" . }}"
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8081
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          name: manager
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: 8081
+            initialDelaySeconds: 5
+            periodSeconds: 10
+        {{- with .Values.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+        {{- end }}
+        {{- with .Values.env }}
+          env:
+            {{- toYaml . | nindent 10 }}
+        {{- end }}
+          securityContext:
+            allowPrivilegeEscalation: false
+      securityContext:
+        runAsNonRoot: true
+      serviceAccountName: {{ include "config-connector-templater.fullname" . }}-controller-manager
+      terminationGracePeriodSeconds: 10
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}

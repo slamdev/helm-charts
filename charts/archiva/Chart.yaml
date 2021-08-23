@@ -3,8 +3,8 @@ name: archiva
 description: |-
   Helm chart to deploy [archiva](https://hub.docker.com/r/xetusoss/archiva/).
 type: application
-version: 0.0.3
-appVersion: "v2.2.4-1"
+version: 0.0.6
+appVersion: "v2.2.5"
 home: https://github.com/slamdev/helm-charts/tree/master/charts/archiva
 icon: http://archiva.apache.org/images/archiva.png
 maintainers:

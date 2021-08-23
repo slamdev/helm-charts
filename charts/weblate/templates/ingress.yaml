@@ -1,10 +1,12 @@
 {{- if .Values.ingress.enabled -}}
 {{- $fullName := include "weblate.fullname" . -}}
 {{- $svcPort := .Values.service.port -}}
-{{- if semverCompare ">=1.14-0" .Capabilities.KubeVersion.GitVersion -}}
+{{- if semverCompare "<1.14-0" .Capabilities.KubeVersion.GitVersion -}}
+apiVersion: extensions/v1beta1
+{{- else if semverCompare "<1.19-0" .Capabilities.KubeVersion.GitVersion -}}
 apiVersion: networking.k8s.io/v1beta1
 {{- else -}}
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 {{- end }}
 kind: Ingress
 metadata:
@@ -34,9 +36,18 @@ spec:
         paths:
         {{- range .paths }}
           - path: {{ . }}
+          {{- if semverCompare "<1.19-0" $.Capabilities.KubeVersion.GitVersion }}
             backend:
               serviceName: {{ $fullName }}
               servicePort: {{ $svcPort }}
+          {{- else }}
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: {{ $fullName }}
+                port:
+                  number: {{ $svcPort }}
+          {{- end }}
         {{- end }}
   {{- end }}
 {{- end }}
