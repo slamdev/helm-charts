@@ -13,9 +13,16 @@ nameOverride: ""
 # fullnameOverride -- full name of the chart.
 fullnameOverride: ""
 
+# -- Custom labels to add into metadata
+additionalLabels: {}
+  # foo: bar
+
+rbac:
+  create: true
+
 serviceAccount:
   # serviceAccount.create -- specifies whether a service account should be created
-  create: false
+  create: true
   # serviceAccount.annotations -- annotations to add to the service account
   annotations: {}
   # serviceAccount.name -- the name of the service account to use; if not set and create is true, a name is generated using the fullname template
