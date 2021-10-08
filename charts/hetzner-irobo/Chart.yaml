@@ -3,7 +3,7 @@ name: hetzner-irobo
 description: |-
   Helm chart to deploy [hetzner-irobo](https://github.com/slamdev/hetzner-irobo).
 type: application
-version: 0.0.3
+version: 0.0.4
 appVersion: "0.0.1"
 home: https://github.com/slamdev/helm-charts/tree/master/charts/hetzner-irobo
 icon: https://i.stack.imgur.com/mwFzF.png
