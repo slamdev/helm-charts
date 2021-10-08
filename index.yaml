@@ -1422,6 +1422,21 @@ entries:
   hetzner-irobo:
   - apiVersion: v2
     appVersion: 0.0.1
+    created: "2021-10-08T11:38:04.640028641Z"
+    description: Helm chart to deploy [hetzner-irobo](https://github.com/slamdev/hetzner-irobo).
+    digest: 2d773375b7f5e7a35118be3a97767eb61529fe4bd9813d89093a12e44274b486
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/hetzner-irobo
+    icon: https://i.stack.imgur.com/mwFzF.png
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: hetzner-irobo
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/hetzner-irobo-0.0.2/hetzner-irobo-0.0.2.tgz
+    version: 0.0.2
+  - apiVersion: v2
+    appVersion: 0.0.1
     created: "2021-10-08T11:24:27.971543731Z"
     description: Helm chart to deploy [hetzner-irobo](https://github.com/slamdev/hetzner-irobo).
     digest: 76e76bf20576d333d39192ffa5c48a8fcb515f8de5ac74c0d3ed3acf4ce079d2
