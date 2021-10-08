@@ -1,6 +1,6 @@
 # hetzner-irobo
 
-![Version: 0.0.1](https://img.shields.io/badge/Version-0.0.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.1](https://img.shields.io/badge/AppVersion-0.0.1-informational?style=flat-square)
+![Version: 0.0.2](https://img.shields.io/badge/Version-0.0.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.1](https://img.shields.io/badge/AppVersion-0.0.1-informational?style=flat-square)
 
 Helm chart to deploy [hetzner-irobo](https://github.com/slamdev/hetzner-irobo).
 
@@ -34,6 +34,7 @@ Helm chart to deploy [hetzner-irobo](https://github.com/slamdev/hetzner-irobo).
 | podSecurityContext | object | `{}` | specifies security settings for a pod |
 | readinessProbe.httpGet.path | string | `"/actuator/health"` | path for readiness probe |
 | readinessProbe.httpGet.port | string | `"http-management"` | port for readiness probe |
+| replicaCount | int | `1` | number of replicas for flux-notifier deployment. |
 | resources | object | `{}` | custom resource configuration |
 | securityContext | object | `{}` | specifies security settings for a container |
 | service.managementPort | int | `8081` | service actuator port |

@@ -59,6 +59,9 @@ ingress:
   #    hosts:
   #      - chart-example.local
 
+# replicaCount -- number of replicas for flux-notifier deployment.
+replicaCount: 1
+
 # resources -- custom resource configuration
 resources: {}
   # limits:

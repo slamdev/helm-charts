@@ -6,7 +6,7 @@ metadata:
   labels:
     {{- include "hetzner-irobo.labels" . | nindent 4 }}
 spec:
-  replicas: 1
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       {{- include "hetzner-irobo.selectorLabels" . | nindent 6 }}
