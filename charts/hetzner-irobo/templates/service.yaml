@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "hetzner-irobo.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "hetzner-irobo.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+    - name: http-management
+      port: {{ .Values.service.managementPort }}
+      targetPort: http-management
+  selector:
+    {{- include "hetzner-irobo.selectorLabels" . | nindent 4 }}
