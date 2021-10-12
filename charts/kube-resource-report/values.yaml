@@ -22,7 +22,7 @@ rbac:
 
 serviceAccount:
   # serviceAccount.create -- specifies whether a service account should be created
-  create: true
+  create: false
   # serviceAccount.annotations -- annotations to add to the service account
   annotations: {}
   # serviceAccount.name -- the name of the service account to use; if not set and create is true, a name is generated using the fullname template
