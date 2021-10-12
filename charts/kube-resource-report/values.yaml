@@ -18,7 +18,7 @@ additionalLabels: {}
   # foo: bar
 
 rbac:
-  create: true
+  create: false
 
 serviceAccount:
   # serviceAccount.create -- specifies whether a service account should be created
