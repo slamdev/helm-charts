@@ -1,6 +1,6 @@
 # nginx
 
-![Version: 0.0.16](https://img.shields.io/badge/Version-0.0.16-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.19.10](https://img.shields.io/badge/AppVersion-1.19.10-informational?style=flat-square)
+![Version: 0.0.18](https://img.shields.io/badge/Version-0.0.18-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.19.10](https://img.shields.io/badge/AppVersion-1.19.10-informational?style=flat-square)
 
 Helm chart to deploy [nginx](https://www.nginx.com).
 
@@ -27,12 +27,10 @@ Chart supports environment variables inside of the nginx.conf file.
 | image.repository | string | `"nginx"` | image repository |
 | image.tag | string | `""` | image tag (chart's appVersion value will be used if not set) |
 | imagePullSecrets | list | `[]` | image pull secret for private images |
-| ingress.annotations."nginx.ingress.kubernetes.io/proxy-body-size" | string | `"0"` |  |
-| ingress.enabled | bool | `true` |  |
-| ingress.hosts[0].host | string | `"dev-cdn.adnz.co"` |  |
-| ingress.hosts[0].paths[0] | string | `""` |  |
-| ingress.tls[0].hosts[0] | string | `"dev-cdn.adnz.co"` |  |
-| ingress.tls[0].secretName | string | `"adnz-co-tls"` |  |
+| ingress.annotations | object | `{}` | ingress annotations |
+| ingress.enabled | bool | `false` | enables Ingress for nginx |
+| ingress.hosts | list | `[]` | ingress accepted hostnames |
+| ingress.tls | list | `[]` | ingress TLS configuration |
 | livenessProbe.httpGet.path | string | `"/"` | path for liveness probe |
 | livenessProbe.httpGet.port | string | `"http"` | port for liveness probe |
 | nameOverride | string | `""` | override name of the chart |

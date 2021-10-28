@@ -1,6 +1,6 @@
 # kube-resource-report
 
-![Version: 0.0.7](https://img.shields.io/badge/Version-0.0.7-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 21.2.1](https://img.shields.io/badge/AppVersion-21.2.1-informational?style=flat-square)
+![Version: 0.1.1](https://img.shields.io/badge/Version-0.1.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 21.2.1](https://img.shields.io/badge/AppVersion-21.2.1-informational?style=flat-square)
 
 Helm chart to deploy [kube-resource-report](https://codeberg.org/hjacobs/kube-resource-report).
 
@@ -16,6 +16,7 @@ Helm chart to deploy [kube-resource-report](https://codeberg.org/hjacobs/kube-re
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| additionalLabels | object | `{}` | Custom labels to add into metadata |
 | affinity | object | `{}` | affinity for scheduler pod assignment |
 | app.resources | object | `{}` | custom resource configuration |
 | args | list | `[]` | extra args to pass to container |
@@ -34,6 +35,7 @@ Helm chart to deploy [kube-resource-report](https://codeberg.org/hjacobs/kube-re
 | nodeSelector | object | `{}` | node for scheduler pod assignment |
 | podSecurityContext | object | `{}` | specifies security settings for a pod |
 | pricingData | string | `"dc-1,master,30.000\ndc-1,worker,500.000"` | CSV with columns region,instance-type,monthly-price-usd |
+| rbac.create | bool | `false` |  |
 | service.port | int | `80` | service port |
 | service.type | string | `"ClusterIP"` | service type |
 | serviceAccount.annotations | object | `{}` | annotations to add to the service account |

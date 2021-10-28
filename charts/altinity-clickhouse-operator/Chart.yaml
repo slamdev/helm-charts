@@ -7,7 +7,7 @@ description: |-
 
   Refer to operator repo for additional information.
 type: application
-version: 0.0.7
+version: 0.0.8
 appVersion: 0.16.0
 home: https://github.com/slamdev/helm-charts/tree/master/charts/altinity-clickhouse-operator
 icon: https://artifacthub.io/image/2d6aa29c-c74f-4bff-bede-ba7e6e0315a7@2x
