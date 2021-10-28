@@ -100,16 +100,16 @@ serviceMonitor:
 livenessProbe:
   httpGet:
     # livenessProbe.httpGet.path -- path for liveness probe
-    path: /
+    path: /ready
     # livenessProbe.httpGet.port -- port for liveness probe
-    port: http
+    port: http-admin
 
 readinessProbe:
   httpGet:
     # readinessProbe.httpGet.path -- path for readiness probe
-    path: /
+    path: /ready
     # readinessProbe.httpGet.port -- port for readiness probe
-    port: http
+    port: http-admin
 
 # containerPort -- container port, should match static port_value from config.yaml
 containerPort: 10000
