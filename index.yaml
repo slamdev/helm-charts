@@ -72,12 +72,9 @@ entries:
   - apiVersion: v2
     appVersion: 0.13.0
     created: "2021-01-31T13:19:21.044779534Z"
-    description: |-
-      Helm chart to deploy [altinity-clickhouse-operator](https://github.com/Altinity/clickhouse-operator).
-
-      The ClickHouse Operator creates, configures and manages ClickHouse clusters running on Kubernetes.
-
-      Refer to operator repo for additional information.
+    description: Helm chart to deploy [altinity-clickhouse-operator](https://github.com/Altinity/clickhouse-operator).  The
+      ClickHouse Operator creates, configures and manages ClickHouse clusters running
+      on Kubernetes.  Refer to operator repo for additional information.
     digest: 00900046b13b186eae301678f9c52cdf266cd67442872ce36f4ce473a2236fb5
     home: https://github.com/slamdev/helm-charts/tree/master/charts/altinity-clickhouse-operator
     icon: https://artifacthub.io/image/2d6aa29c-c74f-4bff-bede-ba7e6e0315a7@2x
@@ -92,12 +89,9 @@ entries:
   - apiVersion: v2
     appVersion: 0.13.0
     created: "2021-01-31T13:08:42.029293269Z"
-    description: |-
-      Helm chart to deploy [altinity-clickhouse-operator](https://github.com/Altinity/clickhouse-operator).
-
-      The ClickHouse Operator creates, configures and manages ClickHouse clusters running on Kubernetes.
-
-      Refer to operator repo for additional information.
+    description: Helm chart to deploy [altinity-clickhouse-operator](https://github.com/Altinity/clickhouse-operator).  The
+      ClickHouse Operator creates, configures and manages ClickHouse clusters running
+      on Kubernetes.  Refer to operator repo for additional information.
     digest: b441b7f609e64e00210776ae28aee817fca14a91c6f6a3e6bf8ac7b1f1fb799b
     home: https://github.com/slamdev/helm-charts/tree/master/charts/altinity-clickhouse-operator
     icon: https://artifacthub.io/image/2d6aa29c-c74f-4bff-bede-ba7e6e0315a7@2x
@@ -199,6 +193,22 @@ entries:
     type: application
     urls:
     - https://github.com/slamdev/helm-charts/releases/download/archiva-0.0.1/archiva-0.0.1.tgz
+    version: 0.0.1
+  bazel-remote:
+  - apiVersion: v2
+    appVersion: v2.2.0
+    created: "2021-10-28T19:44:18.068613044Z"
+    description: Helm chart to deploy [bazel-remote](https://github.com/buchgr/bazel-remote).
+    digest: ff5f5afbe9d9b95533b1433899bf9a82c5d88aa88f04d148db4f7021da1ea41e
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/bazel-remote
+    icon: https://bazel.build/images/bazel-icon.svg
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: bazel-remote
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/bazel-remote-0.0.1/bazel-remote-0.0.1.tgz
     version: 0.0.1
   config-connector-templater:
   - apiVersion: v2
@@ -518,12 +528,10 @@ entries:
   - apiVersion: v2
     appVersion: 0.0.6
     created: "2021-01-10T14:48:21.745817468Z"
-    description: |-
-      Helm chart to deploy [external-secrets-operator](https://github.com/slamdev/external-secrets-operator).
-
-      External Secrets Operator watches changes in external key-value backends to sync them with Kubernetes Secrets and ConfigMaps.
-
-      Refer to operator repo for additional information.
+    description: Helm chart to deploy [external-secrets-operator](https://github.com/slamdev/external-secrets-operator).  External
+      Secrets Operator watches changes in external key-value backends to sync them
+      with Kubernetes Secrets and ConfigMaps.  Refer to operator repo for additional
+      information.
     digest: 88cb9c435e92ab39d2826d5bb0db3ce322a3f4a13e6309a08fe410b2e9615ef2
     home: https://github.com/slamdev/helm-charts/tree/master/charts/external-secrets-operator
     icon: https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Emblem-question.svg/1200px-Emblem-question.svg.png
@@ -538,12 +546,10 @@ entries:
   - apiVersion: v2
     appVersion: 0.0.6
     created: "2020-06-30T08:17:57.222478998Z"
-    description: |-
-      Helm chart to deploy [external-secrets-operator](https://github.com/slamdev/external-secrets-operator).
-
-      External Secrets Operator watches changes in external key-value backends to sync them with Kubernetes Secrets and ConfigMaps.
-
-      Refer to operator repo for additional information.
+    description: Helm chart to deploy [external-secrets-operator](https://github.com/slamdev/external-secrets-operator).  External
+      Secrets Operator watches changes in external key-value backends to sync them
+      with Kubernetes Secrets and ConfigMaps.  Refer to operator repo for additional
+      information.
     digest: dc6072ec644665487cc2c2b9376fb0c04c28624ac0d42a720f2c410b261a90a3
     home: https://github.com/slamdev/helm-charts/tree/master/charts/external-secrets-operator
     icon: https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Emblem-question.svg/1200px-Emblem-question.svg.png
@@ -558,12 +564,10 @@ entries:
   - apiVersion: v2
     appVersion: 0.0.5
     created: "2020-06-28T13:56:23.129570667Z"
-    description: |-
-      Helm chart to deploy [external-secrets-operator](https://github.com/slamdev/external-secrets-operator).
-
-      External Secrets Operator watches changes in external key-value backends to sync them with Kubernetes Secrets and ConfigMaps.
-
-      Refer to operator repo for additional information.
+    description: Helm chart to deploy [external-secrets-operator](https://github.com/slamdev/external-secrets-operator).  External
+      Secrets Operator watches changes in external key-value backends to sync them
+      with Kubernetes Secrets and ConfigMaps.  Refer to operator repo for additional
+      information.
     digest: d1a301518e5d6e42c50e6a6e6581e5c933236ceb0182aa52fc70a12d971a1ea6
     home: https://github.com/slamdev/helm-charts/tree/master/charts/external-secrets-operator
     icon: https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Emblem-question.svg/1200px-Emblem-question.svg.png
@@ -578,12 +582,10 @@ entries:
   - apiVersion: v2
     appVersion: 0.0.4
     created: "2020-04-08T17:07:26.172438086Z"
-    description: |-
-      Helm chart to deploy [external-secrets-operator](https://github.com/slamdev/external-secrets-operator).
-
-      External Secrets Operator watches changes in external key-value backends to sync them with Kubernetes Secrets and ConfigMaps.
-
-      Refer to operator repo for additional information.
+    description: Helm chart to deploy [external-secrets-operator](https://github.com/slamdev/external-secrets-operator).  External
+      Secrets Operator watches changes in external key-value backends to sync them
+      with Kubernetes Secrets and ConfigMaps.  Refer to operator repo for additional
+      information.
     digest: 23f5df7fe6b88e109a3974100a27180498495f4a5cfe07c396e78b8b881da1a4
     home: https://github.com/slamdev/helm-charts/tree/master/charts/external-secrets-operator
     icon: https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Emblem-question.svg/1200px-Emblem-question.svg.png
@@ -598,12 +600,10 @@ entries:
   - apiVersion: v2
     appVersion: 0.0.3
     created: "2020-04-07T14:15:52.651575832Z"
-    description: |-
-      Helm chart to deploy [external-secrets-operator](https://github.com/slamdev/external-secrets-operator).
-
-      External Secrets Operator watches changes in external key-value backends to sync them with Kubernetes Secrets and ConfigMaps.
-
-      Refer to operator repo for additional information.
+    description: Helm chart to deploy [external-secrets-operator](https://github.com/slamdev/external-secrets-operator).  External
+      Secrets Operator watches changes in external key-value backends to sync them
+      with Kubernetes Secrets and ConfigMaps.  Refer to operator repo for additional
+      information.
     digest: 8c49560cebd3b5f0471818abd0f18ea38928478a68f8a04acf4188391a978069
     home: https://github.com/slamdev/helm-charts/tree/master/charts/external-secrets-operator
     icon: https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Emblem-question.svg/1200px-Emblem-question.svg.png
@@ -618,12 +618,10 @@ entries:
   - apiVersion: v2
     appVersion: 0.0.3
     created: "2020-04-01T19:06:20.799384425Z"
-    description: |-
-      Helm chart to deploy [external-secrets-operator](https://github.com/slamdev/external-secrets-operator).
-
-      External Secrets Operator watches changes in external key-value backends to sync them with Kubernetes Secrets and ConfigMaps.
-
-      Refer to operator repo for additional information.
+    description: Helm chart to deploy [external-secrets-operator](https://github.com/slamdev/external-secrets-operator).  External
+      Secrets Operator watches changes in external key-value backends to sync them
+      with Kubernetes Secrets and ConfigMaps.  Refer to operator repo for additional
+      information.
     digest: 9dc6f2ea2e7843f52528ea4f95b1bf8a0fed1ef93df7980218fda977ca3163f1
     home: https://github.com/slamdev/helm-charts/tree/master/charts/external-secrets-operator
     icon: https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Emblem-question.svg/1200px-Emblem-question.svg.png
@@ -638,12 +636,10 @@ entries:
   - apiVersion: v2
     appVersion: 0.0.3
     created: "2020-03-27T09:22:34.294817013Z"
-    description: |-
-      Helm chart to deploy [external-secrets-operator](https://github.com/slamdev/external-secrets-operator).
-
-      External Secrets Operator watches changes in external key-value backends to sync them with Kubernetes Secrets and ConfigMaps.
-
-      Refer to operator repo for additional information.
+    description: Helm chart to deploy [external-secrets-operator](https://github.com/slamdev/external-secrets-operator).  External
+      Secrets Operator watches changes in external key-value backends to sync them
+      with Kubernetes Secrets and ConfigMaps.  Refer to operator repo for additional
+      information.
     digest: fe760c56c9ff89a54c00bdf2bf3a391163f3c93a70bb6dfa1eb438bc41c753f8
     home: https://github.com/slamdev/helm-charts/tree/master/charts/external-secrets-operator
     icon: https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Emblem-question.svg/1200px-Emblem-question.svg.png
@@ -658,12 +654,10 @@ entries:
   - apiVersion: v2
     appVersion: 0.0.2
     created: "2020-03-27T08:08:52.882881485Z"
-    description: |-
-      Helm chart to deploy [external-secrets-operator](https://github.com/slamdev/external-secrets-operator).
-
-      External Secrets Operator watches changes in external key-value backends to sync them with Kubernetes Secrets and ConfigMaps.
-
-      Refer to operator repo for additional information.
+    description: Helm chart to deploy [external-secrets-operator](https://github.com/slamdev/external-secrets-operator).  External
+      Secrets Operator watches changes in external key-value backends to sync them
+      with Kubernetes Secrets and ConfigMaps.  Refer to operator repo for additional
+      information.
     digest: 551c14f2df9f3c8fd8bd6fd251a4d1a489d3df634afcfe847643de5812e762f5
     home: https://github.com/slamdev/helm-charts/tree/master/charts/external-secrets-operator
     icon: https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Emblem-question.svg/1200px-Emblem-question.svg.png
@@ -678,12 +672,10 @@ entries:
   - apiVersion: v2
     appVersion: 0.0.1
     created: "2020-03-26T10:33:36.155666714Z"
-    description: |-
-      Helm chart to deploy [external-secrets-operator](https://github.com/slamdev/external-secrets-operator).
-
-      External Secrets Operator watches changes in external key-value backends to sync them with Kubernetes Secrets and ConfigMaps.
-
-      Refer to operator repo for additional information.
+    description: Helm chart to deploy [external-secrets-operator](https://github.com/slamdev/external-secrets-operator).  External
+      Secrets Operator watches changes in external key-value backends to sync them
+      with Kubernetes Secrets and ConfigMaps.  Refer to operator repo for additional
+      information.
     digest: 85ae265716a954db24d445035da8c3e81684806c7bf9f0c2520776ae477224ac
     home: https://github.com/slamdev/helm-charts/tree/master/charts/external-secrets-operator
     icon: https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Emblem-question.svg/1200px-Emblem-question.svg.png
@@ -698,12 +690,10 @@ entries:
   - apiVersion: v2
     appVersion: 0.0.1
     created: "2020-03-21T14:10:31.540557659Z"
-    description: |-
-      Helm chart to deploy [external-secrets-operator](https://github.com/slamdev/external-secrets-operator).
-
-      External Secrets Operator watches changes in external key-value backends to sync them with Kubernetes Secrets and ConfigMaps.
-
-      Refer to operator repo for additional information.
+    description: Helm chart to deploy [external-secrets-operator](https://github.com/slamdev/external-secrets-operator).  External
+      Secrets Operator watches changes in external key-value backends to sync them
+      with Kubernetes Secrets and ConfigMaps.  Refer to operator repo for additional
+      information.
     digest: 7851e2c3b6df991e31e121975220fd9510c5e0baa6d0e2324471a54cca99d800
     home: https://github.com/slamdev/helm-charts/tree/master/charts/external-secrets-operator
     icon: https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Emblem-question.svg/1200px-Emblem-question.svg.png
@@ -1718,10 +1708,8 @@ entries:
   - apiVersion: v2
     appVersion: 1.17.9
     created: "2021-01-16T15:53:00.326821591Z"
-    description: |-
-      Helm chart to deploy [nginx](https://www.nginx.com).
-
-      Chart supports environment variables inside of the nginx.conf file.
+    description: Helm chart to deploy [nginx](https://www.nginx.com).  Chart supports
+      environment variables inside of the nginx.conf file.
     digest: 98af7188cbb5434ba2be1c19f40b8b313c57aafc015c515ab6116d457f826007
     home: https://github.com/slamdev/helm-charts/tree/master/charts/nginx
     icon: https://www.nginx.com/wp-content/uploads/2019/10/favicon-48x48.ico
@@ -1736,10 +1724,8 @@ entries:
   - apiVersion: v2
     appVersion: 1.17.9
     created: "2021-01-10T14:48:22.295930222Z"
-    description: |-
-      Helm chart to deploy [nginx](https://www.nginx.com).
-
-      Chart supports environment variables inside of the nginx.conf file.
+    description: Helm chart to deploy [nginx](https://www.nginx.com).  Chart supports
+      environment variables inside of the nginx.conf file.
     digest: 691a59bc6d493743f58c3aef720a2661770ab0d166ea37e83a9e0eb92321d0f4
     home: https://github.com/slamdev/helm-charts/tree/master/charts/nginx
     icon: https://www.nginx.com/wp-content/uploads/2019/10/favicon-48x48.ico
@@ -1754,10 +1740,8 @@ entries:
   - apiVersion: v2
     appVersion: 1.17.9
     created: "2020-08-16T11:19:48.469831446Z"
-    description: |-
-      Helm chart to deploy [nginx](https://www.nginx.com).
-
-      Chart supports environment variables inside of the nginx.conf file.
+    description: Helm chart to deploy [nginx](https://www.nginx.com).  Chart supports
+      environment variables inside of the nginx.conf file.
     digest: 356b3f211d10044225caded214c8e7e53f336cd2834a97016091775d5e0aab2d
     home: https://github.com/slamdev/helm-charts/tree/master/charts/nginx
     icon: https://www.nginx.com/wp-content/uploads/2019/10/favicon-48x48.ico
@@ -1772,10 +1756,8 @@ entries:
   - apiVersion: v2
     appVersion: 1.17.9
     created: "2020-07-09T16:09:27.252592558Z"
-    description: |-
-      Helm chart to deploy [nginx](https://www.nginx.com).
-
-      Chart supports environment variables inside of the nginx.conf file.
+    description: Helm chart to deploy [nginx](https://www.nginx.com).  Chart supports
+      environment variables inside of the nginx.conf file.
     digest: a704b98a2066fb74863e923e4e6b81d7ac0b16a3c2161e8e878c5df86879ab8a
     home: https://github.com/slamdev/helm-charts/tree/master/charts/nginx
     icon: https://www.nginx.com/wp-content/uploads/2019/10/favicon-48x48.ico
@@ -1790,10 +1772,8 @@ entries:
   - apiVersion: v2
     appVersion: 1.17.9
     created: "2020-07-09T10:39:19.716246812Z"
-    description: |-
-      Helm chart to deploy [nginx](https://www.nginx.com).
-
-      Chart supports environment variables inside of the nginx.conf file.
+    description: Helm chart to deploy [nginx](https://www.nginx.com).  Chart supports
+      environment variables inside of the nginx.conf file.
     digest: 5f99ef976a5b49b7209f73cab52d0b9a0d120c4aafb1ba21560ebee8aa5e691e
     home: https://github.com/slamdev/helm-charts/tree/master/charts/nginx
     icon: https://www.nginx.com/wp-content/uploads/2019/10/favicon-48x48.ico
@@ -1808,10 +1788,8 @@ entries:
   - apiVersion: v2
     appVersion: 1.17.9
     created: "2020-03-26T10:33:36.377328227Z"
-    description: |-
-      Helm chart to deploy [nginx](https://www.nginx.com).
-
-      Chart supports environment variables inside of the nginx.conf file.
+    description: Helm chart to deploy [nginx](https://www.nginx.com).  Chart supports
+      environment variables inside of the nginx.conf file.
     digest: 17d0877afdb461eb34fb45b9be9ff10e9def0807d7d3f9e4e2e459ed23cbf0a6
     home: https://github.com/slamdev/helm-charts/tree/master/charts/nginx
     icon: https://www.nginx.com/wp-content/uploads/2019/10/favicon-48x48.ico
@@ -1826,10 +1804,8 @@ entries:
   - apiVersion: v2
     appVersion: 1.17.9
     created: "2020-03-21T14:10:31.698068138Z"
-    description: |-
-      Helm chart to deploy [nginx](https://www.nginx.com).
-
-      Chart supports environment variables inside of the nginx.conf file.
+    description: Helm chart to deploy [nginx](https://www.nginx.com).  Chart supports
+      environment variables inside of the nginx.conf file.
     digest: 460c1a38d18a7e052e9561a677a6241f2516a4a6998eaa6602eb3252228657c2
     home: https://github.com/slamdev/helm-charts/tree/master/charts/nginx
     icon: https://www.nginx.com/wp-content/uploads/2019/10/favicon-48x48.ico
@@ -2370,4 +2346,4 @@ entries:
     urls:
     - https://github.com/slamdev/helm-charts/releases/download/zeppelin-0.0.1/zeppelin-0.0.1.tgz
     version: 0.0.1
-generated: "2020-03-18T21:35:58.993159574Z"
+generated: "2021-10-28T19:44:18.069023949Z"
