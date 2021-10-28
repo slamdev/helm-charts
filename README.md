@@ -4,6 +4,7 @@ This repository contains [Helm](https://helm.sh) charts for various projects
 
 * [Altinity Clickhouse Operator](https://github.com/slamdev/helm-charts/tree/master/charts/altinity-clickhouse-operator)
 * [Archiva](https://github.com/slamdev/helm-charts/tree/master/charts/archiva)
+* [Config Connector Templater](https://github.com/slamdev/helm-charts/tree/master/charts/config-connector-templater)
 * [Docker Registry Proxy](https://github.com/slamdev/helm-charts/tree/master/charts/docker-registry-proxy)
 * [Envoy](https://github.com/slamdev/helm-charts/tree/master/charts/envoy)
 * [External Secrets Operator](https://github.com/slamdev/helm-charts/tree/master/charts/external-secrets-operator)
@@ -13,6 +14,7 @@ This repository contains [Helm](https://helm.sh) charts for various projects
 * [GKE Preemptible Notifier](https://github.com/slamdev/helm-charts/tree/master/charts/gke-preemptible-notifier)
 * [Gradle Cache](https://github.com/slamdev/helm-charts/tree/master/charts/gradle-cache)
 * [HAProxy](https://github.com/slamdev/helm-charts/tree/master/charts/haproxy)
+* [Hetzner IRobo](https://github.com/slamdev/helm-charts/tree/master/charts/hetzner-irobo)
 * [Kube Resource Report](https://github.com/slamdev/helm-charts/tree/master/charts/kube-resource-report)
 * [Nginx](https://github.com/slamdev/helm-charts/tree/master/charts/nginx)
 * [Octavia Ingress Controller](https://github.com/slamdev/helm-charts/tree/master/charts/octavia-ingress-controller)
