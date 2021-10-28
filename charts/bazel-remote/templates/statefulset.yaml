@@ -1,0 +1,25 @@
+{{- if eq .Values.kind "StatefulSet" }}
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "bazel-remote.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+{{- with .Values.deploymentAnnotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+{{- end }}
+  labels:
+    {{- include "bazel-remote.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "bazel-remote.selectorLabels" . | nindent 6 }}
+  serviceName: {{ include "bazel-remote.fullname" . }}
+  template:
+    {{- include "bazel-remote.pod" . | nindent 4 }}
+{{- with .Values.volumeClaimTemplates }}
+  volumeClaimTemplates:
+    {{- toYaml . | nindent 4 }}
+{{- end }}
+{{- end }}

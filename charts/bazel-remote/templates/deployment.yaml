@@ -1,0 +1,20 @@
+{{- if eq .Values.kind "Deployment" }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "bazel-remote.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+{{- with .Values.deploymentAnnotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+{{- end }}
+  labels:
+    {{- include "bazel-remote.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "bazel-remote.selectorLabels" . | nindent 6 }}
+  template:
+    {{- include "bazel-remote.pod" . | nindent 4 }}
+{{- end }}

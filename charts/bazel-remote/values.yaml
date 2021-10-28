@@ -1,0 +1,141 @@
+# kind -- resource type to operate bazel-remote, can be StatefulSet or Deployment
+kind: Deployment
+
+# replicaCount -- number of replicas for bazel-remote deployment.
+replicaCount: 1
+
+image:
+  # image.repository -- image repository
+  repository: buchgr/bazel-remote-cache
+  # image.tag -- image tag (chart's appVersion value will be used if not set)
+  tag: ""
+  # image.pullPolicy -- image pull policy
+  pullPolicy: IfNotPresent
+
+# imagePullSecrets -- image pull secret for private images
+imagePullSecrets: []
+# nameOverride -- override name of the chart
+nameOverride: ""
+# fullnameOverride -- full name of the chart.
+fullnameOverride: ""
+
+serviceAccount:
+  # serviceAccount.create -- specifies whether a service account should be created
+  create: false
+  # serviceAccount.annotations -- annotations to add to the service account
+  annotations: {}
+  # serviceAccount.name -- the name of the service account to use; if not set and create is true, a name is generated using the fullname template
+  name:
+
+# podSecurityContext -- specifies security settings for a pod
+podSecurityContext: {}
+  # fsGroup: 2000
+
+# securityContext -- specifies security settings for a container
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+# containerPorts -- ports exposed by container
+containerPorts:
+  - name: http
+    containerPort: 8080
+  - name: grpc
+    containerPort: 9092
+
+# deploymentAnnotations -- annotations to add to the deployment
+deploymentAnnotations: {}
+# podAnnotations -- annotations to add to the pod
+podAnnotations: {}
+
+service:
+  # service.type -- service type
+  type: ClusterIP
+  # service.ports -- service ports
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+    - name: grpc
+      port: 9092
+      targetPort: grpc
+
+# resources -- custom resource configuration
+resources: {}
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+# nodeSelector -- node for scheduler pod assignment
+nodeSelector: {}
+
+# tolerations -- tolerations for scheduler pod assignment
+tolerations: []
+
+# affinity -- affinity for scheduler pod assignment
+affinity: {}
+
+# volumeMounts -- additional volume mounts
+volumeMounts: []
+#   - name: cache
+#     mountPath: /cache
+
+# volumes -- additional volumes
+volumes: []
+#   - name: cache
+#     emptyDir: {}
+
+livenessProbe:
+  httpGet:
+    # livenessProbe.httpGet.path -- path for liveness probe
+    path: /status
+    # livenessProbe.httpGet.port -- port for liveness probe
+    port: http
+
+readinessProbe:
+  httpGet:
+    # readinessProbe.httpGet.path -- path for readiness probe
+    path: /status
+    # readinessProbe.httpGet.port -- port for readiness probe
+    port: http
+
+startupProbe:
+  httpGet:
+    # readinessProbe.httpGet.path -- path for readiness probe
+    path: /status
+    # readinessProbe.httpGet.port -- port for readiness probe
+    port: http
+
+# env -- additional environment variables for the deployment
+env: []
+  # - name: SAMPLE
+  #   value: text
+
+# volumeClaimTemplates -- volume claim templates; used only when 'kind: StatefulSet'
+volumeClaimTemplates: []
+#  - metadata:
+#      name: cache
+#    spec:
+#      accessModes: [ "ReadWriteOnce" ]
+#      resources:
+#        requests:
+#          storage: 10Gi
+
+serviceMonitor:
+  # serviceMonitor.enabled -- ServiceMonitor CRD is created for a prometheus operator
+  enabled: false
+  # serviceMonitor.additionalLabels -- additional labels for service monitor
+  additionalLabels: {}
+
+# conf -- bazel-remote config to provision inside of the container
+conf: |-
+  # https://github.com/buchgr/bazel-remote#example-configuration-file
+  access_log_level: none
+  dir: /cache
