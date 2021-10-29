@@ -66,5 +66,5 @@ Create the name of the service account to use
 Create the tag for the docker image to use
 */}}
 {{- define "bazel-remote.tag" -}}
-{{- .Values.image.tag | default (printf "%s-%s" .Chart.AppVersion "debian-forward-1.0") -}}
+{{- .Values.image.tag | default .Chart.AppVersion -}}
 {{- end -}}
