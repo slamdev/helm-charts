@@ -3,7 +3,7 @@ name: kube-resource-report
 description: |-
   Helm chart to deploy [kube-resource-report](https://codeberg.org/hjacobs/kube-resource-report).
 type: application
-version: 0.1.2
+version: 0.1.3
 appVersion: "21.2.1"
 home: https://github.com/slamdev/helm-charts/tree/master/charts/kube-resource-report
 icon: https://i.stack.imgur.com/mwFzF.png

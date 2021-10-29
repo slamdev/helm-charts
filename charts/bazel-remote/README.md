@@ -1,6 +1,6 @@
 # bazel-remote
 
-![Version: 0.0.2](https://img.shields.io/badge/Version-0.0.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v2.2.0](https://img.shields.io/badge/AppVersion-v2.2.0-informational?style=flat-square)
+![Version: 0.0.3](https://img.shields.io/badge/Version-0.0.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v2.2.0](https://img.shields.io/badge/AppVersion-v2.2.0-informational?style=flat-square)
 
 Helm chart to deploy [bazel-remote](https://github.com/buchgr/bazel-remote).
 
@@ -17,7 +17,7 @@ Helm chart to deploy [bazel-remote](https://github.com/buchgr/bazel-remote).
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | affinity | object | `{}` | affinity for scheduler pod assignment |
-| conf | string | `"# https://github.com/buchgr/bazel-remote#example-configuration-file\naccess_log_level: none\ndir: /cache"` | bazel-remote config to provision inside of the container |
+| conf | string | `"# https://github.com/buchgr/bazel-remote#example-configuration-file\ndir: /cache\nmax_size: 50\nexperimental_remote_asset_api: true\naccess_log_level: none\nport: 8080\ngrpc_port: 9092"` | bazel-remote config to provision inside of the container |
 | containerPorts | list | `[{"containerPort":8080,"name":"http"},{"containerPort":9092,"name":"grpc"}]` | ports exposed by container |
 | deploymentAnnotations | object | `{}` | annotations to add to the deployment |
 | env | list | `[]` | additional environment variables for the deployment |

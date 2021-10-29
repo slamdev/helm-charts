@@ -137,5 +137,9 @@ serviceMonitor:
 # conf -- bazel-remote config to provision inside of the container
 conf: |-
   # https://github.com/buchgr/bazel-remote#example-configuration-file
-  access_log_level: none
   dir: /cache
+  max_size: 50
+  experimental_remote_asset_api: true
+  access_log_level: none
+  port: 8080
+  grpc_port: 9092

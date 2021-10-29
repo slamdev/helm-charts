@@ -3,7 +3,7 @@ name: haproxy
 description: |-
   Helm chart to deploy [haproxy](http://www.haproxy.org/).
 type: application
-version: 0.0.3
+version: 0.0.4
 appVersion: 2.3.9
 home: https://github.com/slamdev/helm-charts/tree/master/charts/haproxy
 icon: http://www.haproxy.org/img/HAProxyCommunityEdition_60px.png

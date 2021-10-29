@@ -7,7 +7,7 @@ description: |-
 
   Refer to operator repo for additional information.
 type: application
-version: 0.0.4
+version: 0.0.5
 appVersion: 0.0.3
 home: https://github.com/slamdev/helm-charts/tree/master/charts/config-connector-templater
 icon: https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Emblem-question.svg/1200px-Emblem-question.svg.png
