@@ -26,11 +26,12 @@ spec:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       initContainers:
         - name: preprocess-config
-          image: alpine:3.12.4
+          image: "{{ .Values.initContainer.image.repository }}:{{ .Values.initContainer.image.tag }}"
+          imagePullPolicy: {{ .Values.initContainer.image.pullPolicy }}
           args:
             - sh
             - -c
-            - apk add perl && cp /opt/envoy.yaml.tpl /config/envoy.yaml && perl -pi -e 's/ENV_([_A-Z0-9]+)_ENV/$ENV{$1}/g' /config/envoy.yaml
+            - {{ .Values.initContainer.command }}
         {{- with .Values.env }}
           env:
             {{- toYaml . | nindent 12 }}
