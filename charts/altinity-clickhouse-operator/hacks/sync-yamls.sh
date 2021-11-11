@@ -3,7 +3,7 @@
 set -o errexit
 set -o nounset
 
-CHART_PATH=../
+CHART_PATH=..
 BUILD_PATH="${CHART_PATH}/../../build"
 
 APP_VERSION=$(cat "${CHART_PATH}/Chart.yaml" | grep appVersion | cut -d : -f 2 | xargs)
@@ -35,12 +35,19 @@ function extract_resources() {
   IFS=$OLDIFS
 }
 
-rm -rf "${CHART_PATH}/crds" "${CHART_PATH}/templates/generated"
-mkdir "${CHART_PATH}/crds" "${CHART_PATH}/templates/generated"
+rm -rf "${CHART_PATH}/crds"  "${CHART_PATH}/tmp"
+mkdir "${CHART_PATH}/crds"  "${CHART_PATH}/tmp"
 
-extract_resources "${REPO_URL}/clickhouse-operator-install-crd.yaml" "${CHART_PATH}/crds"
-extract_resources "${REPO_URL}/clickhouse-operator-install-deployment.yaml" "${CHART_PATH}/templates/generated"
-extract_resources "${REPO_URL}/clickhouse-operator-install-service.yaml" "${CHART_PATH}/templates/generated"
+
+extract_resources "${REPO_URL}/clickhouse-operator-install-bundle.yaml" "${CHART_PATH}/tmp"
+cp ${CHART_PATH}/tmp/CustomResourceDefinition-* ${CHART_PATH}/crds/
+cat ${CHART_PATH}/tmp/ClusterRole* > ${CHART_PATH}/templates/rbac.yaml
+cp ${CHART_PATH}/tmp/ConfigMap-* ${CHART_PATH}/templates/generated/
+cp ${CHART_PATH}/tmp/Deployment-clickhouse-operator.yaml ${CHART_PATH}/templates/generated/
+cp ${CHART_PATH}/tmp/Service-clickhouse-operator-metrics.yaml ${CHART_PATH}/templates/generated/
+rm -rf "${CHART_PATH}/tmp"
+#extract_resources "${REPO_URL}/clickhouse-operator-install-deployment.yaml" "${CHART_PATH}/templates/generated"
+#extract_resources "${REPO_URL}/clickhouse-operator-install-service.yaml" "${CHART_PATH}/templates/generated"
 
 exit 1
 
