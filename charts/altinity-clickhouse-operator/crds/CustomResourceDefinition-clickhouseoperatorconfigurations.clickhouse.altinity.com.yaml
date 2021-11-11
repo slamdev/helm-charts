@@ -85,7 +85,7 @@ spec:
                   description: ClickHouse server configuration `<quota>...</quota>` for any <user>
                 chConfigUserDefaultNetworksIP:
                   type: array
-                  description: ClickHouse server configuration `<networks><ip>...</ip></netrworks>` for any <user>
+                  description: ClickHouse server configuration `<networks><ip>...</ip></networks>` for any <user>
                   items:
                     type: string
                 chConfigUserDefaultPassword:
@@ -116,7 +116,7 @@ spec:
                   description: boolean, allows logs to stderr
                 alsologtostderr:
                   type: string
-                  description: booleanm allows logs to stderr and files both
+                  description: boolean allows logs to stderr and files both
                 v:
                   type: string
                   description: verbosity level of clickhouse-operator log, default - 1 max - 9
