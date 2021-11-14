@@ -1,3 +1,7 @@
+# Template Parameters:
+#
+# NONE
+#
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
@@ -19,12 +23,12 @@ spec:
         - name: namespaces
           type: string
           description: Watch namespaces
-          priority: 0
+          priority: 0 # show in standard view
           jsonPath: .status
       schema:
         openAPIV3Schema:
           type: object
-          description: allows customize `clickhouse-operator` settings, need restart clickhouse-operator pod after adding, more details https://github.com/Altinity/clickhouse-operator/blob/master/docs/operator_configuration.md
+          description: "allows customize `clickhouse-operator` settings, need restart clickhouse-operator pod after adding, more details https://github.com/Altinity/clickhouse-operator/blob/master/docs/operator_configuration.md"
           x-kubernetes-preserve-unknown-fields: true
           properties:
             status:
@@ -40,27 +44,27 @@ spec:
               properties:
                 watchNamespaces:
                   type: array
-                  description: List of namespaces where clickhouse-operator watches for events.
+                  description: "List of namespaces where clickhouse-operator watches for events."
                   items:
                     type: string
                 chCommonConfigsPath:
                   type: string
-                  description: Path to folder where ClickHouse configuration files common for all instances within CHI are located. Default - config.d
+                  description: "Path to folder where ClickHouse configuration files common for all instances within CHI are located. Default - config.d"
                 chHostConfigsPath:
                   type: string
-                  description: Path to folder where ClickHouse configuration files unique for each instance (host) within CHI are located. Default - conf.d
+                  description: "Path to folder where ClickHouse configuration files unique for each instance (host) within CHI are located. Default - conf.d"
                 chUsersConfigsPath:
                   type: string
-                  description: Path to folder where ClickHouse configuration files with users settings are located. Files are common for all instances within CHI
+                  description: "Path to folder where ClickHouse configuration files with users settings are located. Files are common for all instances within CHI"
                 chiTemplatesPath:
                   type: string
-                  description: Path to folder where ClickHouseInstallation .yaml manifests are located.
+                  description: "Path to folder where ClickHouseInstallation .yaml manifests are located."
                 statefulSetUpdateTimeout:
                   type: integer
-                  description: How many seconds to wait for created/updated StatefulSet to be Ready
+                  description: "How many seconds to wait for created/updated StatefulSet to be Ready"
                 statefulSetUpdatePollPeriod:
                   type: integer
-                  description: How many seconds to wait between checks for created/updated StatefulSet status
+                  description: "How many seconds to wait between checks for created/updated StatefulSet status"
                 onStatefulSetCreateFailureAction:
                   type: string
                   description: |
@@ -79,47 +83,47 @@ spec:
                     3. ignore - ignore error, pretend nothing happened and move on to the next StatefulSet.
                 chConfigUserDefaultProfile:
                   type: string
-                  description: ClickHouse server configuration `<profile>...</profile>` for any <user>
+                  description: "ClickHouse server configuration `<profile>...</profile>` for any <user>"
                 chConfigUserDefaultQuota:
                   type: string
-                  description: ClickHouse server configuration `<quota>...</quota>` for any <user>
+                  description: "ClickHouse server configuration `<quota>...</quota>` for any <user>"
                 chConfigUserDefaultNetworksIP:
                   type: array
-                  description: ClickHouse server configuration `<networks><ip>...</ip></netrworks>` for any <user>
+                  description: "ClickHouse server configuration `<networks><ip>...</ip></networks>` for any <user>"
                   items:
                     type: string
                 chConfigUserDefaultPassword:
-                  description: ClickHouse server configuration `<password>...</password>` for any <user>
+                  description: "ClickHouse server configuration `<password>...</password>` for any <user>"
                   type: string
                 chConfigNetworksHostRegexpTemplate:
-                  description: ClickHouse server configuration `<host_regexp>...</host_regexp>` for any <user>
+                  description: "ClickHouse server configuration `<host_regexp>...</host_regexp>` for any <user>"
                   type: string
                 chUsername:
                   type: string
-                  description: ClickHouse username to be used by operator to connect to ClickHouse instances, deprecated, use chCredentialsSecretName
+                  description: "ClickHouse username to be used by operator to connect to ClickHouse instances, deprecated, use chCredentialsSecretName"
                 chPassword:
                   type: string
-                  description: ClickHouse password to be used by operator to connect to ClickHouse instances, deprecated, use chCredentialsSecretName
+                  description: "ClickHouse password to be used by operator to connect to ClickHouse instances, deprecated, use chCredentialsSecretName"
                 chCredentialsSecretNamespace:
                   type: string
-                  description: Location of k8s Secret with username and password to be used by operator to connect to ClickHouse instances
+                  description: "Location of k8s Secret with username and password to be used by operator to connect to ClickHouse instances"
                 chCredentialsSecretName:
                   type: string
-                  description: Name of k8s Secret with username and password to be used by operator to connect to ClickHouse instances
+                  description: "Name of k8s Secret with username and password to be used by operator to connect to ClickHouse instances"
                 chPort:
                   type: integer
                   minimum: 1
                   maximum: 65535
-                  description: Name of k8s Secret with username and password to be used by operator to connect to ClickHouse instances
+                  description: "Name of k8s Secret with username and password to be used by operator to connect to ClickHouse instances"
                 logtostderr:
                   type: string
-                  description: boolean, allows logs to stderr
+                  description: "boolean, allows logs to stderr"
                 alsologtostderr:
                   type: string
-                  description: booleanm allows logs to stderr and files both
+                  description: "boolean allows logs to stderr and files both"
                 v:
                   type: string
-                  description: verbosity level of clickhouse-operator log, default - 1 max - 9
+                  description: "verbosity level of clickhouse-operator log, default - 1 max - 9"
                 stderrthreshold:
                   type: string
                 vmodule:
@@ -128,7 +132,7 @@ spec:
                   type: string
                 reconcileThreadsNumber:
                   type: integer
-                  description: how much goroutines will use to reconcile in parallel, 10 by default
+                  description: "how much goroutines will use to reconcile in parallel, 10 by default"
                   minimum: 1
                   maximum: 65535
                 reconcileWaitExclude:
@@ -144,8 +148,9 @@ spec:
                     type: string
                 appendScopeLabels:
                   type: string
-                  description: Whether to append *Scope* labels to StatefulSet and Pod
+                  description: "Whether to append *Scope* labels to StatefulSet and Pod"
                   enum:
+                    # List StringBoolXXX constants from model
                     - ""
                     - "0"
                     - "1"
@@ -161,21 +166,21 @@ spec:
                     - "off"
                     - "On"
                     - "on"
-                    - Disable
-                    - disable
-                    - Enable
-                    - enable
-                    - Disabled
-                    - disabled
-                    - Enabled
-                    - enabled
-                    - LabelShardScopeIndex
-                    - LabelReplicaScopeIndex
-                    - LabelCHIScopeIndex
-                    - LabelCHIScopeCycleSize
-                    - LabelCHIScopeCycleIndex
-                    - LabelCHIScopeCycleOffset
-                    - LabelClusterScopeIndex
-                    - LabelClusterScopeCycleSize
-                    - LabelClusterScopeCycleIndex
-                    - LabelClusterScopeCycleOffset
+                    - "Disable"
+                    - "disable"
+                    - "Enable"
+                    - "enable"
+                    - "Disabled"
+                    - "disabled"
+                    - "Enabled"
+                    - "enabled"
+                    - "LabelShardScopeIndex"
+                    - "LabelReplicaScopeIndex"
+                    - "LabelCHIScopeIndex"
+                    - "LabelCHIScopeCycleSize"
+                    - "LabelCHIScopeCycleIndex"
+                    - "LabelCHIScopeCycleOffset"
+                    - "LabelClusterScopeIndex"
+                    - "LabelClusterScopeCycleSize"
+                    - "LabelClusterScopeCycleIndex"
+                    - "LabelClusterScopeCycleOffset"

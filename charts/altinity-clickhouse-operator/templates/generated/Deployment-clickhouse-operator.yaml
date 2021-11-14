@@ -1,3 +1,12 @@
+# Template Parameters:
+#
+# NAMESPACE=kube-system
+# COMMENT=
+# OPERATOR_IMAGE=altinity/clickhouse-operator:0.16.1
+# METRICS_EXPORTER_IMAGE=altinity/metrics-exporter:0.16.1
+#
+# Setup Deployment for clickhouse-operator
+# Deployment would be created in kubectl-specified namespace
 kind: Deployment
 apiVersion: apps/v1
 metadata:
@@ -58,26 +67,34 @@ spec:
             - name: etc-clickhouse-operator-usersd-folder
               mountPath: /etc/clickhouse-operator/users.d
           env:
+            # Pod-specific
+            # spec.nodeName: ip-172-20-52-62.ec2.internal
             - name: OPERATOR_POD_NODE_NAME
               valueFrom:
                 fieldRef:
                   fieldPath: spec.nodeName
+            # metadata.name: clickhouse-operator-6f87589dbb-ftcsf
             - name: OPERATOR_POD_NAME
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.name
+            # metadata.namespace: kube-system
             - name: OPERATOR_POD_NAMESPACE
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
+            # status.podIP: 100.96.3.2
             - name: OPERATOR_POD_IP
               valueFrom:
                 fieldRef:
                   fieldPath: status.podIP
+            # spec.serviceAccount: clickhouse-operator
+            # spec.serviceAccountName: clickhouse-operator
             - name: OPERATOR_POD_SERVICE_ACCOUNT
               valueFrom:
                 fieldRef:
                   fieldPath: spec.serviceAccountName
+            # Container-specific
             - name: OPERATOR_CONTAINER_CPU_REQUEST
               valueFrom:
                 resourceFieldRef:

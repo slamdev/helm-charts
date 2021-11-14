@@ -1,3 +1,9 @@
+# Template Parameters:
+#
+# NAME=etc-clickhouse-operator-templatesd-files
+# NAMESPACE=kube-system
+# COMMENT=
+#
 apiVersion: v1
 kind: ConfigMap
 metadata:
