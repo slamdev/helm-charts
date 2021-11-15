@@ -1,6 +1,6 @@
 # envoy
 
-![Version: 0.0.13](https://img.shields.io/badge/Version-0.0.13-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.18.2](https://img.shields.io/badge/AppVersion-v1.18.2-informational?style=flat-square)
+![Version: 0.0.14](https://img.shields.io/badge/Version-0.0.14-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.18.2](https://img.shields.io/badge/AppVersion-v1.18.2-informational?style=flat-square)
 
 Helm chart to deploy [envoy](https://www.envoyproxy.io/).
 
@@ -31,6 +31,10 @@ Helm chart to deploy [envoy](https://www.envoyproxy.io/).
 | ingress.enabled | bool | `false` | enables Ingress for envoy |
 | ingress.hosts | list | `[]` | ingress accepted hostnames |
 | ingress.tls | list | `[]` | ingress TLS configuration |
+| initContainer.command | string | `"apk add perl && cp /opt/envoy.yaml.tpl /config/envoy.yaml && perl -pi -e 's/ENV_([_A-Z0-9]+)_ENV/$ENV{$1}/g' /config/envoy.yaml"` |  |
+| initContainer.image.pullPolicy | string | `"IfNotPresent"` | initContainer image pull policy |
+| initContainer.image.repository | string | `"alpine"` | initContainer image repository |
+| initContainer.image.tag | string | `"3.12.4"` | initContainer image tag |
 | livenessProbe.httpGet.path | string | `"/ready"` | path for liveness probe |
 | livenessProbe.httpGet.port | string | `"http-admin"` | port for liveness probe |
 | nameOverride | string | `""` | override name of the chart |
