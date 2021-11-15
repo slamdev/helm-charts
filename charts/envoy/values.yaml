@@ -1,3 +1,13 @@
+initContainer:
+  image:
+    # initContainer.image.repository -- initContainer image repository
+    repository: alpine
+    # initContainer.image.tag -- initContainer image tag
+    tag: 3.12.4
+    # initContainer.image.pullPolicy -- initContainer image pull policy
+    pullPolicy: IfNotPresent
+  command: "apk add perl && cp /opt/envoy.yaml.tpl /config/envoy.yaml && perl -pi -e 's/ENV_([_A-Z0-9]+)_ENV/$ENV{$1}/g' /config/envoy.yaml"
+
 # replicaCount -- number of replicas for haproxy deployment.
 replicaCount: 1
 
