@@ -1750,6 +1750,22 @@ entries:
     urls:
     - https://github.com/slamdev/helm-charts/releases/download/hetzner-irobo-0.0.1/hetzner-irobo-0.0.1.tgz
     version: 0.0.1
+  hive-metastore:
+  - apiVersion: v2
+    appVersion: 2.3.9-2.10.1
+    created: "2021-11-28T20:37:38.087487805Z"
+    description: Helm chart to deploy [hive-metastore](https://hive.apache.org/).
+    digest: 8fb81621b14f0dfa030ff495903e51cdc2629ceae155a8f02c7a1549ef668371
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/hive-metastore
+    icon: https://hive.apache.org/images/hive_logo_medium.jpg
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: hive-metastore
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/hive-metastore-0.0.1/hive-metastore-0.0.1.tgz
+    version: 0.0.1
   kube-resource-report:
   - apiVersion: v2
     appVersion: 21.2.1
@@ -2700,4 +2716,4 @@ entries:
     urls:
     - https://github.com/slamdev/helm-charts/releases/download/zeppelin-0.0.1/zeppelin-0.0.1.tgz
     version: 0.0.1
-generated: "2021-11-15T10:46:33.417456677Z"
+generated: "2021-11-28T20:37:38.088547814Z"
