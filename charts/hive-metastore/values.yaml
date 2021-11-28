@@ -99,7 +99,13 @@ hiveSiteXml: |
   </configuration>
 
 schematool:
-  # schematool.enabled -- run schematool as int container
+  # schematool.enabled -- run schematool as init container
   enabled: false
   # schematool.dbType -- schematool database type
   dbType: postgres
+importJars:
+  # importJars.enabled -- import jars as init container
+  enabled: false
+  # importJars.coords -- maven coords
+  coords: []
+  #  - org.apache.hadoop:hadoop-aws:2.10.1

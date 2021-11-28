@@ -57,6 +57,18 @@ spec:
             - name: hive-configs
               mountPath: /opt/hive-configs
       {{- end }}
+      {{- if .Values.importJars.enabled }}
+        - name: import-jars
+          image: baccata/coursier:2.0.0-RC6-24
+          command:
+            - sh
+          args:
+            - -c
+            - coursier fetch --cache=/tmp --artifact-type=jar {{ join " " .Values.importJars.coords }} && find /tmp -name '*.jar' -exec sh -c 'cp {} /opt/hive-extra-jars/$(basename {})' \;
+          volumeMounts:
+            - name: hive-extra-jars
+              mountPath: /opt/hive-extra-jars
+      {{- end }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
@@ -84,18 +96,30 @@ spec:
           env:
             - name: HIVE_CONF_DIR
               value: /opt/hive-configs
+          {{- if .Values.importJars.enabled }}
+            - name: HIVE_AUX_JARS_PATH
+              value: "$HIVE_AUX_JARS_PATH:/opt/hive-extra-jars/*"
+          {{- end }}
           {{- with .Values.env }}
             {{- toYaml . | nindent 12 }}
           {{- end }}
           volumeMounts:
             - name: hive-configs
               mountPath: /opt/hive-configs
+          {{- if .Values.importJars.enabled }}
+            - name: hive-extra-jars
+              mountPath: /opt/hive-extra-jars
+          {{- end }}
           {{- with .Values.volumeMounts }}
             {{- toYaml . | nindent 12 }}
           {{- end }}
       volumes:
         - name: hive-configs
           emptyDir: {}
+      {{- if .Values.importJars.enabled }}
+        - name: hive-extra-jars
+          emptyDir: {}
+      {{- end }}
         - name: hive-config-map
           configMap:
             name: {{ include "hive-metastore.fullname" . }}
