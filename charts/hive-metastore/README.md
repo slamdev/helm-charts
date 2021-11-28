@@ -1,6 +1,6 @@
 # hive-metastore
 
-![Version: 0.0.1](https://img.shields.io/badge/Version-0.0.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.3.9-2.10.1](https://img.shields.io/badge/AppVersion-2.3.9--2.10.1-informational?style=flat-square)
+![Version: 0.0.2](https://img.shields.io/badge/Version-0.0.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.3.9-2.10.1](https://img.shields.io/badge/AppVersion-2.3.9--2.10.1-informational?style=flat-square)
 
 Helm chart to deploy [hive-metastore](https://hive.apache.org/).
 
