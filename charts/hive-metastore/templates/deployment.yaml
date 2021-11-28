@@ -1,0 +1,116 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "hive-metastore.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "hive-metastore.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "hive-metastore.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "hive-metastore.selectorLabels" . | nindent 8 }}
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      serviceAccountName: {{ include "hive-metastore.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+        - name: expand-configs
+          image: tempire/alpine-perl:3.14.0
+          command:
+            - sh
+          args:
+            - -c
+            - cp /tmp/hive-site.xml /opt/hive-configs/ && perl -pi -e 's/\${env:([_A-Z0-9]+)}/$ENV{$1}/g' /opt/hive-configs/hive-site.xml
+        {{- with .Values.env }}
+          env:
+            {{- toYaml . | nindent 12 }}
+        {{- end }}
+          volumeMounts:
+          - name: hive-config-map
+            mountPath: /tmp/hive-site.xml
+            subPath: hive-site.xml
+          - name: hive-configs
+            mountPath: /opt/hive-configs
+      {{- if .Values.schematool.enabled -}}
+        - name: schematool
+          image: "{{ .Values.image.repository }}:{{ include "hive-metastore.tag" . }}"
+          command:
+            - sh
+          args:
+            - -c
+            - schematool -dbType {{ .Values.schematool.dbType }} -initSchema || true
+          env:
+            - name: HIVE_CONF_DIR
+              value: /opt/hive-configs
+          volumeMounts:
+            - name: hive-configs
+              mountPath: /opt/hive-configs
+      {{- end -}}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ include "hive-metastore.tag" . }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args:
+            - --service
+            - metastore
+          ports:
+            - name: thrift
+              containerPort: 9083
+              protocol: TCP
+          livenessProbe:
+            tcpSocket:
+              port: thrift
+          readinessProbe:
+            tcpSocket:
+              port: thrift
+          startupProbe:
+            tcpSocket:
+              port: thrift
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          env:
+            - name: HIVE_CONF_DIR
+              value: /opt/hive-configs
+          {{- with .Values.env }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          volumeMounts:
+            - name: hive-configs
+              mountPath: /opt/hive-configs
+          {{- with .Values.volumeMounts }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      volumes:
+        - name: hive-configs
+          emptyDir: {}
+        - name: hive-config-map
+          configMap:
+            name: {{ include "hive-metastore.fullname" . }}
+      {{- with .Values.volumes }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
