@@ -25,6 +25,16 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       initContainers:
+      {{- range .Values.initContainers }}
+        - {{- toYaml . | nindent 10 }}
+        {{- with $.Values.env }}
+          env:
+            {{- toYaml . | nindent 12 }}
+        {{- end }}
+          volumeMounts:
+            - name: hive-configs
+              mountPath: /opt/hive-configs
+      {{- end }}
         - name: expand-configs
           image: tempire/alpine-perl:3.14.0
           command:

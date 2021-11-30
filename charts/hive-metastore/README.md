@@ -1,6 +1,6 @@
 # hive-metastore
 
-![Version: 0.0.4](https://img.shields.io/badge/Version-0.0.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.3.9-2.10.1](https://img.shields.io/badge/AppVersion-2.3.9--2.10.1-informational?style=flat-square)
+![Version: 0.0.5](https://img.shields.io/badge/Version-0.0.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.3.9-2.10.1](https://img.shields.io/badge/AppVersion-2.3.9--2.10.1-informational?style=flat-square)
 
 Helm chart to deploy [hive-metastore](https://hive.apache.org/).
 
@@ -30,6 +30,7 @@ Helm chart to deploy [hive-metastore](https://hive.apache.org/).
 | ingress.enabled | bool | `false` | enables Ingress for hive-metastore |
 | ingress.hosts | list | `[]` | ingress accepted hostnames |
 | ingress.tls | list | `[]` | ingress TLS configuration |
+| initContainers | list | `[]` | additional init containers; env vars and volume mounts are the same as for the main container |
 | nameOverride | string | `""` | override name of the chart |
 | nodeSelector | object | `{}` | node for scheduler pod assignment |
 | podSecurityContext | object | `{}` | specifies security settings for a pod |

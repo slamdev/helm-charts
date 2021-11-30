@@ -93,6 +93,9 @@ env: []
 #  - name: HADOOP_CLIENT_OPTS
 #    value: --add-opens java.base/java.net=ALL-UNNAMED -Dhive.root.logger=console
 
+# initContainers -- additional init containers; env vars and volume mounts are the same as for the main container
+initContainers: []
+
 hiveSiteXml: |
   <configuration>
 
