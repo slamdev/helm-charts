@@ -90,8 +90,8 @@ volumes: []
 
 # env -- additional environment variables for the deployment
 env: []
-  # - name: SAMPLE
-  #   value: text
+#  - name: HADOOP_CLIENT_OPTS
+#    value: --add-opens java.base/java.net=ALL-UNNAMED -Dhive.root.logger=console
 
 hiveSiteXml: |
   <configuration>

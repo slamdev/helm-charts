@@ -89,6 +89,7 @@ spec:
             tcpSocket:
               port: thrift
           startupProbe:
+            failureThreshold: 60
             tcpSocket:
               port: thrift
           resources:

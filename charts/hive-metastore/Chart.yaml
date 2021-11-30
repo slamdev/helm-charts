@@ -3,7 +3,7 @@ name: hive-metastore
 description: |-
   Helm chart to deploy [hive-metastore](https://hive.apache.org/).
 type: application
-version: 0.0.3
+version: 0.0.4
 appVersion: 2.3.9-2.10.1
 home: https://github.com/slamdev/helm-charts/tree/master/charts/hive-metastore
 icon: https://hive.apache.org/images/hive_logo_medium.jpg
