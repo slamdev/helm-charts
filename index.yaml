@@ -1753,6 +1753,21 @@ entries:
   hive-metastore:
   - apiVersion: v2
     appVersion: 2.3.9-2.10.1
+    created: "2021-11-30T19:23:17.481400376Z"
+    description: Helm chart to deploy [hive-metastore](https://hive.apache.org/).
+    digest: b34996938274a72b1607bd9ae93921eb27091f3d662ff1f907ba6f7724d04c22
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/hive-metastore
+    icon: https://hive.apache.org/images/hive_logo_medium.jpg
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: hive-metastore
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/hive-metastore-0.0.5/hive-metastore-0.0.5.tgz
+    version: 0.0.5
+  - apiVersion: v2
+    appVersion: 2.3.9-2.10.1
     created: "2021-11-30T18:21:42.757864364Z"
     description: Helm chart to deploy [hive-metastore](https://hive.apache.org/).
     digest: f1703cb90994e2e57285fb6d69c83cc2c41ac5a48613ccff31cb5b5256c92f3c
@@ -2761,4 +2776,4 @@ entries:
     urls:
     - https://github.com/slamdev/helm-charts/releases/download/zeppelin-0.0.1/zeppelin-0.0.1.tgz
     version: 0.0.1
-generated: "2021-11-30T18:21:42.758273891Z"
+generated: "2021-11-30T19:23:17.481942576Z"
