@@ -1,6 +1,6 @@
 # gradle-cache
 
-![Version: 0.0.15](https://img.shields.io/badge/Version-0.0.15-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 10.3](https://img.shields.io/badge/AppVersion-10.3-informational?style=flat-square)
+![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.0](https://img.shields.io/badge/AppVersion-11.0-informational?style=flat-square)
 
 Helm chart to deploy [gradle-cache](https://docs.gradle.com/build-cache-node/).
 
@@ -17,6 +17,10 @@ Helm chart to deploy [gradle-cache](https://docs.gradle.com/build-cache-node/).
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | affinity | object | `{}` | affinity for scheduler pod assignment |
+| args | list | `["start","--no-warn-anon-cache-write","--no-warn-anon-ui-access"]` | args to pass to the container |
+| configSecret.content | string | `"version: 4\ncache:\n  accessControl:\n    anonymousLevel: readwrite\n  maxEntryAgeInHours: null\n  freeSpaceBufferSize: 1024\n  maxArtifactSize: 100\n  targetSize:\n    type: fixed\n    size: 10000\nuiAccess:\n  type: open"` |  |
+| configSecret.create | bool | `true` | specifies whether a secret should be created |
+| configSecret.name | string | `nil` | the name of the secret to use; if not set and create is true, a name is generated using the fullname template |
 | env | list | `[]` | additional environment variables for the deployment |
 | fullnameOverride | string | `""` | full name of the chart. |
 | image.pullPolicy | string | `"IfNotPresent"` | image pull policy |
@@ -43,5 +47,4 @@ Helm chart to deploy [gradle-cache](https://docs.gradle.com/build-cache-node/).
 | serviceAccount.create | bool | `false` | specifies whether a service account should be created |
 | serviceAccount.name | string | `nil` | the name of the service account to use; if not set and create is true, a name is generated using the fullname template |
 | tolerations | list | `[]` | tolerations for scheduler pod assignment |
-| volumeMounts | list | `[]` | additional volume mounts |
-| volumes | list | `[]` | additional volumes |
+| volumes | list | `[{"emptyDir":{},"name":"cache"}]` | volumes |

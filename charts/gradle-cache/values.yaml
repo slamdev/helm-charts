@@ -13,6 +13,32 @@ nameOverride: ""
 # fullnameOverride -- full name of the chart.
 fullnameOverride: ""
 
+configSecret:
+  # configSecret.create -- specifies whether a secret should be created
+  create: true
+  # configSecret.name -- the name of the secret to use; if not set and create is true, a name is generated using the fullname template
+  name:
+  # configSecret.content - content of 'config.yaml'
+  content: |-
+    version: 4
+    cache:
+      accessControl:
+        anonymousLevel: readwrite
+      maxEntryAgeInHours: null
+      freeSpaceBufferSize: 1024
+      maxArtifactSize: 100
+      targetSize:
+        type: fixed
+        size: 10000
+    uiAccess:
+      type: open
+
+# args -- args to pass to the container
+args:
+  - start
+  - --no-warn-anon-cache-write
+  - --no-warn-anon-ui-access
+
 serviceAccount:
   # serviceAccount.create -- specifies whether a service account should be created
   create: false
@@ -79,15 +105,10 @@ tolerations: []
 # affinity -- affinity for scheduler pod assignment
 affinity: {}
 
-# volumeMounts -- additional volume mounts
-volumeMounts: []
-  # - name: cache
-  #   mountPath: /data
-
-# volumes -- additional volumes
-volumes: []
-  # - name: cache
-  #   emptyDir: {}
+# volumes -- volumes
+volumes:
+   - name: cache
+     emptyDir: {}
 
 livenessProbe:
   httpGet:

@@ -22,11 +22,24 @@ spec:
       serviceAccountName: {{ include "gradle-cache.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+        - name: config-mounter
+          image: busybox:1.33.0
+          command:
+             - sh
+             - -ce
+             - cp /tmp/config.yaml /data/conf/config.yaml
+          volumeMounts:
+            - name: tmp-build-cache-config-file
+              mountPath: /tmp
+            - name: cache
+              mountPath: /data
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ include "gradle-cache.tag" . }}"
+          args: {{ .Values.args | toYaml | nindent 12 }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
@@ -42,14 +55,14 @@ spec:
           env:
             {{- toYaml . | nindent 12 }}
         {{- end }}
-        {{- with .Values.volumeMounts }}
           volumeMounts:
-            {{- toYaml . | nindent 12 }}
-        {{- end }}
-    {{- with .Values.volumes }}
+            - name: cache
+              mountPath: /data
       volumes:
-        {{- toYaml . | nindent 8 }}
-    {{- end }}
+        - name: tmp-build-cache-config-file
+          secret:
+            secretName: {{ include "gradle-cache.configSecretName" . }}
+        {{- .Values.volumes | toYaml | nindent 8 }}
     {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

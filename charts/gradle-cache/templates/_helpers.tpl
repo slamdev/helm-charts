@@ -63,6 +63,17 @@ Create the name of the service account to use
 {{- end -}}
 
 {{/*
+Create the name of the config secret to use
+*/}}
+{{- define "gradle-cache.configSecretName" -}}
+{{- if .Values.configSecret.create -}}
+    {{ default (include "gradle-cache.fullname" .) .Values.configSecret.name }}
+{{- else -}}
+    {{ default "default" .Values.configSecret.name }}
+{{- end -}}
+{{- end -}}
+
+{{/*
 Create the tag for the docker image to use
 */}}
 {{- define "gradle-cache.tag" -}}
