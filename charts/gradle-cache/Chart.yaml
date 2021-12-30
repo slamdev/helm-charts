@@ -3,7 +3,7 @@ name: gradle-cache
 description: |-
   Helm chart to deploy [gradle-cache](https://docs.gradle.com/build-cache-node/).
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "11.0"
 home: https://github.com/slamdev/helm-charts/tree/master/charts/gradle-cache
 icon: https://gradle.org/icon/favicon-32x32.png
