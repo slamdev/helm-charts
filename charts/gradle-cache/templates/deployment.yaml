@@ -28,7 +28,7 @@ spec:
           command:
              - sh
              - -ce
-             - cp /tmp/config.yaml /data/conf/config.yaml
+             - mkdir -p /data/conf/ && cp /tmp/config.yaml /data/conf/config.yaml
           volumeMounts:
             - name: tmp-build-cache-config-file
               mountPath: /tmp
