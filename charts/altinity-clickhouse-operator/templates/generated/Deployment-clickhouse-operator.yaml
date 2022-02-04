@@ -2,8 +2,8 @@
 #
 # NAMESPACE=kube-system
 # COMMENT=
-# OPERATOR_IMAGE=altinity/clickhouse-operator:0.16.1
-# METRICS_EXPORTER_IMAGE=altinity/metrics-exporter:0.16.1
+# OPERATOR_IMAGE=altinity/clickhouse-operator:0.18.0
+# METRICS_EXPORTER_IMAGE=altinity/metrics-exporter:0.18.0
 #
 # Setup Deployment for clickhouse-operator
 # Deployment would be created in kubectl-specified namespace
@@ -13,6 +13,7 @@ metadata:
   name: {{ include "altinity-clickhouse-operator.fullname" . }}
   namespace: {{ .Release.Namespace }}
   labels:
+    clickhouse.altinity.com/chop: 0.18.0
     {{- include "altinity-clickhouse-operator.labels" . | nindent 4 }}
 spec:
   replicas: 1
@@ -24,6 +25,8 @@ spec:
       labels:
         {{- include "altinity-clickhouse-operator.selectorLabels" . | nindent 8 }}
       annotations:
+        prometheus.io/port: '8888'
+        prometheus.io/scrape: 'true'
         checksum/confd-files: {{ include (print $.Template.BasePath "/generated/ConfigMap-etc-clickhouse-operator-confd-files.yaml") . | sha256sum }}
         checksum/configd-files: {{ include (print $.Template.BasePath "/generated/ConfigMap-etc-clickhouse-operator-configd-files.yaml") . | sha256sum }}
         checksum/files: {{ include (print $.Template.BasePath "/generated/ConfigMap-etc-clickhouse-operator-files.yaml") . | sha256sum }}
@@ -123,9 +126,6 @@ spec:
         - name: metrics-exporter
           image: "{{ .Values.metrics.image.repository }}:{{ include "altinity-clickhouse-operator.metrics.tag" . }}"
           imagePullPolicy: {{ .Values.metrics.image.pullPolicy }}
-          ports:
-            - name: metrics
-              containerPort: 8888
           volumeMounts:
             - name: etc-clickhouse-operator-folder
               mountPath: /etc/clickhouse-operator
@@ -137,6 +137,9 @@ spec:
               mountPath: /etc/clickhouse-operator/templates.d
             - name: etc-clickhouse-operator-usersd-folder
               mountPath: /etc/clickhouse-operator/users.d
+          ports:
+            - containerPort: 8888
+              name: metrics
         {{- with .Values.metrics.env }}
           env:
           {{- toYaml . | nindent 12 }}
