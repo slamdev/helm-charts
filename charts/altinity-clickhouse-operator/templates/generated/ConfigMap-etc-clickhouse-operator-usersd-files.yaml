@@ -10,7 +10,7 @@ metadata:
   name: {{ include "altinity-clickhouse-operator.fullname" . }}-usersd-files
   namespace: {{ .Release.Namespace }}
   labels:
-    clickhouse.altinity.com/chop: 0.18.0
+    clickhouse.altinity.com/chop: 0.18.1
     {{- include "altinity-clickhouse-operator.labels" . | nindent 4 }}
 data:
 {{- if .Values.configs.usersdFiles }}

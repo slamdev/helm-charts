@@ -1,4 +1,3 @@
----
 # Template Parameters:
 #
 # NONE
@@ -8,7 +7,7 @@ kind: CustomResourceDefinition
 metadata:
   name: clickhouseoperatorconfigurations.clickhouse.altinity.com
   labels:
-    clickhouse.altinity.com/chop: 0.18.0
+    clickhouse.altinity.com/chop: 0.18.1
 spec:
   group: clickhouse.altinity.com
   scope: Namespaced
