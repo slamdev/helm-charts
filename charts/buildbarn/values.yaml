@@ -232,7 +232,7 @@ frontend:
       blobstore: common.blobstore,
       grpcServers: [{
         listenAddresses: [':8980'],
-        authenticationPolicy: { allow: {} },
+        authenticationPolicy: common.allowAllauthorizerConfiguration,
       }],
       schedulers: {
         '': { endpoint: { address: 'buildbarn-scheduler:8982' } },
@@ -750,6 +750,7 @@ commonConf: |-
         listen_address: ':8080',
         enable_prometheus: true,
       },
+      setUmask: { umask: 0 },
     },
     allowAllauthorizerConfiguration: {
       allow: {},
@@ -789,8 +790,7 @@ commonConf: |-
       },
     },
     # Remember to set your browserUrl to the ingress of the browser deployment
-    browserUrl: 'http://buildbarn-storage:80',
+    browserUrl: 'http://buildbarn-browser:80',
     maximumMessageSizeBytes: 16 * 1024 * 1024,
     httpListenAddress: ':80'
   }
-
