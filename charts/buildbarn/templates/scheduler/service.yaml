@@ -1,0 +1,23 @@
+{{- if .Values.scheduler.enabled -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "buildbarn.fullname" (list . "scheduler") }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "buildbarn.labels" (list . "scheduler") | nindent 4 }}
+spec:
+  type: {{ .Values.scheduler.service.type }}
+  ports:
+    - name: {{ .Values.scheduler.service.http.name }}
+      port: {{ .Values.scheduler.service.http.port }}
+      targetPort: http
+    - name: {{ .Values.scheduler.service.grpcClient.name }}
+      port: {{ .Values.scheduler.service.grpcClient.port }}
+      targetPort: grpc-client
+    - name: {{ .Values.scheduler.service.grpcWorker.name }}
+      port: {{ .Values.scheduler.service.grpcWorker.port }}
+      targetPort: grpc-worker
+  selector:
+    {{- include "buildbarn.selectorLabels" (list . "scheduler") | nindent 4 }}
+{{- end }}

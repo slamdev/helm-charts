@@ -1,0 +1,579 @@
+# imagePullSecrets -- image pull secret for private images
+imagePullSecrets: []
+# nameOverride -- override name of the chart
+nameOverride: ""
+# fullnameOverride -- full name of the chart.
+fullnameOverride: ""
+
+serviceAccount:
+  # serviceAccount.create -- specifies whether a service account should be created
+  create: false
+  # serviceAccount.annotations -- annotations to add to the service account
+  annotations: {}
+  # serviceAccount.name -- the name of the service account to use; if not set and create is true, a name is generated using the fullname template
+  name:
+
+browser:
+  # browser.enabled -- enable browser component
+  enabled: false
+  # browser.replicaCount -- number of replicas for the deployment.
+  replicaCount: 1
+  image:
+    # browser.image.repository -- image repository
+    repository: buildbarn/bb-browser
+    # browser.image.tag -- image tag
+    tag: 20211222T121123Z-547095c
+    # browser.image.pullPolicy -- image pull policy
+    pullPolicy: IfNotPresent
+
+  # browser.podSecurityContext -- specifies security settings for a pod
+  podSecurityContext: {}
+  # fsGroup: 2000
+
+  # browser.securityContext -- specifies security settings for a container
+  securityContext: {}
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+  # browser.containerPort -- port exposed by container
+  containerPort: 80
+
+  service:
+    # browser.service.type -- service type
+    type: ClusterIP
+    # browser.service.name -- service name
+    name: http
+    # browser.service.port -- service port
+    port: 80
+
+  # browser.resources -- custom resource configuration
+  resources: {}
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+  # browser.nodeSelector -- node for scheduler pod assignment
+  nodeSelector: {}
+
+  # browser.tolerations -- tolerations for scheduler pod assignment
+  tolerations: []
+
+  # browser.affinity -- affinity for scheduler pod assignment
+  affinity: {}
+
+  # browser.volumeMounts -- volume mounts
+  volumeMounts: []
+  # - name: cache
+  #   mountPath: /data/cache
+
+  # browser.volumes -- volumes
+  volumes: []
+  # - name: cache
+  #   emptyDir: {}
+
+  livenessProbe:
+    httpGet:
+      # browser.livenessProbe.httpGet.path -- path for liveness probe
+      path: /
+      # browser.livenessProbe.httpGet.port -- port for liveness probe
+      port: http
+
+  readinessProbe:
+    httpGet:
+      # browser.readinessProbe.httpGet.path -- path for readiness probe
+      path: /
+      # browser.readinessProbe.httpGet.port -- port for readiness probe
+      port: http
+
+  # browser.env -- environment variables for the deployment
+  env: []
+  # - name: SAMPLE
+  #   value: text
+
+  ingress:
+    # browser.ingress.enabled -- enables Ingress
+    enabled: false
+    # browser.ingress.annotations -- ingress annotations
+    annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+
+    # browser.ingress.hosts -- ingress accepted hostnames
+    hosts: []
+    #  - host: chart-example.local
+    #    paths: []
+    # browser.ingress.tls -- ingress TLS configuration
+    tls: []
+    #  - secretName: chart-example-tls
+    #    hosts:
+    #      - chart-example.local
+
+  serviceMonitor:
+    # browser.serviceMonitor.enabled -- ServiceMonitor CRD is created for a prometheus operator
+    enabled: false
+    # browser.serviceMonitor.additionalLabels -- additional labels for service monitor
+    additionalLabels: { }
+
+  # browser.conf -- config https://github.com/buildbarn/bb-browser/blob/547095cf8540c671b0f2291b1e6f76081e47a9fc/pkg/proto/configuration/bb_browser/bb_browser.proto
+  conf: |-
+    local common = import 'common.libsonnet';
+    {
+      blobstore: common.blobstore,
+      maximumMessageSizeBytes: common.maximumMessageSizeBytes,
+      listenAddress: common.httpListenAddress,
+    }
+
+frontend:
+  # frontend.enabled -- enable frontend component
+  enabled: false
+  # frontend.replicaCount -- number of replicas for the deployment.
+  replicaCount: 1
+  image:
+    # frontend.image.pullPolicy -- image pull policy
+    pullPolicy: IfNotPresent
+
+  # frontend.podSecurityContext -- specifies security settings for a pod
+  podSecurityContext: {}
+  # fsGroup: 2000
+
+  # frontend.securityContext -- specifies security settings for a container
+  securityContext: {}
+    # capabilities:
+    #   drop:
+    #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+  # frontend.containerHttpPort -- http port exposed by container
+  containerHttpPort: 80
+  # frontend.containerGrpcPort -- grpc port exposed by container
+  containerGrpcPort: 8980
+
+  service:
+    # frontend.service.type -- service type
+    type: ClusterIP
+    http:
+      # frontend.service.http.name -- http service name
+      name: http
+      # frontend.service.http.port -- http service port
+      port: 80
+    grpc:
+      # frontend.service.grpc.name -- grpc service name
+      name: grpc
+      # frontend.service.grpc.port -- grpc service port
+      port: 8980
+
+  # frontend.resources -- custom resource configuration
+  resources: {}
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+  # frontend.nodeSelector -- node for scheduler pod assignment
+  nodeSelector: {}
+
+  # frontend.tolerations -- tolerations for scheduler pod assignment
+  tolerations: []
+
+  # frontend.affinity -- affinity for scheduler pod assignment
+  affinity: {}
+
+  # frontend.volumeMounts -- volume mounts
+  volumeMounts: []
+  # - name: cache
+  #   mountPath: /data/cache
+
+  # frontend.volumes -- volumes
+  volumes: []
+  # - name: cache
+  #   emptyDir: {}
+
+  livenessProbe:
+    httpGet:
+      # frontend.livenessProbe.httpGet.path -- path for liveness probe
+      path: /
+      # frontend.livenessProbe.httpGet.port -- port for liveness probe
+      port: http
+
+  readinessProbe:
+    httpGet:
+      # frontend.readinessProbe.httpGet.path -- path for readiness probe
+      path: /
+      # frontend.readinessProbe.httpGet.port -- port for readiness probe
+      port: http
+
+  # frontend.env -- environment variables for the deployment
+  env: []
+  # - name: SAMPLE
+  #   value: text
+
+  serviceMonitor:
+    # frontend.serviceMonitor.enabled -- ServiceMonitor CRD is created for a prometheus operator
+    enabled: false
+    # frontend.serviceMonitor.additionalLabels -- additional labels for service monitor
+    additionalLabels: { }
+
+  # frontend.conf -- config https://github.com/buildbarn/bb-frontend/blob/547095cf8540c671b0f2291b1e6f76081e47a9fc/pkg/proto/configuration/bb_frontend/bb_frontend.proto
+  conf: |-
+    local common = import 'common.libsonnet';
+    {
+      blobstore: common.blobstore,
+      httpListenAddress: common.httpListenAddress,
+      grpcServers: [{
+        listenAddresses: [':8980'],
+        authenticationPolicy: { allow: {} },
+      }],
+      schedulers: {
+        '': { endpoint: { address: 'scheduler:8982' } },
+      },
+      maximumMessageSizeBytes: common.maximumMessageSizeBytes,
+    }
+
+scheduler:
+  # scheduler.enabled -- enable scheduler component
+  enabled: false
+  # scheduler.replicaCount -- number of replicas for the deployment.
+  replicaCount: 1
+  image:
+    # scheduler.image.repository -- image repository
+    repository: buildbarn/bb-scheduler
+    # scheduler.image.tag -- image tag
+    tag: 20220211T141613Z-74b54e3
+    # scheduler.image.pullPolicy -- image pull policy
+    pullPolicy: IfNotPresent
+
+  # scheduler.podSecurityContext -- specifies security settings for a pod
+  podSecurityContext: {}
+  # fsGroup: 2000
+
+  # scheduler.securityContext -- specifies security settings for a container
+  securityContext: {}
+    # capabilities:
+    #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+  # scheduler.containerHttpPort -- http port exposed by container
+  containerHttpPort: 80
+  # scheduler.containerGrpcClientPort -- client grpc port exposed by container
+  containerGrpcClientPort: 8982
+  # scheduler.containerGrpcWorkerPort -- worker grpc port exposed by container
+  containerGrpcWorkerPort: 8983
+
+  service:
+    # scheduler.service.type -- service type
+    type: ClusterIP
+    http:
+      # scheduler.service.http.name -- http service name
+      name: http
+      # scheduler.service.http.port -- http service port
+      port: 80
+    grpcClient:
+      # scheduler.service.grpcClient.name -- grpc client service name
+      name: grpc
+      # scheduler.service.grpcClient.port -- grpc client service port
+      port: 8982
+    grpcWorker:
+      # scheduler.service.grpcWorker.name -- grpc worker service name
+      name: grpc
+      # scheduler.service.grpcWorker.port -- grpc worker service port
+      port: 8983
+
+  # scheduler.resources -- custom resource configuration
+  resources: {}
+    # limits:
+    #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+  # scheduler.nodeSelector -- node for scheduler pod assignment
+  nodeSelector: {}
+
+  # scheduler.tolerations -- tolerations for scheduler pod assignment
+  tolerations: []
+
+  # scheduler.affinity -- affinity for scheduler pod assignment
+  affinity: {}
+
+  # scheduler.volumeMounts -- volume mounts
+  volumeMounts: []
+  # - name: cache
+  #   mountPath: /data/cache
+
+  # scheduler.volumes -- volumes
+  volumes: []
+  # - name: cache
+  #   emptyDir: {}
+
+  livenessProbe:
+    httpGet:
+      # scheduler.livenessProbe.httpGet.path -- path for liveness probe
+      path: /
+      # scheduler.livenessProbe.httpGet.port -- port for liveness probe
+      port: http
+
+  readinessProbe:
+    httpGet:
+      # scheduler.readinessProbe.httpGet.path -- path for readiness probe
+      path: /
+      # scheduler.readinessProbe.httpGet.port -- port for readiness probe
+      port: http
+
+  # scheduler.env -- environment variables for the deployment
+  env: []
+  # - name: SAMPLE
+  #   value: text
+
+  serviceMonitor:
+    # scheduler.serviceMonitor.enabled -- ServiceMonitor CRD is created for a prometheus operator
+    enabled: false
+    # scheduler.serviceMonitor.additionalLabels -- additional labels for service monitor
+    additionalLabels: { }
+
+  # scheduler.conf -- config https://github.com/buildbarn/bb-scheduler/blob/547095cf8540c671b0f2291b1e6f76081e47a9fc/pkg/proto/configuration/bb_scheduler/bb_scheduler.proto
+  conf: |-
+    local common = import 'common.libsonnet';
+    {
+      httpListenAddress: common.httpListenAddress,
+      clientGrpcServers: [{
+        listenAddresses: [':8982'],
+        authenticationPolicy: { allow: {} },
+      }],
+      workerGrpcServers: [{
+        listenAddresses: [':8983'],
+        authenticationPolicy: { allow: {} },
+      }],
+      contentAddressableStorage: common.blobstore.contentAddressableStorage,
+      maximumMessageSizeBytes: common.maximumMessageSizeBytes,
+      browserUrl: common.browserUrl,
+    }
+
+worker:
+  # worker.enabled -- enable worker component
+  enabled: true
+  # worker.replicaCount -- number of replicas for the deployment.
+  replicaCount: 1
+  image:
+    # worker.image.pullPolicy -- image pull policy
+    pullPolicy: IfNotPresent
+    runnerInstaller:
+      # worker.image.runnerInstaller.repository -- image repository
+      repository: buildbarn/bb-runner-installer
+      # worker.image.runnerInstaller.tag -- image tag
+      tag: 20220211T141613Z-74b54e3
+    worker:
+      # worker.image.worker.repository -- image repository
+      repository: buildbarn/bb-worker
+      # worker.image.worker.tag -- image tag
+      tag: 20220211T141613Z-74b54e3
+
+  workerContainer:
+    image:
+      # worker.workerContainer.image.pullPolicy -- image pull policy
+      pullPolicy: IfNotPresent
+      # worker.workerContainer.image.repository -- image repository
+      repository: buildbarn/bb-worker
+      # worker.workerContainer.image.tag -- image tag
+      tag: 20220211T141613Z-74b54e3
+    # worker.workerContainer.securityContext -- specifies security settings for a container
+    securityContext: { }
+      # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
+
+    # worker.workerContainer.containerPort -- port exposed by container
+    containerPort: 80
+
+    livenessProbe:
+      httpGet:
+        # worker.workerContainer.livenessProbe.httpGet.path -- path for liveness probe
+        path: /
+        # worker.workerContainer.livenessProbe.httpGet.port -- port for liveness probe
+        port: http
+
+    readinessProbe:
+      httpGet:
+        # worker.workerContainer.readinessProbe.httpGet.path -- path for readiness probe
+        path: /
+        # worker.workerContainer.readinessProbe.httpGet.port -- port for readiness probe
+        port: http
+
+    # worker.workerContainer.resources -- custom resource configuration
+    resources: { }
+      # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+
+  runnerContainer:
+    image:
+      # worker.runnerContainer.image.pullPolicy -- image pull policy
+      pullPolicy: IfNotPresent
+      # worker.runnerContainer.image.repository -- image repository
+      repository: l.gcr.io/google/rbe-ubuntu16-04
+      # worker.runnerContainer.image.tag -- image tag
+      tag: latest@sha256:b516a2d69537cb40a7c6a7d92d0008abb29fba8725243772bdaf2c83f1be2272
+    # worker.runnerContainer.securityContext -- specifies security settings for a container
+    securityContext:
+      runAsUser: 65534
+      allowPrivilegeEscalation: false
+
+    # worker.runnerContainer.resources -- custom resource configuration
+    resources: { }
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+
+  # worker.podSecurityContext -- specifies security settings for a pod
+  podSecurityContext: {}
+  # fsGroup: 2000
+
+  service:
+    # worker.service.type -- service type
+    type: ClusterIP
+    # worker.service.name -- service name
+    name: http
+    # worker.service.port -- service port
+    port: 80
+
+  # worker.nodeSelector -- node for scheduler pod assignment
+  nodeSelector: {}
+
+  # worker.tolerations -- tolerations for scheduler pod assignment
+  tolerations: []
+
+  # worker.affinity -- affinity for scheduler pod assignment
+  affinity: {}
+
+  # worker.volumeMounts -- volume mounts
+  volumeMounts: []
+  # - name: cache
+  #   mountPath: /data/cache
+
+  # worker.volumes -- volumes
+  volumes: []
+  # - name: cache
+  #   emptyDir: {}
+
+  # worker.env -- environment variables for the deployment
+  env: []
+  # - name: SAMPLE
+  #   value: text
+
+  serviceMonitor:
+    # worker.serviceMonitor.enabled -- ServiceMonitor CRD is created for a prometheus operator
+    enabled: false
+    # worker.serviceMonitor.additionalLabels -- additional labels for service monitor
+    additionalLabels: { }
+
+  # worker.workerConf -- config https://github.com/buildbarn/bb-worker/blob/547095cf8540c671b0f2291b1e6f76081e47a9fc/pkg/proto/configuration/bb_worker/bb_worker.proto
+  workerConf: |-
+    local common = import 'common.libsonnet';
+    {
+      blobstore: common.blobstore,
+      maximumMessageSizeBytes: common.maximumMessageSizeBytes,
+      scheduler: { address: 'scheduler:8983' },
+      httpListenAddress: common.httpListenAddress,
+      maximumMemoryCachedDirectories: 1000,
+      instanceName: 'remote-execution',
+      browserUrl: common.browserUrl,
+      buildDirectories: [{
+        native: {
+          buildDirectoryPath: '/worker/build',
+          cacheDirectoryPath: '/worker/cache',
+          maximumCacheFileCount: 10000,
+          maximumCacheSizeBytes: 1024 * 1024 * 1024,
+          cacheReplacementPolicy: 'LEAST_RECENTLY_USED',
+        },
+        runners: [{
+          endpoint: { address: 'unix:///worker/runner' },
+          concurrency: 8,
+          platform: {
+            properties: [
+              { name: 'OSFamily', value: 'Linux' },
+              { name: 'container-image', value: 'docker://marketplace.gcr.io/google/rbe-ubuntu16-04@sha256:b516a2d69537cb40a7c6a7d92d0008abb29fba8725243772bdaf2c83f1be2272' },
+            ],
+          },
+          defaultExecutionTimeout: '1800s',
+          maximumExecutionTimeout: '3600s',
+          workerId: {
+            'pod': std.extVar("POD_NAME"),
+            'node': std.extVar("NODE_NAME")
+          },
+        }],
+      }],
+    }
+  # worker.runnerConf -- config https://github.com/buildbarn/bb-worker/blob/547095cf8540c671b0f2291b1e6f76081e47a9fc/pkg/proto/configuration/bb_worker/bb_worker.proto
+  runnerConf: |-
+    {
+      buildDirectoryPath: '/worker/build',
+      grpcServers: [{
+        listenPaths: ['/worker/runner'],
+        authenticationPolicy: { allow: {} },
+      }],
+    }
+
+commonConf: |-
+  {
+    blobstore: {
+      contentAddressableStorage: {
+        sharding: {
+          hashInitialization: 11946695773637837490,
+          shards: [
+            {
+              backend: { grpc: { address: 'storage-0.storage.buildbarn:8981' } },
+              weight: 1,
+            },
+            {
+              backend: { grpc: { address: 'storage-1.storage.buildbarn:8981' } },
+              weight: 1,
+            },
+          ],
+        },
+      },
+      actionCache: {
+        completenessChecking: {
+          sharding: {
+            hashInitialization: 14897363947481274433,
+            shards: [
+              {
+                backend: { grpc: { address: 'storage-0.storage.buildbarn:8981' } },
+                weight: 1,
+              },
+              {
+                backend: { grpc: { address: 'storage-1.storage.buildbarn:8981' } },
+                weight: 1,
+              },
+            ],
+          },
+        },
+      },
+    },
+    # Remember to set your browserUrl to the ingress of the browser deployment
+    # browserUrl: 'http://address-of-bb-browser-ingress:80',
+    maximumMessageSizeBytes: 16 * 1024 * 1024,
+    httpListenAddress: ':80'
+  }

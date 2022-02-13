@@ -1,0 +1,12 @@
+{{- if .Values.scheduler.enabled -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "buildbarn.fullname" (list . "scheduler") }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "buildbarn.labels" (list . "scheduler") | nindent 4 }}
+data:
+  scheduler.jsonnet: |-
+    {{- .Values.scheduler.conf | nindent 4 }}
+{{- end }}

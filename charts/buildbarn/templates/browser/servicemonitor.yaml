@@ -1,0 +1,18 @@
+{{- if .Values.browser.serviceMonitor.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "buildbarn.fullname" (list . "browser") }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "buildbarn.labels" (list . "browser") | nindent 4 }}
+  {{- if .Values.browser.serviceMonitor.additionalLabels }}
+    {{- toYaml .Values.browser.serviceMonitor.additionalLabels | nindent 4 }}
+  {{- end }}
+spec:
+  endpoints:
+    - port: {{ .Values.browser.service.name }}
+  selector:
+    matchLabels:
+      {{- include "buildbarn.selectorLabels" (list . "browser") | nindent 6 }}
+{{- end }}

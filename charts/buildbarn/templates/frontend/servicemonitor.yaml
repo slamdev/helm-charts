@@ -1,0 +1,18 @@
+{{- if .Values.frontend.serviceMonitor.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "buildbarn.fullname" (list . "frontend") }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "buildbarn.labels" (list . "frontend") | nindent 4 }}
+  {{- if .Values.frontend.serviceMonitor.additionalLabels }}
+    {{- toYaml .Values.frontend.serviceMonitor.additionalLabels | nindent 4 }}
+  {{- end }}
+spec:
+  endpoints:
+    - port: {{ .Values.frontend.service.http.name }}
+  selector:
+    matchLabels:
+      {{- include "buildbarn.selectorLabels" (list . "frontend") | nindent 6 }}
+{{- end }}

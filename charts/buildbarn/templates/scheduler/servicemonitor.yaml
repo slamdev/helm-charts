@@ -1,0 +1,18 @@
+{{- if .Values.scheduler.serviceMonitor.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "buildbarn.fullname" (list . "scheduler") }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "buildbarn.labels" (list . "scheduler") | nindent 4 }}
+  {{- if .Values.scheduler.serviceMonitor.additionalLabels }}
+    {{- toYaml .Values.scheduler.serviceMonitor.additionalLabels | nindent 4 }}
+  {{- end }}
+spec:
+  endpoints:
+    - port: {{ .Values.scheduler.service.http.name }}
+  selector:
+    matchLabels:
+      {{- include "buildbarn.selectorLabels" (list . "scheduler") | nindent 6 }}
+{{- end }}

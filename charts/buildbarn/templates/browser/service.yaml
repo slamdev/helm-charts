@@ -1,0 +1,17 @@
+{{- if .Values.browser.enabled -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "buildbarn.fullname" (list . "browser") }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "buildbarn.labels" (list . "browser") | nindent 4 }}
+spec:
+  type: {{ .Values.browser.service.type }}
+  ports:
+    - name: {{ .Values.browser.service.name }}
+      port: {{ .Values.browser.service.port }}
+      targetPort: http
+  selector:
+    {{- include "buildbarn.selectorLabels" (list . "browser") | nindent 4 }}
+{{- end }}
