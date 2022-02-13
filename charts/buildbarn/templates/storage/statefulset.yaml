@@ -1,0 +1,111 @@
+{{- if .Values.storage.enabled -}}
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "buildbarn.fullname" (list . "storage") }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "buildbarn.labels" (list . "storage") | nindent 4 }}
+spec:
+  replicas: {{ .Values.storage.replicaCount }}
+  serviceName: {{ include "buildbarn.fullname" (list . "storage") }}
+  selector:
+    matchLabels:
+      {{- include "buildbarn.selectorLabels" (list . "storage") | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "buildbarn.selectorLabels" (list . "storage") | nindent 8 }}
+      annotations:
+        checksum/common-config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        checksum/storage-config: {{ include (print $.Template.BasePath "/storage/configmap.yaml") . | sha256sum }}
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      serviceAccountName: {{ include "buildbarn.serviceAccountName" (list . "common") }}
+      securityContext:
+        {{- toYaml .Values.storage.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}-storage
+          args:
+            - /config/storage.jsonnet
+          securityContext:
+            {{- toYaml .Values.storage.securityContext | nindent 12 }}
+          image: "{{ .Values.storage.image.repository }}:{{ .Values.storage.image.tag }}"
+          imagePullPolicy: {{ .Values.storage.image.pullPolicy }}
+          ports:
+            - name: http-metrics
+              containerPort: {{ .Values.containerMetricsPort }}
+              protocol: TCP
+            - name: grpc
+              containerPort: {{ .Values.storage.containerGrpcPort }}
+              protocol: TCP
+          livenessProbe:
+            {{- toYaml .Values.storage.livenessProbe | nindent 12 }}
+          readinessProbe:
+            {{- toYaml .Values.storage.readinessProbe | nindent 12 }}
+          resources:
+            {{- toYaml .Values.storage.resources | nindent 12 }}
+        {{- with .Values.storage.env }}
+          env:
+            {{- toYaml . | nindent 12 }}
+        {{- end }}
+          volumeMounts:
+            - name: {{ include "buildbarn.fullname" (list . "storage") }}
+              mountPath: /config/
+              readOnly: true
+            - name: {{ include "buildbarn.fullname" (list . "storage-cas") }}
+              mountPath: /cas
+            - name: {{ include "buildbarn.fullname" (list . "storage-ac") }}
+              mountPath: /ac
+        {{- with .Values.storage.volumeMounts }}
+            {{- toYaml . | nindent 12 }}
+        {{- end }}
+      volumes:
+        - name: {{ include "buildbarn.fullname" (list . "storage") }}
+          projected:
+            sources:
+              - configMap:
+                  name: {{ include "buildbarn.fullname" (list . "storage") }}
+                  items:
+                    - key: storage.jsonnet
+                      path: storage.jsonnet
+              - configMap:
+                  name: {{ include "buildbarn.fullname" (list . "common") }}
+                  items:
+                    - key: common.libsonnet
+                      path: common.libsonnet
+    {{- with .Values.storage.volumes }}
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.storage.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.storage.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.storage.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+  volumeClaimTemplates:
+    - metadata:
+        name: {{ include "buildbarn.fullname" (list . "storage-cas") }}
+        labels:
+          {{- include "buildbarn.labels" (list . "storage") | nindent 10 }}
+      spec:
+        {{- .Values.storage.volumeClaims.cas | toYaml | nindent 8 }}
+    - metadata:
+        name: {{ include "buildbarn.fullname" (list . "storage-ac") }}
+        labels:
+          {{- include "buildbarn.labels" (list . "storage") | nindent 10 }}
+      spec:
+        {{- .Values.storage.volumeClaims.ac | toYaml | nindent 8 }}
+  {{- with .Values.storage.volumeClaims.additional }}
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+{{- end }}

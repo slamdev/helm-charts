@@ -38,6 +38,9 @@ spec:
             - name: http
               containerPort: {{ .Values.browser.containerPort }}
               protocol: TCP
+            - name: http-metrics
+              containerPort: {{ .Values.containerMetricsPort }}
+              protocol: TCP
           livenessProbe:
             {{- toYaml .Values.browser.livenessProbe | nindent 12 }}
           readinessProbe:

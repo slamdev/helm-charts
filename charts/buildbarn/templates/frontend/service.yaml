@@ -9,9 +9,6 @@ metadata:
 spec:
   type: {{ .Values.frontend.service.type }}
   ports:
-    - name: {{ .Values.frontend.service.http.name }}
-      port: {{ .Values.frontend.service.http.port }}
-      targetPort: http
     - name: {{ .Values.frontend.service.grpc.name }}
       port: {{ .Values.frontend.service.grpc.port }}
       targetPort: grpc

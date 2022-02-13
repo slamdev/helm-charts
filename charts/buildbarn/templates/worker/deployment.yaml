@@ -28,12 +28,14 @@ spec:
         {{- toYaml .Values.worker.podSecurityContext | nindent 8 }}
       initContainers:
         - name: {{ .Chart.Name }}-worker-runner-installer
-          image: "{{ .Values.worker.image.runnerInstaller.repository }}:{{ .Values.worker.image.runnerInstaller.tag }}"
+          image: "{{ .Values.worker.runnerInstallerContainer.image.repository }}:{{ .Values.worker.runnerInstallerContainer.image.tag }}"
+          imagePullPolicy: {{ .Values.worker.runnerInstallerContainer.image.pullPolicy }}
           volumeMounts:
             - name: {{ include "buildbarn.fullname" (list . "worker-runner") }}
               mountPath: /bb/
         - name: {{ .Chart.Name }}-worker-volume-init
-          image: busybox:1.31.1-uclibc
+          image: "{{ .Values.worker.volumeInitContainer.image.repository }}:{{ .Values.worker.volumeInitContainer.image.tag }}"
+          imagePullPolicy: {{ .Values.worker.volumeInitContainer.image.pullPolicy }}
           command:
             - sh
             - -c
@@ -50,8 +52,8 @@ spec:
           image: "{{ .Values.worker.workerContainer.image.repository }}:{{ .Values.worker.workerContainer.image.tag }}"
           imagePullPolicy: {{ .Values.worker.workerContainer.image.pullPolicy }}
           ports:
-            - name: http
-              containerPort: {{ .Values.worker.workerContainer.containerPort }}
+            - name: http-metrics
+              containerPort: {{ .Values.containerMetricsPort }}
               protocol: TCP
           livenessProbe:
             {{- toYaml .Values.worker.workerContainer.livenessProbe | nindent 12 }}
@@ -97,7 +99,7 @@ spec:
               mountPath: /config/
               readOnly: true
             - name: {{ include "buildbarn.fullname" (list . "worker-runner") }}
-              mountPath: /worker
+              mountPath: /bb
               readOnly: true
             - name: {{ include "buildbarn.fullname" (list . "worker-worker") }}
               mountPath: /worker
@@ -118,7 +120,7 @@ spec:
                     - key: worker.jsonnet
                       path: worker.jsonnet
                     - key: runner.jsonnet
-                      path: runnerr.jsonnet
+                      path: runner.jsonnet
               - configMap:
                   name: {{ include "buildbarn.fullname" (list . "common") }}
                   items:

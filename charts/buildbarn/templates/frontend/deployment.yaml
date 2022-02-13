@@ -32,14 +32,14 @@ spec:
             - /config/frontend.jsonnet
           securityContext:
             {{- toYaml .Values.frontend.securityContext | nindent 12 }}
-          image: "{{ .Values.scheduler.image.repository }}:{{ .Values.scheduler.image.tag }}"
+          image: "{{ .Values.storage.image.repository }}:{{ .Values.storage.image.tag }}"
           imagePullPolicy: {{ .Values.frontend.image.pullPolicy }}
           ports:
-            - name: http
-              containerPort: {{ .Values.frontend.containerHttpPort }}
-              protocol: TCP
             - name: grpc
               containerPort: {{ .Values.frontend.containerGrpcPort }}
+              protocol: TCP
+            - name: http-metrics
+              containerPort: {{ .Values.containerMetricsPort }}
               protocol: TCP
           livenessProbe:
             {{- toYaml .Values.frontend.livenessProbe | nindent 12 }}

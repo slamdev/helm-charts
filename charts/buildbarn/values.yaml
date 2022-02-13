@@ -13,9 +13,12 @@ serviceAccount:
   # serviceAccount.name -- the name of the service account to use; if not set and create is true, a name is generated using the fullname template
   name:
 
+# browser.containerMetricsPort -- metrics port exposed by container
+containerMetricsPort: 8080
+
 browser:
   # browser.enabled -- enable browser component
-  enabled: false
+  enabled: true
   # browser.replicaCount -- number of replicas for the deployment.
   replicaCount: 1
   image:
@@ -81,16 +84,16 @@ browser:
   livenessProbe:
     httpGet:
       # browser.livenessProbe.httpGet.path -- path for liveness probe
-      path: /
+      path: /-/healthy
       # browser.livenessProbe.httpGet.port -- port for liveness probe
-      port: http
+      port: http-metrics
 
   readinessProbe:
     httpGet:
       # browser.readinessProbe.httpGet.path -- path for readiness probe
-      path: /
+      path: /-/healthy
       # browser.readinessProbe.httpGet.port -- port for readiness probe
-      port: http
+      port: http-metrics
 
   # browser.env -- environment variables for the deployment
   env: []
@@ -115,24 +118,26 @@ browser:
     #    hosts:
     #      - chart-example.local
 
-  serviceMonitor:
-    # browser.serviceMonitor.enabled -- ServiceMonitor CRD is created for a prometheus operator
+  podMonitor:
+    # browser.podMonitor.enabled -- PodMonitor CRD is created for a prometheus operator
     enabled: false
-    # browser.serviceMonitor.additionalLabels -- additional labels for service monitor
+    # browser.podMonitor.additionalLabels -- additional labels for pod monitor
     additionalLabels: { }
 
   # browser.conf -- config https://github.com/buildbarn/bb-browser/blob/547095cf8540c671b0f2291b1e6f76081e47a9fc/pkg/proto/configuration/bb_browser/bb_browser.proto
   conf: |-
     local common = import 'common.libsonnet';
     {
+      global: common.global,
       blobstore: common.blobstore,
       maximumMessageSizeBytes: common.maximumMessageSizeBytes,
       listenAddress: common.httpListenAddress,
+      authorizer: common.allowAllauthorizerConfiguration,
     }
 
 frontend:
   # frontend.enabled -- enable frontend component
-  enabled: false
+  enabled: true
   # frontend.replicaCount -- number of replicas for the deployment.
   replicaCount: 1
   image:
@@ -160,11 +165,6 @@ frontend:
   service:
     # frontend.service.type -- service type
     type: ClusterIP
-    http:
-      # frontend.service.http.name -- http service name
-      name: http
-      # frontend.service.http.port -- http service port
-      port: 80
     grpc:
       # frontend.service.grpc.name -- grpc service name
       name: grpc
@@ -202,47 +202,57 @@ frontend:
   livenessProbe:
     httpGet:
       # frontend.livenessProbe.httpGet.path -- path for liveness probe
-      path: /
+      path: /-/healthy
       # frontend.livenessProbe.httpGet.port -- port for liveness probe
-      port: http
+      port: http-metrics
 
   readinessProbe:
     httpGet:
       # frontend.readinessProbe.httpGet.path -- path for readiness probe
-      path: /
+      path: /-/healthy
       # frontend.readinessProbe.httpGet.port -- port for readiness probe
-      port: http
+      port: http-metrics
 
   # frontend.env -- environment variables for the deployment
   env: []
   # - name: SAMPLE
   #   value: text
 
-  serviceMonitor:
-    # frontend.serviceMonitor.enabled -- ServiceMonitor CRD is created for a prometheus operator
+  podMonitor:
+    # frontend.podMonitor.enabled -- PodMonitor CRD is created for a prometheus operator
     enabled: false
-    # frontend.serviceMonitor.additionalLabels -- additional labels for service monitor
+    # frontend.podMonitor.additionalLabels -- additional labels for pod monitor
     additionalLabels: { }
 
-  # frontend.conf -- config https://github.com/buildbarn/bb-frontend/blob/547095cf8540c671b0f2291b1e6f76081e47a9fc/pkg/proto/configuration/bb_frontend/bb_frontend.proto
+  # frontend.conf -- config https://github.com/buildbarn/bb-storage/blob/e5ee29d82ea7f458ad720a6ade4480e5838ab495/pkg/proto/configuration/bb_storage/bb_storage.proto
   conf: |-
     local common = import 'common.libsonnet';
     {
+      global: common.global,
       blobstore: common.blobstore,
-      httpListenAddress: common.httpListenAddress,
       grpcServers: [{
         listenAddresses: [':8980'],
         authenticationPolicy: { allow: {} },
       }],
       schedulers: {
-        '': { endpoint: { address: 'scheduler:8982' } },
+        '': { endpoint: { address: 'buildbarn-scheduler:8982' } },
       },
       maximumMessageSizeBytes: common.maximumMessageSizeBytes,
+      contentAddressableStorageAuthorizers: {
+        get: common.allowAllauthorizerConfiguration,
+        put: common.allowAllauthorizerConfiguration,
+        findMissing: common.allowAllauthorizerConfiguration,
+      },
+      actionCacheAuthorizers: {
+        get: common.allowAllauthorizerConfiguration,
+        put: common.allowAllauthorizerConfiguration,
+      },
+      execute_authorizer: common.allowAllauthorizerConfiguration,
     }
 
 scheduler:
   # scheduler.enabled -- enable scheduler component
-  enabled: false
+  enabled: true
   # scheduler.replicaCount -- number of replicas for the deployment.
   replicaCount: 1
   image:
@@ -283,12 +293,12 @@ scheduler:
       port: 80
     grpcClient:
       # scheduler.service.grpcClient.name -- grpc client service name
-      name: grpc
+      name: grpc-client
       # scheduler.service.grpcClient.port -- grpc client service port
       port: 8982
     grpcWorker:
       # scheduler.service.grpcWorker.name -- grpc worker service name
-      name: grpc
+      name: grpc-worker
       # scheduler.service.grpcWorker.port -- grpc worker service port
       port: 8983
 
@@ -323,33 +333,35 @@ scheduler:
   livenessProbe:
     httpGet:
       # scheduler.livenessProbe.httpGet.path -- path for liveness probe
-      path: /
+      path: /-/healthy
       # scheduler.livenessProbe.httpGet.port -- port for liveness probe
-      port: http
+      port: http-metrics
 
   readinessProbe:
     httpGet:
       # scheduler.readinessProbe.httpGet.path -- path for readiness probe
-      path: /
+      path: /-/healthy
       # scheduler.readinessProbe.httpGet.port -- port for readiness probe
-      port: http
+      port: http-metrics
 
   # scheduler.env -- environment variables for the deployment
   env: []
   # - name: SAMPLE
   #   value: text
 
-  serviceMonitor:
-    # scheduler.serviceMonitor.enabled -- ServiceMonitor CRD is created for a prometheus operator
+  podMonitor:
+    # scheduler.podMonitor.enabled -- PodMonitor CRD is created for a prometheus operator
     enabled: false
-    # scheduler.serviceMonitor.additionalLabels -- additional labels for service monitor
+    # scheduler.podMonitor.additionalLabels -- additional labels for pod monitor
     additionalLabels: { }
 
-  # scheduler.conf -- config https://github.com/buildbarn/bb-scheduler/blob/547095cf8540c671b0f2291b1e6f76081e47a9fc/pkg/proto/configuration/bb_scheduler/bb_scheduler.proto
+  # scheduler.conf -- config https://github.com/buildbarn/bb-remote-execution/blob/74b54e3e72c8ae507bbee1efe18aad1fbbe8de9e/pkg/proto/configuration/bb_scheduler/bb_scheduler.proto
   conf: |-
     local common = import 'common.libsonnet';
     {
-      httpListenAddress: common.httpListenAddress,
+      global: common.global,
+      admin_http_listen_address: ':80',
+      execute_authorizer: common.allowAllauthorizerConfiguration,
       clientGrpcServers: [{
         listenAddresses: [':8982'],
         authenticationPolicy: { allow: {} },
@@ -361,6 +373,17 @@ scheduler:
       contentAddressableStorage: common.blobstore.contentAddressableStorage,
       maximumMessageSizeBytes: common.maximumMessageSizeBytes,
       browserUrl: common.browserUrl,
+      action_router: {
+        simple: {
+          platformKeyExtractor: { actionAndCommand: {} },
+          invocationKeyExtractors: [{ toolInvocationId: {} }],
+          initialSizeClassAnalyzer: {
+            defaultExecutionTimeout: '1800s',
+            maximumExecutionTimeout: '7200s',
+          },
+        },
+      },
+      platformQueueWithNoWorkersTimeout: '900s', 
     }
 
 worker:
@@ -368,19 +391,24 @@ worker:
   enabled: true
   # worker.replicaCount -- number of replicas for the deployment.
   replicaCount: 1
-  image:
-    # worker.image.pullPolicy -- image pull policy
-    pullPolicy: IfNotPresent
-    runnerInstaller:
-      # worker.image.runnerInstaller.repository -- image repository
+
+  runnerInstallerContainer:
+    image:
+      # worker.runnerInstallerContainer.image.pullPolicy -- image pull policy
+      pullPolicy: IfNotPresent
+      # worker.runnerInstallerContainer.image.repository -- image repository
       repository: buildbarn/bb-runner-installer
-      # worker.image.runnerInstaller.tag -- image tag
+      # worker.runnerInstallerContainer.image.tag -- image tag
       tag: 20220211T141613Z-74b54e3
-    worker:
-      # worker.image.worker.repository -- image repository
-      repository: buildbarn/bb-worker
-      # worker.image.worker.tag -- image tag
-      tag: 20220211T141613Z-74b54e3
+
+  volumeInitContainer:
+    image:
+      # worker.volumeInitContainer.image.pullPolicy -- image pull policy
+      pullPolicy: IfNotPresent
+      # worker.volumeInitContainer.image.repository -- image repository
+      repository: busybox
+      # worker.volumeInitContainer.image.tag -- image tag
+      tag: 1.31.1-uclibc
 
   workerContainer:
     image:
@@ -399,22 +427,19 @@ worker:
     # runAsNonRoot: true
     # runAsUser: 1000
 
-    # worker.workerContainer.containerPort -- port exposed by container
-    containerPort: 80
-
     livenessProbe:
       httpGet:
         # worker.workerContainer.livenessProbe.httpGet.path -- path for liveness probe
-        path: /
+        path: /-/healthy
         # worker.workerContainer.livenessProbe.httpGet.port -- port for liveness probe
-        port: http
+        port: http-metrics
 
     readinessProbe:
       httpGet:
         # worker.workerContainer.readinessProbe.httpGet.path -- path for readiness probe
-        path: /
+        path: /-/healthy
         # worker.workerContainer.readinessProbe.httpGet.port -- port for readiness probe
-        port: http
+        port: http-metrics
 
     # worker.workerContainer.resources -- custom resource configuration
     resources: { }
@@ -429,10 +454,10 @@ worker:
     image:
       # worker.runnerContainer.image.pullPolicy -- image pull policy
       pullPolicy: IfNotPresent
-      # worker.runnerContainer.image.repository -- image repository
-      repository: l.gcr.io/google/rbe-ubuntu16-04
+      # worker.runnerContainer.image.repository -- image repository (default is https://console.cloud.google.com/marketplace/product/google/rbe-ubuntu18-04)
+      repository: l.gcr.io/google/rbe-ubuntu18-04
       # worker.runnerContainer.image.tag -- image tag
-      tag: latest@sha256:b516a2d69537cb40a7c6a7d92d0008abb29fba8725243772bdaf2c83f1be2272
+      tag: latest@sha256:48b67b41118dbcdfc265e7335f454fbefa62681ab8d47200971fc7a52fb32054
     # worker.runnerContainer.securityContext -- specifies security settings for a container
     securityContext:
       runAsUser: 65534
@@ -450,14 +475,6 @@ worker:
   # worker.podSecurityContext -- specifies security settings for a pod
   podSecurityContext: {}
   # fsGroup: 2000
-
-  service:
-    # worker.service.type -- service type
-    type: ClusterIP
-    # worker.service.name -- service name
-    name: http
-    # worker.service.port -- service port
-    port: 80
 
   # worker.nodeSelector -- node for scheduler pod assignment
   nodeSelector: {}
@@ -483,22 +500,21 @@ worker:
   # - name: SAMPLE
   #   value: text
 
-  serviceMonitor:
-    # worker.serviceMonitor.enabled -- ServiceMonitor CRD is created for a prometheus operator
+  podMonitor:
+    # worker.podMonitor.enabled -- PodMonitor CRD is created for a prometheus operator
     enabled: false
-    # worker.serviceMonitor.additionalLabels -- additional labels for service monitor
+    # worker.podMonitor.additionalLabels -- additional labels for pod monitor
     additionalLabels: { }
 
-  # worker.workerConf -- config https://github.com/buildbarn/bb-worker/blob/547095cf8540c671b0f2291b1e6f76081e47a9fc/pkg/proto/configuration/bb_worker/bb_worker.proto
+  # worker.workerConf -- config https://github.com/buildbarn/bb-remote-execution/blob/74b54e3e72c8ae507bbee1efe18aad1fbbe8de9e/pkg/proto/configuration/bb_worker/bb_worker.proto
   workerConf: |-
     local common = import 'common.libsonnet';
     {
+      global: common.global,
       blobstore: common.blobstore,
       maximumMessageSizeBytes: common.maximumMessageSizeBytes,
-      scheduler: { address: 'scheduler:8983' },
-      httpListenAddress: common.httpListenAddress,
+      scheduler: { address: 'buildbarn-scheduler:8983' },
       maximumMemoryCachedDirectories: 1000,
-      instanceName: 'remote-execution',
       browserUrl: common.browserUrl,
       buildDirectories: [{
         native: {
@@ -506,19 +522,18 @@ worker:
           cacheDirectoryPath: '/worker/cache',
           maximumCacheFileCount: 10000,
           maximumCacheSizeBytes: 1024 * 1024 * 1024,
-          cacheReplacementPolicy: 'LEAST_RECENTLY_USED',
+          cacheReplacementPolicy: 'RANDOM_REPLACEMENT',
         },
         runners: [{
           endpoint: { address: 'unix:///worker/runner' },
+          instanceNamePrefix: 'remote-execution',
           concurrency: 8,
           platform: {
             properties: [
               { name: 'OSFamily', value: 'Linux' },
-              { name: 'container-image', value: 'docker://marketplace.gcr.io/google/rbe-ubuntu16-04@sha256:b516a2d69537cb40a7c6a7d92d0008abb29fba8725243772bdaf2c83f1be2272' },
+              { name: 'container-image', value: 'docker://marketplace.gcr.io/google/rbe-ubuntu18-04@sha256:48b67b41118dbcdfc265e7335f454fbefa62681ab8d47200971fc7a52fb32054' },
             ],
           },
-          defaultExecutionTimeout: '1800s',
-          maximumExecutionTimeout: '3600s',
           workerId: {
             'pod': std.extVar("POD_NAME"),
             'node': std.extVar("NODE_NAME")
@@ -526,29 +541,230 @@ worker:
         }],
       }],
     }
-  # worker.runnerConf -- config https://github.com/buildbarn/bb-worker/blob/547095cf8540c671b0f2291b1e6f76081e47a9fc/pkg/proto/configuration/bb_worker/bb_worker.proto
+  # worker.runnerConf -- config https://github.com/buildbarn/bb-remote-execution/blob/74b54e3e72c8ae507bbee1efe18aad1fbbe8de9e/pkg/proto/configuration/bb_runner/bb_runner.proto
   runnerConf: |-
     {
       buildDirectoryPath: '/worker/build',
+      set_tmpdir_environment_variable: true,
       grpcServers: [{
         listenPaths: ['/worker/runner'],
         authenticationPolicy: { allow: {} },
       }],
     }
 
+storage:
+  # storage.enabled -- enable storage component
+  enabled: true
+  # storage.replicaCount -- number of replicas for the deployment.
+  replicaCount: 2
+  image:
+    # storage.image.repository -- image repository
+    repository: buildbarn/bb-storage
+    # storage.image.tag -- image tag
+    tag: 20220211T114844Z-e5ee29d
+    # storage.image.pullPolicy -- image pull policy
+    pullPolicy: IfNotPresent
+
+  # storage.podSecurityContext -- specifies security settings for a pod
+  podSecurityContext: {}
+  # fsGroup: 2000
+
+  # storage.securityContext -- specifies security settings for a container
+  securityContext: {}
+    # capabilities:
+    #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+  # storage.containerGrpcPort -- grpc port exposed by container
+  containerGrpcPort: 8981
+
+  service:
+    # storage.service.type -- service type
+    type: ClusterIP
+    grpc:
+      # storage.service.grpc.name -- grpc service name
+      name: grpc
+      # storage.service.grpc.port -- grpc service port
+      port: 8981
+
+  # storage.resources -- custom resource configuration
+  resources: {}
+    # limits:
+    #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+  # storage.nodeSelector -- node for scheduler pod assignment
+  nodeSelector: {}
+
+  # storage.tolerations -- tolerations for scheduler pod assignment
+  tolerations: []
+
+  # storage.affinity -- affinity for scheduler pod assignment
+  affinity: {}
+
+  # storage.volumeMounts -- volume mounts
+  volumeMounts: []
+  # - name: cache
+  #   mountPath: /data/cache
+
+  # storage.volumes -- volumes
+  volumes: []
+  # - name: cache
+  #   emptyDir: {}
+
+  volumeClaims:
+    # storage.volumeClaims.cas -- cas volume claim spec
+    cas:
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: 12Gi
+    # storage.volumeClaims.ac -- ac volume claim spec
+    ac:
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: 1Gi
+    # storage.volumeClaims.additional -- additional volume claims
+    additional: []
+
+  livenessProbe:
+    httpGet:
+      # storage.livenessProbe.httpGet.path -- path for liveness probe
+      path: /-/healthy
+      # storage.livenessProbe.httpGet.port -- port for liveness probe
+      port: http-metrics
+
+  readinessProbe:
+    httpGet:
+      # storage.readinessProbe.httpGet.path -- path for readiness probe
+      path: /-/healthy
+      # storage.readinessProbe.httpGet.port -- port for readiness probe
+      port: http-metrics
+
+  # storage.env -- environment variables for the deployment
+  env: []
+  # - name: SAMPLE
+  #   value: text
+
+  podMonitor:
+    # storage.podMonitor.enabled -- PodMonitor CRD is created for a prometheus operator
+    enabled: false
+    # storage.podMonitor.additionalLabels -- additional labels for pod monitor
+    additionalLabels: { }
+
+  # storage.conf -- config https://github.com/buildbarn/bb-storage/blob/e5ee29d82ea7f458ad720a6ade4480e5838ab495/pkg/proto/configuration/bb_storage/bb_storage.proto
+  conf: |-
+    local common = import 'common.libsonnet';
+    {
+      global: common.global,
+      blobstore: {
+        contentAddressableStorage: {
+          'local': {
+            keyLocationMapOnBlockDevice: {
+              file: {
+                path: '/cas/key_location_map',
+                sizeBytes: 16 * 1024 * 1024,
+              },
+            },
+            keyLocationMapMaximumGetAttempts: 8,
+            keyLocationMapMaximumPutAttempts: 32,
+            oldBlocks: 8,
+            currentBlocks: 24,
+            newBlocks: 3,
+            blocksOnBlockDevice: {
+              source: {
+                file: {
+                  path: '/cas/blocks',
+                  sizeBytes: 10 * 1024 * 1024 * 1024,
+                },
+              },
+              spareBlocks: 3,
+            },
+            persistent: {
+              stateDirectoryPath: '/cas',
+              minimumEpochInterval: '300s',
+            },
+          },
+        },
+        actionCache: {
+          completenessChecking: {
+            'local': {
+              keyLocationMapOnBlockDevice: {
+                file: {
+                  path: '/ac/key_location_map',
+                  sizeBytes: 1024 * 1024,
+                },
+              },
+              keyLocationMapMaximumGetAttempts: 8,
+              keyLocationMapMaximumPutAttempts: 32,
+              oldBlocks: 8,
+              currentBlocks: 24,
+              newBlocks: 1,
+              blocksOnBlockDevice: {
+                source: {
+                  file: {
+                    path: '/ac/blocks',
+                    sizeBytes: 100 * 1024 * 1024,
+                  },
+                },
+                spareBlocks: 3,
+              },
+              persistent: {
+                stateDirectoryPath: '/ac',
+                minimumEpochInterval: '300s',
+              },
+            },
+          },
+        },
+      },
+      grpcServers: [{
+        listenAddresses: [':8981'],
+        authenticationPolicy: common.allowAllauthorizerConfiguration,
+      }],
+      contentAddressableStorageAuthorizers: {
+        get: common.allowAllauthorizerConfiguration,
+        put: common.allowAllauthorizerConfiguration,
+        findMissing: common.allowAllauthorizerConfiguration,
+      },
+      actionCacheAuthorizers: {
+        get: common.allowAllauthorizerConfiguration,
+        put: common.allowAllauthorizerConfiguration,
+      },
+      executeAuthorizer: common.allowAllauthorizerConfiguration,
+      maximumMessageSizeBytes: common.maximumMessageSizeBytes,
+    }
+
 commonConf: |-
   {
+    global: {
+      diagnostics_http_server: {
+        listen_address: ':8080',
+        enable_prometheus: true,
+      },
+    },
+    allowAllauthorizerConfiguration: {
+      allow: {},
+    },
     blobstore: {
       contentAddressableStorage: {
         sharding: {
           hashInitialization: 11946695773637837490,
           shards: [
             {
-              backend: { grpc: { address: 'storage-0.storage.buildbarn:8981' } },
+              backend: { grpc: { address: 'buildbarn-storage-0.buildbarn-storage:8981' } },
               weight: 1,
             },
             {
-              backend: { grpc: { address: 'storage-1.storage.buildbarn:8981' } },
+              backend: { grpc: { address: 'buildbarn-storage-1.buildbarn-storage:8981' } },
               weight: 1,
             },
           ],
@@ -560,11 +776,11 @@ commonConf: |-
             hashInitialization: 14897363947481274433,
             shards: [
               {
-                backend: { grpc: { address: 'storage-0.storage.buildbarn:8981' } },
+                backend: { grpc: { address: 'buildbarn-storage-0.buildbarn-storage:8981' } },
                 weight: 1,
               },
               {
-                backend: { grpc: { address: 'storage-1.storage.buildbarn:8981' } },
+                backend: { grpc: { address: 'buildbarn-storage-1.buildbarn-storage:8981' } },
                 weight: 1,
               },
             ],
@@ -573,7 +789,8 @@ commonConf: |-
       },
     },
     # Remember to set your browserUrl to the ingress of the browser deployment
-    # browserUrl: 'http://address-of-bb-browser-ingress:80',
+    browserUrl: 'http://buildbarn-storage:80',
     maximumMessageSizeBytes: 16 * 1024 * 1024,
     httpListenAddress: ':80'
   }
+
