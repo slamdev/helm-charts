@@ -323,6 +323,22 @@ entries:
     urls:
     - https://github.com/slamdev/helm-charts/releases/download/bazel-remote-0.0.1/bazel-remote-0.0.1.tgz
     version: 0.0.1
+  buildbarn:
+  - apiVersion: v2
+    appVersion: "2022-02-12"
+    created: "2022-02-14T06:36:09.476087778Z"
+    description: Helm chart to deploy [buildbarn](https://github.com/buildbarn).
+    digest: 9d121dc9477f78b774757d2b2007ff56cdd862074fa904338280fa81991c3da8
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/buildbarn
+    icon: https://avatars.githubusercontent.com/u/47299502?s=200&v=4
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: buildbarn
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/buildbarn-0.0.1/buildbarn-0.0.1.tgz
+    version: 0.0.1
   config-connector-templater:
   - apiVersion: v2
     appVersion: 0.0.3
@@ -2870,4 +2886,4 @@ entries:
     urls:
     - https://github.com/slamdev/helm-charts/releases/download/zeppelin-0.0.1/zeppelin-0.0.1.tgz
     version: 0.0.1
-generated: "2022-02-04T13:52:43.238187392Z"
+generated: "2022-02-14T06:36:09.478129913Z"
