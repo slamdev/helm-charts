@@ -1,0 +1,12 @@
+{{- if .Values.storage.enabled -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "buildbarn.fullname" (list . "storage") }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "buildbarn.labels" (list . "storage") | nindent 4 }}
+data:
+  storage.jsonnet: |-
+    {{- .Values.storage.conf | nindent 4 }}
+{{- end }}

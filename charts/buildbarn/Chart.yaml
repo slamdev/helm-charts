@@ -1,0 +1,12 @@
+apiVersion: v2
+name: buildbarn
+description: |-
+  Helm chart to deploy [buildbarn](https://github.com/buildbarn).
+type: application
+version: 0.0.1
+appVersion: 2022-02-12
+home: https://github.com/slamdev/helm-charts/tree/master/charts/buildbarn
+icon: https://avatars.githubusercontent.com/u/47299502?s=200&v=4
+maintainers:
+  - name: slamdev
+    email: valentin.fedoskin@gmail.com

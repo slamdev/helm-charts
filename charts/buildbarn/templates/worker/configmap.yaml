@@ -1,0 +1,14 @@
+{{- if .Values.worker.enabled -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "buildbarn.fullname" (list . "worker") }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "buildbarn.labels" (list . "worker") | nindent 4 }}
+data:
+  worker.jsonnet: |-
+    {{- .Values.worker.workerConf | nindent 4 }}
+  runner.jsonnet: |-
+    {{- .Values.worker.runnerConf | nindent 4 }}
+{{- end }}

@@ -1,0 +1,96 @@
+{{- if .Values.scheduler.enabled -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "buildbarn.fullname" (list . "scheduler") }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "buildbarn.labels" (list . "scheduler") | nindent 4 }}
+spec:
+  replicas: {{ .Values.scheduler.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "buildbarn.selectorLabels" (list . "scheduler") | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "buildbarn.selectorLabels" (list . "scheduler") | nindent 8 }}
+      annotations:
+        checksum/common-config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        checksum/scheduler-config: {{ include (print $.Template.BasePath "/scheduler/configmap.yaml") . | sha256sum }}
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      serviceAccountName: {{ include "buildbarn.serviceAccountName" (list . "common") }}
+      securityContext:
+        {{- toYaml .Values.scheduler.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}-scheduler
+          args:
+            - /config/scheduler.jsonnet
+          securityContext:
+            {{- toYaml .Values.scheduler.securityContext | nindent 12 }}
+          image: "{{ .Values.scheduler.image.repository }}:{{ .Values.scheduler.image.tag }}"
+          imagePullPolicy: {{ .Values.scheduler.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.scheduler.containerHttpPort }}
+              protocol: TCP
+            - name: grpc-client
+              containerPort: {{ .Values.scheduler.containerGrpcClientPort }}
+              protocol: TCP
+            - name: grpc-worker
+              containerPort: {{ .Values.scheduler.containerGrpcWorkerPort }}
+              protocol: TCP
+            - name: http-metrics
+              containerPort: {{ .Values.containerMetricsPort }}
+              protocol: TCP
+          livenessProbe:
+            {{- toYaml .Values.scheduler.livenessProbe | nindent 12 }}
+          readinessProbe:
+            {{- toYaml .Values.scheduler.readinessProbe | nindent 12 }}
+          resources:
+            {{- toYaml .Values.scheduler.resources | nindent 12 }}
+        {{- with .Values.scheduler.env }}
+          env:
+            {{- toYaml . | nindent 12 }}
+        {{- end }}
+          volumeMounts:
+            - name: {{ include "buildbarn.fullname" (list . "scheduler") }}
+              mountPath: /config/
+              readOnly: true
+        {{- with .Values.scheduler.volumeMounts }}
+            {{- toYaml . | nindent 12 }}
+        {{- end }}
+      volumes:
+        - name: {{ include "buildbarn.fullname" (list . "scheduler") }}
+          projected:
+            sources:
+              - configMap:
+                  name: {{ include "buildbarn.fullname" (list . "scheduler") }}
+                  items:
+                    - key: scheduler.jsonnet
+                      path: scheduler.jsonnet
+              - configMap:
+                  name: {{ include "buildbarn.fullname" (list . "common") }}
+                  items:
+                    - key: common.libsonnet
+                      path: common.libsonnet
+    {{- with .Values.scheduler.volumes }}
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.scheduler.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.scheduler.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.scheduler.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+{{- end }}

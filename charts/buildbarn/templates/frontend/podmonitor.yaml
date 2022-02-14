@@ -1,0 +1,18 @@
+{{- if .Values.frontend.podMonitor.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: {{ include "buildbarn.fullname" (list . "frontend") }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "buildbarn.labels" (list . "frontend") | nindent 4 }}
+  {{- if .Values.frontend.podMonitor.additionalLabels }}
+    {{- toYaml .Values.frontend.podMonitor.additionalLabels | nindent 4 }}
+  {{- end }}
+spec:
+  podMetricsEndpoints:
+    - port: http-metrics
+  selector:
+    matchLabels:
+      {{- include "buildbarn.selectorLabels" (list . "frontend") | nindent 6 }}
+{{- end }}

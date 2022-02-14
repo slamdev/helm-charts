@@ -1,0 +1,90 @@
+{{- if .Values.browser.enabled -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "buildbarn.fullname" (list . "browser") }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "buildbarn.labels" (list . "browser") | nindent 4 }}
+spec:
+  replicas: {{ .Values.browser.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "buildbarn.selectorLabels" (list . "browser") | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "buildbarn.selectorLabels" (list . "browser") | nindent 8 }}
+      annotations:
+        checksum/common-config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        checksum/browser-config: {{ include (print $.Template.BasePath "/browser/configmap.yaml") . | sha256sum }}
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      serviceAccountName: {{ include "buildbarn.serviceAccountName" (list . "common") }}
+      securityContext:
+        {{- toYaml .Values.browser.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}-browser
+          args:
+            - /config/browser.jsonnet
+          securityContext:
+            {{- toYaml .Values.browser.securityContext | nindent 12 }}
+          image: "{{ .Values.browser.image.repository }}:{{ .Values.browser.image.tag }}"
+          imagePullPolicy: {{ .Values.browser.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.browser.containerPort }}
+              protocol: TCP
+            - name: http-metrics
+              containerPort: {{ .Values.containerMetricsPort }}
+              protocol: TCP
+          livenessProbe:
+            {{- toYaml .Values.browser.livenessProbe | nindent 12 }}
+          readinessProbe:
+            {{- toYaml .Values.browser.readinessProbe | nindent 12 }}
+          resources:
+            {{- toYaml .Values.browser.resources | nindent 12 }}
+        {{- with .Values.browser.env }}
+          env:
+            {{- toYaml . | nindent 12 }}
+        {{- end }}
+          volumeMounts:
+            - name: {{ include "buildbarn.fullname" (list . "browser") }}
+              mountPath: /config/
+              readOnly: true
+        {{- with .Values.browser.volumeMounts }}
+            {{- toYaml . | nindent 12 }}
+        {{- end }}
+      volumes:
+        - name: {{ include "buildbarn.fullname" (list . "browser") }}
+          projected:
+            sources:
+              - configMap:
+                  name: {{ include "buildbarn.fullname" (list . "browser") }}
+                  items:
+                    - key: browser.jsonnet
+                      path: browser.jsonnet
+              - configMap:
+                  name: {{ include "buildbarn.fullname" (list . "common") }}
+                  items:
+                    - key: common.libsonnet
+                      path: common.libsonnet
+    {{- with .Values.browser.volumes }}
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.browser.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.browser.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.browser.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+{{- end }}

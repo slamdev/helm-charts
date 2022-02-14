@@ -1,0 +1,12 @@
+{{- if .Values.browser.enabled -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "buildbarn.fullname" (list . "browser") }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "buildbarn.labels" (list . "browser") | nindent 4 }}
+data:
+  browser.jsonnet: |-
+    {{- .Values.browser.conf | nindent 4 }}
+{{- end }}

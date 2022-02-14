@@ -1,0 +1,17 @@
+{{- if .Values.frontend.enabled -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "buildbarn.fullname" (list . "frontend") }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "buildbarn.labels" (list . "frontend") | nindent 4 }}
+spec:
+  type: {{ .Values.frontend.service.type }}
+  ports:
+    - name: {{ .Values.frontend.service.grpc.name }}
+      port: {{ .Values.frontend.service.grpc.port }}
+      targetPort: grpc
+  selector:
+    {{- include "buildbarn.selectorLabels" (list . "frontend") | nindent 4 }}
+{{- end }}

@@ -1,0 +1,18 @@
+{{- if .Values.scheduler.podMonitor.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: {{ include "buildbarn.fullname" (list . "scheduler") }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "buildbarn.labels" (list . "scheduler") | nindent 4 }}
+  {{- if .Values.scheduler.podMonitor.additionalLabels }}
+    {{- toYaml .Values.scheduler.podMonitor.additionalLabels | nindent 4 }}
+  {{- end }}
+spec:
+  podMetricsEndpoints:
+    - port: http-metrics
+  selector:
+    matchLabels:
+      {{- include "buildbarn.selectorLabels" (list . "scheduler") | nindent 6 }}
+{{- end }}

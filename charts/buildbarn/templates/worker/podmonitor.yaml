@@ -1,0 +1,18 @@
+{{- if .Values.worker.podMonitor.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: {{ include "buildbarn.fullname" (list . "worker") }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "buildbarn.labels" (list . "worker") | nindent 4 }}
+  {{- if .Values.worker.podMonitor.additionalLabels }}
+    {{- toYaml .Values.worker.podMonitor.additionalLabels | nindent 4 }}
+  {{- end }}
+spec:
+  podMetricsEndpoints:
+    - port: http-metrics
+  selector:
+    matchLabels:
+      {{- include "buildbarn.selectorLabels" (list . "worker") | nindent 6 }}
+{{- end }}

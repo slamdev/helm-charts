@@ -1,0 +1,18 @@
+{{- if .Values.browser.podMonitor.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: {{ include "buildbarn.fullname" (list . "browser") }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "buildbarn.labels" (list . "browser") | nindent 4 }}
+  {{- if .Values.browser.podMonitor.additionalLabels }}
+    {{- toYaml .Values.browser.podMonitor.additionalLabels | nindent 4 }}
+  {{- end }}
+spec:
+  podMetricsEndpoints:
+    - port: http-metrics
+  selector:
+    matchLabels:
+      {{- include "buildbarn.selectorLabels" (list . "browser") | nindent 6 }}
+{{- end }}
