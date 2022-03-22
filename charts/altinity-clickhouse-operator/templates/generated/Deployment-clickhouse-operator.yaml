@@ -32,6 +32,9 @@ spec:
         checksum/files: {{ include (print $.Template.BasePath "/generated/ConfigMap-etc-clickhouse-operator-files.yaml") . | sha256sum }}
         checksum/templatesd-files: {{ include (print $.Template.BasePath "/generated/ConfigMap-etc-clickhouse-operator-templatesd-files.yaml") . | sha256sum }}
         checksum/usersd-files: {{ include (print $.Template.BasePath "/generated/ConfigMap-etc-clickhouse-operator-usersd-files.yaml") . | sha256sum }}
+        {{- if .Values.podAnnotations }}
+        {{- toYaml .Values.podAnnotations | nindent 8 }}
+        {{- end }}
     spec:
     {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
@@ -58,6 +61,18 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.operator.image.repository }}:{{ include "altinity-clickhouse-operator.operator.tag" . }}"
           imagePullPolicy: {{ .Values.operator.image.pullPolicy }}
+          {{- if .Values.operator.command }}
+          command:
+            {{- range $value := .Values.operator.command }}
+            - {{ $value | quote }}
+            {{- end }}
+          {{- end }}
+          {{- if .Values.operator.args }}
+          args:
+            {{- range $value := .Values.operator.args }}
+            - {{ $value | quote }}
+            {{- end }}
+          {{- end }}
           volumeMounts:
             - name: etc-clickhouse-operator-folder
               mountPath: /etc/clickhouse-operator
@@ -126,6 +141,18 @@ spec:
         - name: metrics-exporter
           image: "{{ .Values.metrics.image.repository }}:{{ include "altinity-clickhouse-operator.metrics.tag" . }}"
           imagePullPolicy: {{ .Values.metrics.image.pullPolicy }}
+          {{- if .Values.metrics.command }}
+          command:
+            {{- range $value := .Values.metrics.command }}
+            - {{ $value | quote }}
+            {{- end }}
+          {{- end }}
+          {{- if .Values.metrics.args }}
+          args:
+            {{- range $value := .Values.metrics.args }}
+            - {{ $value | quote }}
+            {{- end }}
+          {{- end }}
           volumeMounts:
             - name: etc-clickhouse-operator-folder
               mountPath: /etc/clickhouse-operator
