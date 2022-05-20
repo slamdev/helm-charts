@@ -43,6 +43,8 @@ service:
   type: ClusterIP
   # service.port -- service port
   port: 80
+  # service.loadBalancerIP -- IP of service load balancer
+  loadBalancerIP: ""
   # service.annotations -- annotations to add to the service
   annotations: {}
 
@@ -90,6 +92,12 @@ volumeMounts:
 volumes:
 #  - name: data
 #    emptyDir: {}
+
+# secret -- secret
+secret:
+  # type: Opaque
+  # data: {}
+  # stringData: {}
 
 # env -- environment variables for the deployment
 env:
