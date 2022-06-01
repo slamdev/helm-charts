@@ -9,7 +9,7 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-    - port: {{ .Values.service.port }}
+    - port: {{ .Values.serviceAdmin.port }}
       targetPort: http-admin
       protocol: TCP
       name: http

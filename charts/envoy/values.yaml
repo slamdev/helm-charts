@@ -1,4 +1,5 @@
 initContainer:
+  enabled: true
   image:
     # initContainer.image.repository -- initContainer image repository
     repository: alpine
@@ -41,12 +42,20 @@ podSecurityContext: {}
 service:
   # service.type -- service type
   type: ClusterIP
-  # service.port -- service port
-  port: 80
+  # service.ports -- list of service ports
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
   # service.loadBalancerIP -- IP of service load balancer
   loadBalancerIP: ""
   # service.annotations -- annotations to add to the service
   annotations: {}
+
+serviceAdmin:
+  # serviceAdmin.port -- port of envoy admin service
+  port: 80
 
 ingress:
   # ingress.enabled -- enables Ingress for envoy
@@ -129,8 +138,11 @@ readinessProbe:
     # readinessProbe.httpGet.port -- port for readiness probe
     port: http-admin
 
-# containerPort -- container port, should match static port_value from config.yaml
-containerPort: 10000
+# containerPorts -- list of container ports, should match static port_value 's from config.yaml
+containerPorts:
+  - name: http
+    containerPort: 10000
+    protocol: TCP
 
 # containerPort -- container port, should match admin port_value from config.yaml
 containerAdminPort: 9901

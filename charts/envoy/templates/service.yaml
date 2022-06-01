@@ -11,11 +11,7 @@ metadata:
 {{- end }}
 spec:
   type: {{ .Values.service.type }}
-  ports:
-    - port: {{ .Values.service.port }}
-      targetPort: http
-      protocol: TCP
-      name: http
+  ports: {{ .Values.service.ports | toYaml | nindent 4 }}
   {{- with .Values.service.loadBalancerIP }}
   loadBalancerIP: {{ . }}
   {{- end }}

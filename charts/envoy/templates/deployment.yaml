@@ -24,6 +24,7 @@ spec:
       serviceAccountName: {{ include "envoy.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+    {{- if .Values.initContainer.enabled  }}
       initContainers:
         - name: preprocess-config
           image: "{{ .Values.initContainer.image.repository }}:{{ .Values.initContainer.image.tag }}"
@@ -42,6 +43,7 @@ spec:
             - name: config-tpl
               mountPath: /opt/envoy.yaml.tpl
               subPath: envoy.yaml
+    {{- end }}
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ include "envoy.tag" . }}"
@@ -53,9 +55,7 @@ spec:
             - {{ . | quote }}
             {{- end }}
           ports:
-            - name: http
-              containerPort: {{ .Values.containerPort }}
-              protocol: TCP
+            {{ .Values.containerPorts | toYaml | nindent 12 }}
             - name: http-admin
               containerPort: {{ .Values.containerAdminPort }}
               protocol: TCP
@@ -77,10 +77,17 @@ spec:
         {{- end }}
       volumes:
         - name: config
+        {{- if .Values.initContainer.enabled }}
           emptyDir: {}
+        {{- else }}
+          configMap:
+            name: {{ include "envoy.fullname" . }}
+        {{- end }}
+      {{- if .Values.initContainer.enabled }}
         - name: config-tpl
           configMap:
             name: {{ include "envoy.fullname" . }}
+      {{- end }}
     {{- with .Values.volumes }}
         {{- toYaml . | nindent 8 }}
     {{- end }}
