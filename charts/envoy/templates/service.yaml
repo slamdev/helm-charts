@@ -16,5 +16,8 @@ spec:
       targetPort: http
       protocol: TCP
       name: http
+  {{- with .Values.service.loadBalancerIP }}
+  loadBalancerIP: {{ . }}
+  {{- end }}
   selector:
     {{- include "envoy.selectorLabels" . | nindent 4 }}
