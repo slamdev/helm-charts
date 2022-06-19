@@ -1,6 +1,6 @@
 # altinity-clickhouse-operator
 
-![Version: 0.0.13](https://img.shields.io/badge/Version-0.0.13-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.18.1](https://img.shields.io/badge/AppVersion-0.18.1-informational?style=flat-square)
+![Version: 0.0.16](https://img.shields.io/badge/Version-0.0.16-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.18.5](https://img.shields.io/badge/AppVersion-0.18.5-informational?style=flat-square)
 
 Helm chart to deploy [altinity-clickhouse-operator](https://github.com/Altinity/clickhouse-operator).
 
@@ -14,7 +14,7 @@ Refer to operator repo for additional information.
 
 | Name | Email | Url |
 | ---- | ------ | --- |
-| slamdev | valentin.fedoskin@gmail.com |  |
+| slamdev | <valentin.fedoskin@gmail.com> |  |
 
 ## Values
 
@@ -29,8 +29,6 @@ Refer to operator repo for additional information.
 | metrics.image.repository | string | `"altinity/metrics-exporter"` | image repository |
 | metrics.image.tag | string | `""` | image tag (chart's appVersion value will be used if not set) |
 | metrics.resources | object | `{}` | custom resource configuration |
-| metrics.command | list | `nil` | command for metrics-exporter container |
-| metrics.args | list | `nil` | args for metrics-exporter container |
 | nameOverride | string | `""` | override name of the chart |
 | nodeSelector | object | `{}` | node for scheduler pod assignment |
 | operator.env | list | `[]` | additional environment variables for the deployment |
@@ -38,9 +36,6 @@ Refer to operator repo for additional information.
 | operator.image.repository | string | `"altinity/clickhouse-operator"` | image repository |
 | operator.image.tag | string | `""` | image tag (chart's appVersion value will be used if not set) |
 | operator.resources | object | `{}` | custom resource configuration |
-| operator.command | list | `nil` | command for operator container |
-| operator.args | list | `nil` | args for operator container |
-| podAnnotations | object | `nil` | additional pod annotations |
 | serviceAccount.annotations | object | `{}` | annotations to add to the service account |
 | serviceAccount.create | bool | `true` | specifies whether a service account should be created |
 | serviceAccount.name | string | `nil` | the name of the service account to use; if not set and create is true, a name is generated using the fullname template |

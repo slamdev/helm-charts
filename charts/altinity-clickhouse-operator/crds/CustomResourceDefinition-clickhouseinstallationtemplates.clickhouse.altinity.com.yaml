@@ -10,7 +10,7 @@ kind: CustomResourceDefinition
 metadata:
   name: clickhouseinstallationtemplates.clickhouse.altinity.com
   labels:
-    clickhouse.altinity.com/chop: 0.18.1
+    clickhouse.altinity.com/chop: 0.18.5
 spec:
   group: clickhouse.altinity.com
   scope: Namespaced
@@ -80,6 +80,11 @@ spec:
           description: Client access endpoint
           priority: 1 # show in wide view
           jsonPath: .status.endpoint
+        - name: age
+          type: date
+          description: Age of the resource
+          # Displayed in all priorities
+          jsonPath: .metadata.creationTimestamp
       subresources:
         status: {}
       schema:

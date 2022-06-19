@@ -7,7 +7,7 @@ kind: CustomResourceDefinition
 metadata:
   name: clickhouseoperatorconfigurations.clickhouse.altinity.com
   labels:
-    clickhouse.altinity.com/chop: 0.18.1
+    clickhouse.altinity.com/chop: 0.18.5
 spec:
   group: clickhouse.altinity.com
   scope: Namespaced
@@ -27,6 +27,11 @@ spec:
           description: Watch namespaces
           priority: 0 # show in standard view
           jsonPath: .status
+        - name: age
+          type: date
+          description: Age of the resource
+          # Displayed in all priorities
+          jsonPath: .metadata.creationTimestamp
       schema:
         openAPIV3Schema:
           type: object
@@ -102,6 +107,9 @@ spec:
                     access:
                       type: object
                       properties:
+                        scheme:
+                          type: string
+                          description: "The scheme to user for connecting to ClickHouse. One of http or https"
                         username:
                           type: string
                           description: "ClickHouse username to be used by operator to connect to ClickHouse instances, deprecated, use chCredentialsSecretName"

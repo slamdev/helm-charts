@@ -10,7 +10,7 @@ metadata:
   name: {{ include "altinity-clickhouse-operator.fullname" . }}-files
   namespace: {{ .Release.Namespace }}
   labels:
-    clickhouse.altinity.com/chop: 0.18.1
+    clickhouse.altinity.com/chop: 0.18.5
     {{- include "altinity-clickhouse-operator.labels" . | nindent 4 }}
 data:
 {{- if .Values.configs.files }}
@@ -147,6 +147,10 @@ data:
           onFailure: rollback
 
       host:
+        # Whether reconciler should wait for host:
+        # to be excluded from cluster OR
+        # to be included into cluster
+        # respectfully
         wait:
           exclude: true
           include: false

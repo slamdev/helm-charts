@@ -14,7 +14,7 @@ metadata:
   name: {{ include "altinity-clickhouse-operator.fullname" . }}-metrics
   namespace: {{ .Release.Namespace }}
   labels:
-    clickhouse.altinity.com/chop: 0.18.1
+    clickhouse.altinity.com/chop: 0.18.5
     {{- include "altinity-clickhouse-operator.labels" . | nindent 4 }}
 spec:
   ports:

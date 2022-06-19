@@ -10,7 +10,7 @@ metadata:
   name: {{ include "altinity-clickhouse-operator.fullname" . }}-templatesd-files
   namespace: {{ .Release.Namespace }}
   labels:
-    clickhouse.altinity.com/chop: 0.18.1
+    clickhouse.altinity.com/chop: 0.18.5
     {{- include "altinity-clickhouse-operator.labels" . | nindent 4 }}
 data:
 {{- if .Values.configs.templatesdFiles }}
@@ -48,7 +48,7 @@ data:
                 "containers" : [
                   {
                     "name": "clickhouse",
-                    "image": "yandex/clickhouse-server:21.3",
+                    "image": "clickhouse/clickhouse-server:22.3",
                     "ports": [
                       {
                         "name": "http",
