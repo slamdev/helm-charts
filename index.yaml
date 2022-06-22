@@ -3,6 +3,23 @@ entries:
   altinity-clickhouse-operator:
   - apiVersion: v2
     appVersion: 0.18.5
+    created: "2022-06-22T06:57:30.338684172Z"
+    description: Helm chart to deploy [altinity-clickhouse-operator](https://github.com/Altinity/clickhouse-operator).  The
+      ClickHouse Operator creates, configures and manages ClickHouse clusters running
+      on Kubernetes.  Refer to operator repo for additional information.
+    digest: 5a86f2468cade17c0bca8646954f0644e13ca28bc1c8e097423555e538a2b2eb
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/altinity-clickhouse-operator
+    icon: https://artifacthub.io/image/2d6aa29c-c74f-4bff-bede-ba7e6e0315a7@2x
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: altinity-clickhouse-operator
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/altinity-clickhouse-operator-0.0.18/altinity-clickhouse-operator-0.0.18.tgz
+    version: 0.0.18
+  - apiVersion: v2
+    appVersion: 0.18.5
     created: "2022-06-20T14:10:59.230809534Z"
     description: Helm chart to deploy [altinity-clickhouse-operator](https://github.com/Altinity/clickhouse-operator).  The
       ClickHouse Operator creates, configures and manages ClickHouse clusters running
@@ -2967,4 +2984,4 @@ entries:
     urls:
     - https://github.com/slamdev/helm-charts/releases/download/zeppelin-0.0.1/zeppelin-0.0.1.tgz
     version: 0.0.1
-generated: "2022-06-20T14:10:59.231331741Z"
+generated: "2022-06-22T06:57:30.339247279Z"
