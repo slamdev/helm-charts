@@ -496,6 +496,21 @@ entries:
   docker-registry-proxy:
   - apiVersion: v2
     appVersion: 0.6.3
+    created: "2022-07-21T22:22:45.303964213Z"
+    description: Helm chart to deploy [docker-registry-proxy](https://hub.docker.com/r/rpardini/docker-registry-proxy).
+    digest: 6a19a53d5e61e4d351e432f6a4c82380a1689b67403b92fef5fbf3539dedb2b8
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/docker-registry-proxy
+    icon: https://i.stack.imgur.com/mwFzF.png
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: docker-registry-proxy
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/docker-registry-proxy-0.0.9/docker-registry-proxy-0.0.9.tgz
+    version: 0.0.9
+  - apiVersion: v2
+    appVersion: 0.6.3
     created: "2021-10-29T11:26:01.06052808Z"
     description: Helm chart to deploy [docker-registry-proxy](https://hub.docker.com/r/rpardini/docker-registry-proxy).
     digest: 1399b8dbcd16856255ea54c11e9d7d84b0ccdbe7a0aa107afd8035bf31d7bc7c
@@ -2984,4 +2999,4 @@ entries:
     urls:
     - https://github.com/slamdev/helm-charts/releases/download/zeppelin-0.0.1/zeppelin-0.0.1.tgz
     version: 0.0.1
-generated: "2022-06-22T06:57:30.339247279Z"
+generated: "2022-07-21T22:22:45.304645019Z"
