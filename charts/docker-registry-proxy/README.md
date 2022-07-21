@@ -1,6 +1,6 @@
 # docker-registry-proxy
 
-![Version: 0.0.8](https://img.shields.io/badge/Version-0.0.8-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.6.3](https://img.shields.io/badge/AppVersion-0.6.3-informational?style=flat-square)
+![Version: 0.0.9](https://img.shields.io/badge/Version-0.0.9-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.6.3](https://img.shields.io/badge/AppVersion-0.6.3-informational?style=flat-square)
 
 Helm chart to deploy [docker-registry-proxy](https://hub.docker.com/r/rpardini/docker-registry-proxy).
 
@@ -10,7 +10,7 @@ Helm chart to deploy [docker-registry-proxy](https://hub.docker.com/r/rpardini/d
 
 | Name | Email | Url |
 | ---- | ------ | --- |
-| slamdev | valentin.fedoskin@gmail.com |  |
+| slamdev | <valentin.fedoskin@gmail.com> |  |
 
 ## Values
 
