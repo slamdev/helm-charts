@@ -147,6 +147,24 @@ containerPorts:
 # containerPort -- container port, should match admin port_value from config.yaml
 containerAdminPort: 9901
 
+# additionalResources -- list of additional resources to create (are processed via `tpl` function)
+additionalResources: []
+# - |
+#   apiVersion: v1
+#   kind: ConfigMap
+#   metadata:
+#     name: {{ include "envoy.fullname" . }}-cm
+#     namespace: {{ .Release.Namespace }}
+#
+# - |
+#    apiVersion: v1
+#    kind: Secret
+#    metadata:
+#      name: {{ include "envoy.fullname" . }}-s
+#      namespace: {{ .Release.Namespace }}
+#    stringData:
+#      mykey: my-value
+
 # configYaml -- config yaml
 configYaml: |-
   admin:

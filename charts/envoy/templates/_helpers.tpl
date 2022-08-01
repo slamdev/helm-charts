@@ -68,3 +68,13 @@ Create the tag for the docker image to use
 {{- define "envoy.tag" -}}
 {{- .Values.image.tag | default .Chart.AppVersion -}}
 {{- end -}}
+
+{{/*
+envoy.rawResource will create a resource template that can be
+merged with each item in `.Values.additionalResources`.
+*/}}
+{{- define "envoy.rawResource" -}}
+metadata:
+  labels:
+    {{- include "envoy.labels" . | nindent 4 }}
+{{- end }}
