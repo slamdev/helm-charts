@@ -124,8 +124,14 @@ volumeClaimTemplates: []
 #        requests:
 #          storage: 1Gi
 
+# disableProbes -- flag to disable livenessProbe/readinessProbe/startupProbe probes; turn on before restoring from backup
+disableProbes: false
+
 # healthCheckToken -- predefined health check token for status probes; should be changed to a random value
 healthCheckToken: CHANGE_ME
+
+# postReconfigureCode -- ruby code block for GITLAB_POST_RECONFIGURE_CODE
+postReconfigureCode: ""
 
 # env -- environment variables for the container
 env: []

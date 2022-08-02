@@ -1,6 +1,6 @@
 # gitlab-omnibus
 
-![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 15.2.1-ee.0](https://img.shields.io/badge/AppVersion-15.2.1--ee.0-informational?style=flat-square)
+![Version: 0.1.1](https://img.shields.io/badge/Version-0.1.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 15.2.1-ee.0](https://img.shields.io/badge/AppVersion-15.2.1--ee.0-informational?style=flat-square)
 
 Helm chart to deploy [Omnibus Gitlab](https://docs.gitlab.com/omnibus/).
 
@@ -24,6 +24,7 @@ Helm chart to deploy [Omnibus Gitlab](https://docs.gitlab.com/omnibus/).
 | backupCronJob.resources | object | `{"requests":{"cpu":"10m","memory":"32Mi"}}` | custom resource configuration |
 | backupCronJob.schedule | string | `"@daily"` | how often to run backaup job |
 | containerPorts | list | `[{"containerPort":8005,"name":"http"},{"containerPort":22,"name":"ssh"}]` | ports exposed by the container |
+| disableProbes | bool | `false` | flag to disable livenessProbe/readinessProbe/startupProbe probes; turn on before restoring from backup |
 | env | list | `[]` | environment variables for the container |
 | envFrom | list | `[]` | environment variable sources for the container |
 | fullnameOverride | string | `""` | full name of the chart. |
@@ -36,6 +37,7 @@ Helm chart to deploy [Omnibus Gitlab](https://docs.gitlab.com/omnibus/).
 | nameOverride | string | `""` | override name of the chart |
 | nodeSelector | object | `{}` | node for scheduler pod assignment |
 | podSecurityContext | object | `{}` | specifies security settings for a pod |
+| postReconfigureCode | string | `""` | ruby code block for GITLAB_POST_RECONFIGURE_CODE |
 | resources | object | `{}` | custom resource configuration |
 | securityContext | object | `{}` | specifies security settings for a container |
 | service.annotations | object | `{}` | service annotations |
