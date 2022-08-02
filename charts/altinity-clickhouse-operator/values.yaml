@@ -18,6 +18,10 @@ operator:
   env: [ ]
   # - name: SAMPLE
   #   value: text
+  # opertor.watchNamespaces -- list of namespaces, that operator can watch
+  watchNamespaces: []
+  # - default
+
 metrics:
   image:
     # metrics.image.repository -- image repository
