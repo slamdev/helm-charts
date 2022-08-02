@@ -5,7 +5,6 @@ metadata:
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "gitlab.labels" . | nindent 4 }}
-    component: 'monitoring'
   {{- with .Values.service.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}

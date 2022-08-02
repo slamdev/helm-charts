@@ -26,8 +26,15 @@ podSecurityContext: {}
 #  fsGroup: 2000
 
 # securityContext -- specifies security settings for a container
-securityContext:
-  privileged: true
+securityContext: {}
+#  privileged: true
+
+# containerPorts -- ports exposed by the container
+containerPorts:
+  - name: http
+    containerPort: 8005
+  - name: ssh
+    containerPort: 22
 
 service:
   # service.type -- service type
@@ -39,9 +46,6 @@ service:
     - name: http
       port: 80
       targetPort: http
-    - name: https
-      port: 443
-      targetPort: https
     - name: ssh
       port: 22
       targetPort: ssh
@@ -69,74 +73,163 @@ affinity: {}
 
 # volumeMounts -- additional volume mounts
 volumeMounts: []
-#  - name: some
-#    mountPath: /volume
+#  - name: ssh
+#    mountPath: /var/opt/gitlab/.ssh
+#  - name: git-data
+#    mountPath: /var/opt/gitlab/git-data
+#  - name: gitlab
+#    mountPath: /etc/gitlab
+#  - name: tmp
+#    mountPath: /opt/tmp
+#  - name: logs
+#    mountPath: /var/log/gitlab
 
 # volumes -- volumes
-volumes:
-  - name: data
-    emptyDir: {}
-  - name: config
-    emptyDir: {}
-  - name: logs
-    emptyDir: {}
+volumes: []
+#  - name: logs
+#    emptyDir: {}
+#  - name: tmp
+#    emptyDir: {}
 
 # volumeClaimTemplates -- volume claim templates
 volumeClaimTemplates: []
 #  - apiVersion: v1
 #    kind: PersistentVolumeClaim
 #    metadata:
-#      name: data
+#      name: ssh
 #    spec:
 #      accessModes:
 #        - ReadWriteOnce
 #      resources:
 #        requests:
-#          storage: 10Gi
+#          storage: 1Gi
+#  - apiVersion: v1
+#    kind: PersistentVolumeClaim
+#    metadata:
+#      name: git-data
+#    spec:
+#      accessModes:
+#        - ReadWriteOnce
+#      resources:
+#        requests:
+#          storage: 100Gi
+#  - apiVersion: v1
+#    kind: PersistentVolumeClaim
+#    metadata:
+#      name: gitlab
+#    spec:
+#      accessModes:
+#        - ReadWriteOnce
+#      resources:
+#        requests:
+#          storage: 1Gi
 
-livenessProbe:
-  httpGet:
-    # livenessProbe.httpGet.path -- path for liveness probe
-    path: /-/liveness
-    # livenessProbe.httpGet.port -- port for liveness probe
-    port: http
-
-readinessProbe:
-  httpGet:
-    # readinessProbe.httpGet.path -- path for readiness probe
-    path: /-/readiness
-    # readinessProbe.httpGet.port -- port for readiness probe
-    port: http
-
-startupProbe:
-  initialDelaySeconds: 30
-  failureThreshold: 300
-  periodSeconds: 2
-  httpGet:
-    # startupProbe.httpGet.path -- path for startup probe
-    path: /-/readiness
-    # startupProbe.httpGet.port -- port for startup probe
-    port: http
+# healthCheckToken -- predefined health check token for status probes; should be changed to a random value
+healthCheckToken: CHANGE_ME
 
 # env -- environment variables for the container
 env: []
-#  - name: POSTGRES_HOST
+#  - name: PG_USER
 #    value: postgres
-#  - name: POSTGRES_PASSWORD
+#  - name: PG_PASSWORD
 #      valueFrom:
 #        secretKeyRef:
 #          name: gitlab-pg
 #          key: postgres-password
+#  - name: GITLAB_INITIAL_ROOT_PASSWORD
+#      valueFrom:
+#        secretKeyRef:
+#          name: gitlab-pw
+#          key: root-password
+#  - name: GITLAB_RUNNER_TOKEN
+#      valueFrom:
+#        secretKeyRef:
+#          name: gitlab-pw
+#          key: runner-token
 
 # envFrom -- environment variable sources for the container
 envFrom: []
 #  - configMapRef:
 #      name: gitlab-cm
 
-# gitlabConf -- config for gitlab.rb https://docs.gitlab.com/omnibus/settings/configuration.html
+# additionalResources -- list of additional resources to create (are processed via `tpl` function)
+additionalResources: []
+# - |
+#   apiVersion: v1
+#   kind: ConfigMap
+#   metadata:
+#     name: {{ include "gitlab.fullname" . }}-cm
+#     namespace: {{ .Release.Namespace }}
+#
+# - |
+#    apiVersion: v1
+#    kind: Secret
+#    metadata:
+#      name: {{ include "gitlab.fullname" . }}-s
+#      namespace: {{ .Release.Namespace }}
+#    stringData:
+#      mykey: my-value
+
+# gitlabConf -- config for gitlab.rb; default values: https://gitlab.com/gitlab-org/omnibus-gitlab/-/blob/15.2.1+ce.0/files/gitlab-config-template/gitlab.rb.template
 gitlabConf: |-
   external_url 'https://gitlab.example.com'
+  gitlab_rails['gitlab_repository_downloads_path'] = '/opt/tmp/repositories'
+  gitlab_rails['object_store']['enabled'] = true
+  gitlab_rails['object_store']['connection'] = {
+    'provider' => 'AWS',
+    'aws_access_key_id' => 'XXX',
+    'aws_secret_access_key' => 'XXX',
+  }
+  gitlab_rails['object_store']['objects']['artifacts']['bucket'] = 'gitlab/artifacts'
+  gitlab_rails['object_store']['objects']['external_diffs']['bucket'] = 'gitlab/external_diffs'
+  gitlab_rails['object_store']['objects']['lfs']['bucket'] = 'gitlab/lfs'
+  gitlab_rails['object_store']['objects']['uploads']['bucket'] = 'gitlab/uploads'
+  gitlab_rails['object_store']['objects']['packages']['bucket'] = 'gitlab/packages'
+  gitlab_rails['object_store']['objects']['dependency_proxy']['bucket'] = 'gitlab/dependency_proxy'
+  gitlab_rails['object_store']['objects']['terraform_state']['bucket'] = 'gitlab/terraform_state'
+  gitlab_rails['object_store']['objects']['ci_secure_files']['bucket'] = 'gitlab/ci_secure_files'
+  gitlab_rails['external_diffs_enabled'] = true
+  gitlab_rails['external_diffs_when'] = 'outdated'
+  gitlab_rails['shared_path'] = '/opt/tmp/shared'
+  gitlab_rails['backup_path'] = "/opt/tmp/backups"
+  gitlab_rails['backup_upload_connection'] = {
+    'provider' => 'AWS',
+    'aws_access_key_id' => 'XXX',
+    'aws_secret_access_key' => 'XXX',
+  }
+  gitlab_rails['backup_upload_remote_directory'] = 'gitlab/backups'
+  gitlab_rails['uploads_directory'] = "/opt/tmp/uploads"
   gitlab_rails['initial_root_password'] = ENV['GITLAB_INITIAL_ROOT_PASSWORD']
+  gitlab_rails['initial_shared_runners_registration_token'] = ENV['GITLAB_RUNNER_TOKEN']
+  gitlab_rails['db_adapter'] = "postgresql"
+  gitlab_rails['db_database'] = "gitlab"
+  gitlab_rails['db_username'] = ENV['PG_USER']
+  gitlab_rails['db_password'] = ENV['PG_PASSWORD']
+  gitlab_rails['db_host'] = "gitlab-postgres"
+  gitlab_rails['db_port'] = 5432
+  gitlab_rails['redis_host'] = "gitlab-redis-master"
+  gitlab_rails['redis_port'] = 6379
+  gitlab_rails['registry_enabled'] = false
+  registry['enable'] = false
+  gitlab_workhorse['listen_network'] = "tcp"
+  gitlab_workhorse['listen_addr'] = "0.0.0.0:8005"
+  sidekiq['metrics_enabled'] = false
+  sidekiq['health_checks_enabled'] = false
+  postgresql['enable'] = false
+  redis['enable'] = false
+  nginx['enable'] = false
+  pages_nginx['enable'] = false
+  gitlab_ci['builds_directory'] = '/opt/tmp/ci-builds'
+  gitlab_rails['gitlab_kas_enabled'] = false
+  gitlab_kas['enable'] = false
+  monitoring_role['enable'] = false
+  prometheus['enable'] = false
+  prometheus_monitoring['enable'] = false
+  alertmanager['enable'] = false
+  grafana['enable'] = false
+  gitlab_exporter['enable'] = false
+  gitlab_rails['packages_enabled'] = false
+  gitlab_rails['dependency_proxy_enabled'] = false
 
 backupCronJob:
   # backupCronJob.enabled -- enable scheduled backups
@@ -149,7 +242,7 @@ backupCronJob:
   command:
     - gitlab-backup
     - create
-    - SKIP=uploads,builds,artifacts,registry,pages
+    - SKIP=uploads,builds,artifacts,terraform_state,registry,pages,packages
     - GZIP_RSYNCABLE=yes
     - STRATEGY=copy
   # backupCronJob.resources -- custom resource configuration

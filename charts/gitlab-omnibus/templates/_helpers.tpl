@@ -68,3 +68,13 @@ Create the tag for the docker image to use
 {{- define "gitlab.tag" -}}
 {{- .Values.image.tag | default .Chart.AppVersion -}}
 {{- end -}}
+
+{{/*
+gitlab.rawResource will create a resource template that can be
+merged with each item in `.Values.additionalResources`.
+*/}}
+{{- define "gitlab.rawResource" -}}
+metadata:
+  labels:
+    {{- include "gitlab.labels" . | nindent 4 }}
+{{- end }}

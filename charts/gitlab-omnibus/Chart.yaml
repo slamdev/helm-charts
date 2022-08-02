@@ -3,9 +3,9 @@ name: gitlab-omnibus
 description: |-
   Helm chart to deploy [Omnibus Gitlab](https://docs.gitlab.com/omnibus/).
 type: application
-version: 0.0.18
+version: 0.1.0
 # https://hub.docker.com/r/gitlab/gitlab-ee/tags
-appVersion: "13.10.3-ee.0"
+appVersion: "15.2.1-ee.0"
 home: https://github.com/slamdev/helm-charts/tree/master/charts/gitlab-omnibus
 icon: https://docs.gitlab.com/assets/images/gitlab-logo.svg
 maintainers:

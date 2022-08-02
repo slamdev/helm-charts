@@ -31,30 +31,37 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ include "gitlab.tag" . }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+        {{- with .Values.containerPorts }}
           ports:
-            - name: http
-              containerPort: 80
-            - name: https
-              containerPort: 443
-            - name: ssh
-              containerPort: 22
-            - name: http-gitlab-exp
-              containerPort: 9168
-            - name: http-node-exp
-              containerPort: 9100
-            - name: http-nginx-exp
-              containerPort: 8060
+            {{- toYaml . | nindent 12 }}
+        {{- end }}
           livenessProbe:
-            {{- toYaml .Values.livenessProbe | nindent 12 }}
+            httpGet:
+              path: /-/liveness?token={{.Values.healthCheckToken}}
+              port: http
           readinessProbe:
-            {{- toYaml .Values.readinessProbe | nindent 12 }}
+            httpGet:
+              path: /-/readiness?token={{.Values.healthCheckToken}}
+              port: http
           startupProbe:
-            {{- toYaml .Values.startupProbe | nindent 12 }}
+            initialDelaySeconds: 60
+            failureThreshold: 300
+            periodSeconds: 2
+            httpGet:
+              path: /-/readiness?token={{.Values.healthCheckToken}}
+              port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
             - name: GITLAB_OMNIBUS_CONFIG
               value: 'from_file "/etc/gitlab-provisioned-config.rb"'
+            - name: GITLAB_POST_RECONFIGURE_CODE
+              value: |
+                include Gitlab::CurrentSettings
+                Gitlab::CurrentSettings.current_application_settings.update_attribute(:health_check_access_token, '{{.Values.healthCheckToken}}')
+            - name: GITLAB_POST_RECONFIGURE_SCRIPT
+              value: |
+                /opt/gitlab/bin/gitlab-rails runner -e production "$GITLAB_POST_RECONFIGURE_CODE"
           {{- with .Values.env }}
             {{- toYaml . | nindent 12 }}
           {{- end }}
@@ -63,12 +70,6 @@ spec:
           {{- toYaml . | nindent 12 }}
         {{- end }}
           volumeMounts:
-            - name: data
-              mountPath: "/var/opt/gitlab"
-            - name: logs
-              mountPath: "/var/log/gitlab"
-            - name: config
-              mountPath: "/etc/gitlab"
             - name: provisioned-config
               mountPath: /etc/gitlab-provisioned-config.rb
               subPath: gitlab.rb
