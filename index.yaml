@@ -599,6 +599,22 @@ entries:
     urls:
     - https://github.com/slamdev/helm-charts/releases/download/docker-registry-proxy-0.0.1/docker-registry-proxy-0.0.1.tgz
     version: 0.0.1
+  docker-registry-ui:
+  - apiVersion: v2
+    appVersion: 0.9.4
+    created: "2022-08-04T15:06:23.874911408Z"
+    description: Helm chart to deploy [docker-registry-ui](https://github.com/Quiq/docker-registry-ui).
+    digest: f20e61e167291cc7ab2e40337ec8586c49695f87992d57644fe5e008f32cbc1a
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/docker-registry-ui
+    icon: https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Emblem-question.svg/1200px-Emblem-question.svg.png
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: docker-registry-ui
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/docker-registry-ui-0.0.1/docker-registry-ui-0.0.1.tgz
+    version: 0.0.1
   envoy:
   - apiVersion: v2
     appVersion: v1.18.2
@@ -3044,4 +3060,4 @@ entries:
     urls:
     - https://github.com/slamdev/helm-charts/releases/download/zeppelin-0.0.1/zeppelin-0.0.1.tgz
     version: 0.0.1
-generated: "2022-08-02T13:19:47.668104518Z"
+generated: "2022-08-04T15:06:23.875690016Z"
