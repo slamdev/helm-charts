@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "docker-registry-ui.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "docker-registry-ui.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+{{- with .Values.service.ports }}
+  ports:
+    {{- toYaml . | nindent 4 }}
+{{- end }}
+  selector:
+    {{- include "docker-registry-ui.selectorLabels" . | nindent 4 }}

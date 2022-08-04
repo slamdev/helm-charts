@@ -1,0 +1,5 @@
+{{- $template := fromYaml (include "docker-registry-ui.rawResource" .) -}}
+{{- range $i, $t := .Values.additionalResources }}
+---
+{{ toYaml (merge (tpl $t $ | fromYaml) $template) -}}
+{{- end }}

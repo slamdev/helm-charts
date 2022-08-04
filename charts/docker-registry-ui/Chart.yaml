@@ -1,0 +1,12 @@
+apiVersion: v2
+name: docker-registry-ui
+description: |-
+  Helm chart to deploy [docker-registry-ui](https://github.com/Quiq/docker-registry-ui).
+type: application
+version: 0.0.1
+appVersion: 0.9.4
+home: https://github.com/slamdev/helm-charts/tree/master/charts/docker-registry-ui
+icon: https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Emblem-question.svg/1200px-Emblem-question.svg.png
+maintainers:
+  - name: slamdev
+    email: valentin.fedoskin@gmail.com
