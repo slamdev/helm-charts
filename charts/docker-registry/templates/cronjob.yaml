@@ -1,0 +1,80 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "docker-registry.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "docker-registry.labels" . | nindent 4 }}
+    app.kubernetes.io/component: garbage-collect
+spec:
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: {{ .Values.garbageCollectCronJob.successfulJobsHistoryLimit }}
+  failedJobsHistoryLimit: {{ .Values.garbageCollectCronJob.failedJobsHistoryLimit }}
+  schedule: {{ .Values.garbageCollectCronJob.schedule | quote }}
+  jobTemplate:
+    metadata:
+      labels:
+        {{- include "docker-registry.selectorLabels" . | nindent 8 }}
+        app.kubernetes.io/component: garbage-collect
+    spec:
+      template:
+        metadata:
+          labels:
+            {{- include "docker-registry.selectorLabels" . | nindent 12 }}
+            app.kubernetes.io/component: garbage-collect
+        spec:
+          restartPolicy: {{ .Values.garbageCollectCronJob.restartPolicy }}
+        {{- with .Values.imagePullSecrets }}
+          imagePullSecrets:
+            {{- toYaml . | nindent 12 }}
+        {{- end }}
+          serviceAccountName: {{ include "docker-registry.serviceAccountName" . }}
+          securityContext:
+            {{- toYaml .Values.podSecurityContext | nindent 12 }}
+          containers:
+            - name: {{ .Chart.Name }}
+              args:
+                - garbage-collect
+                - /opt/config.yml
+                - --delete-untagged={{ .Values.garbageCollectCronJob.deleteUntagged }}
+                - --dry-run={{ .Values.garbageCollectCronJob.dryRun }}
+              securityContext:
+                {{- toYaml .Values.securityContext | nindent 16 }}
+              image: "{{ .Values.image.repository }}:{{ include "docker-registry.tag" . }}"
+              imagePullPolicy: {{ .Values.image.pullPolicy }}
+              resources:
+                {{- toYaml .Values.garbageCollectCronJob.resources | nindent 16 }}
+            {{- with .Values.env }}
+              env:
+                {{- toYaml . | nindent 16 }}
+            {{- end }}
+              volumeMounts:
+                - name: {{ include "docker-registry.fullname" . }}
+                  mountPath: /opt/config.yml
+                  subPath: config.yml
+            {{- with .Values.volumeMounts }}
+                {{- toYaml . | nindent 16 }}
+            {{- end }}
+          volumes:
+            - name: {{ include "docker-registry.fullname" . }}
+              configMap:
+                name: {{ include "docker-registry.fullname" . }}
+                items:
+                  - key: config.yml
+                    path: config.yml
+                    mode: 292 # 0444
+        {{- with .Values.volumes }}
+            {{- toYaml . | nindent 12 }}
+        {{- end }}
+        {{- with .Values.nodeSelector }}
+          nodeSelector:
+            {{- toYaml . | nindent 12 }}
+        {{- end }}
+        {{- with .Values.affinity }}
+          affinity:
+            {{- toYaml . | nindent 12 }}
+        {{- end }}
+        {{- with .Values.tolerations }}
+          tolerations:
+            {{- toYaml . | nindent 12 }}
+        {{- end }}

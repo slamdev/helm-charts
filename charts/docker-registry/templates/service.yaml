@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "docker-registry.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "docker-registry.labels" . | nindent 4 }}
+{{- with .Values.service.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+{{- end }}
+spec:
+  type: {{ .Values.service.type }}
+{{- with .Values.service.ports }}
+  ports:
+    {{- toYaml . | nindent 4 }}
+{{- end }}
+  selector:
+    {{- include "docker-registry.selectorLabels" . | nindent 4 }}
+  loadBalancerSourceRanges: {{ .Values.service.loadBalancerSourceRanges }}
