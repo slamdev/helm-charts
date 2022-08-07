@@ -493,6 +493,22 @@ entries:
     urls:
     - https://github.com/slamdev/helm-charts/releases/download/config-connector-templater-0.0.1/config-connector-templater-0.0.1.tgz
     version: 0.0.1
+  docker-registry:
+  - apiVersion: v2
+    appVersion: 2.8.1
+    created: "2022-08-07T09:47:14.491499282Z"
+    description: Helm chart to deploy [docker-registry](https://github.com/distribution/distribution).
+    digest: 13352888cdb432503b309cb98f83835c9763aec0dd2b20525200160da0b98428
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/docker-registry
+    icon: https://docs.docker.com/favicons/docs@2x.ico
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: docker-registry
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/docker-registry-0.0.1/docker-registry-0.0.1.tgz
+    version: 0.0.1
   docker-registry-proxy:
   - apiVersion: v2
     appVersion: 0.6.3
@@ -3060,4 +3076,4 @@ entries:
     urls:
     - https://github.com/slamdev/helm-charts/releases/download/zeppelin-0.0.1/zeppelin-0.0.1.tgz
     version: 0.0.1
-generated: "2022-08-04T15:06:23.875690016Z"
+generated: "2022-08-07T09:47:14.492054991Z"
