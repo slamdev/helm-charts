@@ -1,6 +1,6 @@
 # docker-registry
 
-![Version: 0.0.1](https://img.shields.io/badge/Version-0.0.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.8.1](https://img.shields.io/badge/AppVersion-2.8.1-informational?style=flat-square)
+![Version: 0.0.2](https://img.shields.io/badge/Version-0.0.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.8.1](https://img.shields.io/badge/AppVersion-2.8.1-informational?style=flat-square)
 
 Helm chart to deploy [docker-registry](https://github.com/distribution/distribution).
 
@@ -20,6 +20,7 @@ Helm chart to deploy [docker-registry](https://github.com/distribution/distribut
 | affinity | object | `{}` | affinity for scheduler pod assignment |
 | config | string | `"http:\n  addr: :5000"` | docker-registry config to provision inside of the container |
 | containerPorts | list | `[{"containerPort":5000,"name":"http","protocol":"TCP"}]` | ports exposed by container |
+| deploymentAnnotations | object | `{}` | annotations to add to the deployment |
 | env | list | `[]` | additional environment variables for the deployment |
 | fullnameOverride | string | `""` | full name of the chart. |
 | garbageCollectCronJob.deleteUntagged | bool | `true` | delete manifests that are not currently referenced via tag |
