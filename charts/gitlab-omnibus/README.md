@@ -1,6 +1,6 @@
 # gitlab-omnibus
 
-![Version: 0.1.1](https://img.shields.io/badge/Version-0.1.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 15.2.1-ee.0](https://img.shields.io/badge/AppVersion-15.2.1--ee.0-informational?style=flat-square)
+![Version: 0.1.2](https://img.shields.io/badge/Version-0.1.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 15.2.1-ee.0](https://img.shields.io/badge/AppVersion-15.2.1--ee.0-informational?style=flat-square)
 
 Helm chart to deploy [Omnibus Gitlab](https://docs.gitlab.com/omnibus/).
 
@@ -47,6 +47,7 @@ Helm chart to deploy [Omnibus Gitlab](https://docs.gitlab.com/omnibus/).
 | serviceAccount.annotations | object | `{}` | annotations to add to the service account |
 | serviceAccount.create | bool | `false` | specifies whether a service account should be created |
 | serviceAccount.name | string | `nil` | the name of the service account to use; if not set and create is true, a name is generated using the fullname template |
+| stsAnnotations | object | `{}` | annotations to add to the statefulset |
 | tolerations | list | `[]` | tolerations for scheduler pod assignment |
 | volumeClaimTemplates | list | `[]` | volume claim templates |
 | volumeMounts | list | `[]` | additional volume mounts |

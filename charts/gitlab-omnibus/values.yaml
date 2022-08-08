@@ -53,6 +53,9 @@ service:
   annotations: {}
   # static-ip: gitlab
 
+# stsAnnotations -- annotations to add to the statefulset
+stsAnnotations: { }
+
 # resources -- custom resource configuration
 resources: {}
 #  limits:
