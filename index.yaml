@@ -496,6 +496,21 @@ entries:
   docker-registry:
   - apiVersion: v2
     appVersion: 2.8.1
+    created: "2022-08-10T16:16:21.991558021Z"
+    description: Helm chart to deploy [docker-registry](https://github.com/distribution/distribution).
+    digest: ec24e13ae7f8347916b2076e1017c04fd85884c1a55a0848941768ac4437fbc4
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/docker-registry
+    icon: https://docs.docker.com/favicons/docs@2x.ico
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: docker-registry
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/docker-registry-0.0.3/docker-registry-0.0.3.tgz
+    version: 0.0.3
+  - apiVersion: v2
+    appVersion: 2.8.1
     created: "2022-08-08T15:12:23.55094353Z"
     description: Helm chart to deploy [docker-registry](https://github.com/distribution/distribution).
     digest: 3708cb7acf3445a4eae2f3550bedc36cbec369fcc5d226e4f45c7e8ea65ee9dc
@@ -3106,4 +3121,4 @@ entries:
     urls:
     - https://github.com/slamdev/helm-charts/releases/download/zeppelin-0.0.1/zeppelin-0.0.1.tgz
     version: 0.0.1
-generated: "2022-08-08T15:26:23.980760191Z"
+generated: "2022-08-10T16:16:21.992335024Z"
