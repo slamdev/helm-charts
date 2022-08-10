@@ -150,3 +150,72 @@ garbageCollectCronJob:
 #    requests:
 #      cpu: 100m
 #      memory: 128Mi
+
+cleanregCronJob:
+
+  image:
+    # cleanregCronJob.image.repository -- image repository
+    repository: hcguersoy/cleanreg
+    # cleanregCronJob.image.tag -- image tag (chart's appVersion value will be used if not set)
+    tag: v0.8.0
+    # cleanregCronJob.image.pullPolicy -- image pull policy
+    pullPolicy: IfNotPresent
+
+  # cleanregCronJob.imagePullSecrets -- image pull secret for private images
+  imagePullSecrets: [ ]
+
+  # cleanregCronJob.podSecurityContext -- specifies security settings for a pod
+  podSecurityContext: { }
+  # fsGroup: 2000
+
+  # cleanregCronJob.securityContext -- specifies security settings for a container
+  securityContext: { }
+    #  capabilities:
+    #    drop:
+    #      - ALL
+    #  readOnlyRootFilesystem: true
+    #  runAsNonRoot: true
+  #  runAsUser: 1000
+
+
+  # cleanregCronJob.env -- additional environment variables for the deployment
+  env: [ ]
+    #  - name: SAMPLE
+  #    value: text
+
+  # cleanregCronJob.volumeMounts -- additional volume mounts
+  volumeMounts: [ ]
+  #  - name: cache
+  #    mountPath: /data/docker-registry/cache
+
+  # cleanregCronJob.volumes -- additional volumes
+  volumes: [ ]
+  #  - name: cache
+  #    emptyDir: {}
+
+  # cleanregCronJob.resources -- custom resource configuration
+  resources: { }
+  #  limits:
+  #    cpu: 100m
+  #    memory: 128Mi
+  #  requests:
+  #    cpu: 100m
+  #    memory: 128Mi
+
+  # cleanregCronJob.successfulJobsHistoryLimit -- the number of successful finished jobs to retain
+  successfulJobsHistoryLimit: 3
+  # cleanregCronJob.failedJobsHistoryLimit -- the number of failed finished jobs to retain
+  failedJobsHistoryLimit: 1
+  # cleanregCronJob.schedule -- the schedule in Cron format, see https://en.wikipedia.org/wiki/Cron
+  schedule: "@daily"
+  # cleanregCronJob.restartPolicy -- container restart policy
+  restartPolicy: Never
+
+  # cleanregCronJob.args -- args for cleanreg https://github.com/hcguersoy/cleanreg#usage
+  args:
+    - --registry=http://docker-registry
+    - --assume-yes
+    - --clean-full-catalog
+    - --keepimages=10
+    - --skip-tls-verify
+    - --ignore-ref-tags

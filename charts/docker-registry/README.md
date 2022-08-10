@@ -1,6 +1,6 @@
 # docker-registry
 
-![Version: 0.0.2](https://img.shields.io/badge/Version-0.0.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.8.1](https://img.shields.io/badge/AppVersion-2.8.1-informational?style=flat-square)
+![Version: 0.0.3](https://img.shields.io/badge/Version-0.0.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.8.1](https://img.shields.io/badge/AppVersion-2.8.1-informational?style=flat-square)
 
 Helm chart to deploy [docker-registry](https://github.com/distribution/distribution).
 
@@ -18,6 +18,21 @@ Helm chart to deploy [docker-registry](https://github.com/distribution/distribut
 |-----|------|---------|-------------|
 | additionalResources | list | `[]` | list of additional resources to create (are processed via `tpl` function) |
 | affinity | object | `{}` | affinity for scheduler pod assignment |
+| cleanregCronJob.args | list | `["--registry=http://docker-registry","--assume-yes","--clean-full-catalog","--keepimages=10","--skip-tls-verify","--ignore-ref-tags"]` | args for cleanreg https://github.com/hcguersoy/cleanreg#usage |
+| cleanregCronJob.env | list | `[]` | additional environment variables for the deployment |
+| cleanregCronJob.failedJobsHistoryLimit | int | `1` | the number of failed finished jobs to retain |
+| cleanregCronJob.image.pullPolicy | string | `"IfNotPresent"` | image pull policy |
+| cleanregCronJob.image.repository | string | `"hcguersoy/cleanreg"` | image repository |
+| cleanregCronJob.image.tag | string | `"v0.8.0"` | image tag (chart's appVersion value will be used if not set) |
+| cleanregCronJob.imagePullSecrets | list | `[]` | image pull secret for private images |
+| cleanregCronJob.podSecurityContext | object | `{}` | specifies security settings for a pod |
+| cleanregCronJob.resources | object | `{}` | custom resource configuration |
+| cleanregCronJob.restartPolicy | string | `"Never"` | container restart policy |
+| cleanregCronJob.schedule | string | `"@daily"` | the schedule in Cron format, see https://en.wikipedia.org/wiki/Cron |
+| cleanregCronJob.securityContext | object | `{}` | specifies security settings for a container |
+| cleanregCronJob.successfulJobsHistoryLimit | int | `3` | the number of successful finished jobs to retain |
+| cleanregCronJob.volumeMounts | list | `[]` | additional volume mounts |
+| cleanregCronJob.volumes | list | `[]` | additional volumes |
 | config | string | `"http:\n  addr: :5000"` | docker-registry config to provision inside of the container |
 | containerPorts | list | `[{"containerPort":5000,"name":"http","protocol":"TCP"}]` | ports exposed by container |
 | deploymentAnnotations | object | `{}` | annotations to add to the deployment |

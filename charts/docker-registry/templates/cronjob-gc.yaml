@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: {{ include "docker-registry.fullname" . }}
+  name: {{ include "docker-registry.fullname" . }}-gc
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "docker-registry.labels" . | nindent 4 }}
