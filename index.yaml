@@ -1958,6 +1958,22 @@ entries:
     urls:
     - https://github.com/slamdev/helm-charts/releases/download/gradle-cache-0.0.2/gradle-cache-0.0.2.tgz
     version: 0.0.2
+  grafana-agent:
+  - apiVersion: v2
+    appVersion: v0.26.1
+    created: "2022-08-15T13:21:00.967600703Z"
+    description: Helm chart to deploy [grafana-agent](https://github.com/grafana/agent).
+    digest: 14236bf0ffe456f5c01f9dc8732ad92c0be8ee7291e63a2ecef54526b54c48e9
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/grafana-agent
+    icon: https://grafana.com/static/assets/internal/grafana_logo-web-white-text.svg
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: grafana-agent
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/grafana-agent-0.0.1/grafana-agent-0.0.1.tgz
+    version: 0.0.1
   haproxy:
   - apiVersion: v2
     appVersion: 2.3.9
@@ -3121,4 +3137,4 @@ entries:
     urls:
     - https://github.com/slamdev/helm-charts/releases/download/zeppelin-0.0.1/zeppelin-0.0.1.tgz
     version: 0.0.1
-generated: "2022-08-10T16:16:21.992335024Z"
+generated: "2022-08-15T13:21:00.968296299Z"
