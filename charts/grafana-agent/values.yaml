@@ -1,0 +1,174 @@
+workload:
+  # workload.kind -- can be deployment, statefulSet or daemonSet
+  kind: deployment
+  # workload.annotations -- annotations to add to the workload
+  annotations: { }
+  # workload.labels -- labels to add to the workload
+  labels: { }
+  deploymentSpec:
+    # workload.deploymentSpec.replicas -- number of desired pods
+    replicas: 1
+    # workload.deploymentSpec.strategy -- the deployment strategy to use to replace existing pods with new ones.
+    strategy: { }
+  statefulSetSpec:
+    # workload.statefulSetSpec.replicas -- number of desired pods
+    replicas: 1
+    # workload.statefulSetSpec.updateStrategy -- indicates the StatefulSetUpdateStrategy that will be employed to update Pods in the StatefulSet when a revision is made to Template
+    updateStrategy: { }
+    # workload.statefulSetSpec.podManagementPolicy -- controls how pods are created during initial scale up
+    podManagementPolicy: OrderedReady
+    # workload.statefulSetSpec.volumeClaimTemplates -- a list of claims that pods are allowed to reference
+    volumeClaimTemplates: { }
+  daemonSetSpec:
+    # workload.daemonSetSpec.updateStrategy -- an update strategy to replace existing DaemonSet pods with new pods
+    updateStrategy: { }
+
+image:
+  # image.repository -- image repository
+  repository: grafana/grafana-agent
+  # image.tag -- image tag (chart's appVersion value will be used if not set)
+  tag: ""
+  # image.pullPolicy -- image pull policy
+  pullPolicy: IfNotPresent
+
+# imagePullSecrets -- image pull secret for private images
+imagePullSecrets: [ ]
+# nameOverride -- override name of the chart
+nameOverride: ""
+# fullnameOverride -- full name of the chart.
+fullnameOverride: ""
+
+serviceAccount:
+  # serviceAccount.create -- specifies whether a service account should be created
+  create: false
+  # serviceAccount.annotations -- annotations to add to the service account
+  annotations: { }
+  # serviceAccount.name -- the name of the service account to use; if not set and create is true, a name is generated using the fullname template
+  name:
+
+# podSecurityContext -- specifies security settings for a pod
+podSecurityContext: { }
+# fsGroup: 2000
+
+# securityContext -- specifies security settings for a container
+securityContext: { }
+#  capabilities:
+#    drop:
+#    - ALL
+#  readOnlyRootFilesystem: true
+#  runAsNonRoot: true
+#  runAsUser: 1000
+
+# containerPorts -- ports exposed by container
+containerPorts:
+  - name: http
+    containerPort: 12345
+  - name: grpc
+    containerPort: 12346
+
+# podAnnotations -- annotations to add to the pod
+podAnnotations: { }
+
+service:
+  # service.type -- service type
+  type: ClusterIP
+  # service.annotations -- service annotations
+  annotations: { }
+  # service.ports -- service ports
+  ports:
+    - name: http
+      port: 12345
+      targetPort: http
+    - name: grpc
+      port: 12346
+      targetPort: grpc
+
+# resources -- custom resource configuration
+resources: { }
+#  limits:
+#    cpu: 100m
+#    memory: 128Mi
+#  requests:
+#    cpu: 100m
+#    memory: 128Mi
+
+# nodeSelector -- node for scheduler pod assignment
+nodeSelector: { }
+
+# tolerations -- tolerations for scheduler pod assignment
+tolerations: [ ]
+
+# affinity -- affinity for scheduler pod assignment
+affinity: { }
+
+# volumeMounts -- additional volume mounts
+volumeMounts: [ ]
+#  - name: cache
+#    mountPath: /cache
+
+# volumes -- additional volumes
+volumes: [ ]
+#  - name: cache
+#    emptyDir: {}
+
+livenessProbe:
+  httpGet:
+    # livenessProbe.httpGet.path -- path for liveness probe
+    path: /http-metrics/-/ready
+    # livenessProbe.httpGet.port -- port for liveness probe
+    port: http
+
+readinessProbe:
+  httpGet:
+    # readinessProbe.httpGet.path -- path for readiness probe
+    path: /http-metrics/-/ready
+    # readinessProbe.httpGet.port -- port for readiness probe
+    port: http
+
+startupProbe:
+  httpGet:
+    # startupProbe.httpGet.path -- path for startup probe
+    path: /http-metrics/-/ready
+    # startupProbe.httpGet.port -- port for startup probe
+    port: http
+
+# env -- additional environment variables for the deployment
+env:
+  - name: HOSTNAME
+    valueFrom:
+      fieldRef:
+        fieldPath: spec.nodeName
+  - name: POD_NAME
+    valueFrom:
+      fieldRef:
+        fieldPath: metadata.name
+  - name: POD_IP
+    valueFrom:
+      fieldRef:
+        fieldPath: status.podIP
+
+args:
+  - --config.file=/grafana-agent.yaml
+
+# conf -- grafana-agent config to provision inside of the container
+conf: |-
+  server:
+    log_level: info
+
+# additionalResources -- list of additional resources to create (are processed via `tpl` function)
+additionalResources: [ ]
+#  - |
+#    apiVersion: v1
+#    kind: ConfigMap
+#    metadata:
+#      name: {{ include "grafana-agent.fullname" . }}-cm
+#      namespace: {{ .Release.Namespace }}
+#
+#  - |
+#     apiVersion: v1
+#     kind: Secret
+#     metadata:
+#       name: {{ include "grafana-agent.fullname" . }}-s
+#       namespace: {{ .Release.Namespace }}
+#     stringData:
+#       mykey: my-value

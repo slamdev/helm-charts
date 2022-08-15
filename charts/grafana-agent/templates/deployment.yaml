@@ -1,0 +1,25 @@
+{{- if eq .Values.workload.kind "deployment" }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "grafana-agent.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+{{- with .Values.workload.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+{{- end }}
+  labels:
+    {{- include "grafana-agent.labels" . | nindent 4 }}
+    {{- .Values.workload.labels | toYaml . | nindent 4 }}
+spec:
+  replicas: {{ .Values.workload.deploymentSpec.replicas }}
+{{- with .Values.workload.deploymentSpec.strategy }}
+  strategy:
+    {{- toYaml . | nindent 4 }}
+{{- end }}
+  selector:
+    matchLabels:
+      {{- include "grafana-agent.selectorLabels" . | nindent 6 }}
+  template:
+    {{- include "grafana-agent.pod" . | nindent 4 }}
+{{- end }}
