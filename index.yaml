@@ -2326,6 +2326,22 @@ entries:
   nginx:
   - apiVersion: v2
     appVersion: 1.19.10
+    created: "2022-08-24T12:41:27.100611652Z"
+    description: Helm chart to deploy [nginx](https://www.nginx.com).  Chart supports
+      environment variables inside of the nginx.conf file.
+    digest: 136cc5b08a840cea8794be511b27b7bc2280e1e9128c06e5f3e4b0791bb13c27
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/nginx
+    icon: https://www.nginx.com/wp-content/uploads/2019/10/favicon-48x48.ico
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: nginx
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/nginx-0.0.21/nginx-0.0.21.tgz
+    version: 0.0.21
+  - apiVersion: v2
+    appVersion: 1.19.10
     created: "2021-10-29T11:26:02.869983935Z"
     description: Helm chart to deploy [nginx](https://www.nginx.com).  Chart supports
       environment variables inside of the nginx.conf file.
@@ -3137,4 +3153,4 @@ entries:
     urls:
     - https://github.com/slamdev/helm-charts/releases/download/zeppelin-0.0.1/zeppelin-0.0.1.tgz
     version: 0.0.1
-generated: "2022-08-15T13:21:00.968296299Z"
+generated: "2022-08-24T12:41:27.101453757Z"
