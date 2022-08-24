@@ -1,6 +1,6 @@
 # nginx
 
-![Version: 0.0.20](https://img.shields.io/badge/Version-0.0.20-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.19.10](https://img.shields.io/badge/AppVersion-1.19.10-informational?style=flat-square)
+![Version: 0.0.21](https://img.shields.io/badge/Version-0.0.21-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.19.10](https://img.shields.io/badge/AppVersion-1.19.10-informational?style=flat-square)
 
 Helm chart to deploy [nginx](https://www.nginx.com).
 
@@ -12,12 +12,13 @@ Chart supports environment variables inside of the nginx.conf file.
 
 | Name | Email | Url |
 | ---- | ------ | --- |
-| slamdev | valentin.fedoskin@gmail.com |  |
+| slamdev | <valentin.fedoskin@gmail.com> |  |
 
 ## Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| additionalLabels | object | `{}` | Custom labels to add into metadata |
 | affinity | object | `{}` | affinity for scheduler pod assignment |
 | deploymentAnnotations | object | `{}` | annotations to add to the deployment |
 | dnsmasq.enabled | bool | `false` | enable simple dns server for nginx |
