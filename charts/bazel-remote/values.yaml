@@ -85,7 +85,7 @@ affinity: {}
 # volumeMounts -- additional volume mounts
 volumeMounts: []
 #   - name: cache
-#     mountPath: /cache
+#     mountPath: /data
 
 # volumes -- additional volumes
 volumes: []
@@ -137,7 +137,7 @@ serviceMonitor:
 # conf -- bazel-remote config to provision inside of the container
 conf: |-
   # https://github.com/buchgr/bazel-remote#example-configuration-file
-  dir: /cache
+  dir: /data
   max_size: 50
   experimental_remote_asset_api: true
   access_log_level: none
