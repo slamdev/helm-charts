@@ -71,3 +71,13 @@ Create the tag for the docker image to use
 {{- define "altinity-clickhouse-operator.metrics.tag" -}}
 {{- .Values.metrics.image.tag | default .Chart.AppVersion -}}
 {{- end -}}
+
+{{/*
+altinity-clickhouse-operator.rawResource will create a resource template that can be
+merged with each item in `.Values.additionalResources`.
+*/}}
+{{- define "altinity-clickhouse-operator.rawResource" -}}
+metadata:
+  labels:
+    {{- include "altinity-clickhouse-operator.labels" . | nindent 4 }}
+{{- end }}

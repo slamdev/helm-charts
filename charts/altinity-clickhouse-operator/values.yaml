@@ -86,3 +86,20 @@ configs:
   usersdFiles: null
 #    some-file: |
 #      ...
+
+# additionalResources -- list of additional resources to create (are processed via `tpl` function)
+additionalResources: [ ]
+#  - |
+#    apiVersion: v1
+#    kind: ConfigMap
+#    metadata:
+#      name: {{ include "altinity-clickhouse-operator.fullname" . }}-cm
+#      namespace: {{ .Release.Namespace }}
+#  - |
+#     apiVersion: v1
+#     kind: Secret
+#     metadata:
+#       name: {{ include "altinity-clickhouse-operator.fullname" . }}-s
+#       namespace: {{ .Release.Namespace }}
+#     stringData:
+#       mykey: my-value

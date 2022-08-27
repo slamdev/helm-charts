@@ -41,6 +41,18 @@ spec:
       {{- toYaml . | nindent 8 }}
     {{- end }}
       serviceAccountName: {{ include "altinity-clickhouse-operator.serviceAccountName" . }}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
       volumes:
         - name: etc-clickhouse-operator-folder
           configMap:
