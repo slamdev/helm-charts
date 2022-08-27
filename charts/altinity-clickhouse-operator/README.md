@@ -1,6 +1,6 @@
 # altinity-clickhouse-operator
 
-![Version: 0.0.20](https://img.shields.io/badge/Version-0.0.20-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.19.1](https://img.shields.io/badge/AppVersion-0.19.1-informational?style=flat-square)
+![Version: 0.0.21](https://img.shields.io/badge/Version-0.0.21-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.19.1](https://img.shields.io/badge/AppVersion-0.19.1-informational?style=flat-square)
 
 Helm chart to deploy [altinity-clickhouse-operator](https://github.com/Altinity/clickhouse-operator).
 
@@ -23,6 +23,9 @@ Refer to operator repo for additional information.
 | additionalResources | list | `[]` | list of additional resources to create (are processed via `tpl` function) |
 | affinity | object | `{}` | affinity for scheduler pod assignment |
 | configs | object | `{"confdFiles":null,"configdFiles":null,"files":null,"templatesdFiles":null,"usersdFiles":null}` | overrides operator default configmaps |
+| dashboards.additionalLabels | object | `{}` |  |
+| dashboards.annotations | object | `{}` |  |
+| dashboards.enabled | bool | `false` | provision https://github.com/Altinity/clickhouse-operator/tree/release-0.19.1/grafana-dashboard as secrets (can be synced by grafana dashboards sidecar https://github.com/grafana/helm-charts/blob/grafana-6.33.1/charts/grafana/values.yaml#L679 ) |
 | fullnameOverride | string | `""` | full name of the chart. |
 | imagePullSecrets | list | `[]` | image pull secret for private images |
 | metrics.env | list | `[]` | additional environment variables for the deployment |
