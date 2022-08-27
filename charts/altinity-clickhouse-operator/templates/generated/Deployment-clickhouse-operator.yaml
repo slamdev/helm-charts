@@ -2,8 +2,10 @@
 #
 # NAMESPACE=kube-system
 # COMMENT=
-# OPERATOR_IMAGE=altinity/clickhouse-operator:0.18.5
-# METRICS_EXPORTER_IMAGE=altinity/metrics-exporter:0.18.5
+# OPERATOR_IMAGE=altinity/clickhouse-operator:0.19.1
+# OPERATOR_IMAGE_PULL_POLICY=Always
+# METRICS_EXPORTER_IMAGE=altinity/metrics-exporter:0.19.1
+# METRICS_EXPORTER_IMAGE_PULL_POLICY=Always
 #
 # Setup Deployment for clickhouse-operator
 # Deployment would be created in kubectl-specified namespace
@@ -13,7 +15,7 @@ metadata:
   name: {{ include "altinity-clickhouse-operator.fullname" . }}
   namespace: {{ .Release.Namespace }}
   labels:
-    clickhouse.altinity.com/chop: 0.18.5
+    clickhouse.altinity.com/chop: 0.19.1
     {{- include "altinity-clickhouse-operator.labels" . | nindent 4 }}
 spec:
   replicas: 1
