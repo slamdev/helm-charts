@@ -3,8 +3,8 @@ name: bazel-remote
 description: |-
   Helm chart to deploy [bazel-remote](https://github.com/buchgr/bazel-remote).
 type: application
-version: 0.0.3
-appVersion: v2.2.0
+version: 0.0.4
+appVersion: v2.3.8
 home: https://github.com/slamdev/helm-charts/tree/master/charts/bazel-remote
 icon: https://bazel.build/images/bazel-icon.svg
 maintainers:
