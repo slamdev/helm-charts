@@ -1,0 +1,12 @@
+apiVersion: v2
+name: gitlab-runner
+description: |-
+  Helm chart to deploy [gitlab-runner](https://gitlab.com/gitlab-org/gitlab-runner).
+type: application
+version: 0.0.1
+appVersion: v15.3.0
+home: https://github.com/slamdev/helm-charts/tree/master/charts/gitlab-runner
+icon: https://gitlab.com/uploads/-/system/project/avatar/250833/runner_logo.png?width=32
+maintainers:
+  - name: slamdev
+    email: valentin.fedoskin@gmail.com

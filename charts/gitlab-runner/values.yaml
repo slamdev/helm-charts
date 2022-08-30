@@ -1,0 +1,151 @@
+# replicaCount -- number of replicas for gitlab-runner deployment.
+replicaCount: 1
+
+image:
+  # image.repository -- image repository
+  repository: gitlab/gitlab-runner
+  # image.tag -- image tag (chart's appVersion value will be used if not set)
+  tag: ""
+  # image.pullPolicy -- image pull policy
+  pullPolicy: IfNotPresent
+
+# imagePullSecrets -- image pull secret for private images
+imagePullSecrets: [ ]
+# nameOverride -- override name of the chart
+nameOverride: ""
+# fullnameOverride -- full name of the chart.
+fullnameOverride: ""
+
+# strategy -- deployment strategy
+strategy: { }
+
+serviceAccount:
+  # serviceAccount.create -- specifies whether a service account should be created
+  create: false
+  # serviceAccount.annotations -- annotations to add to the service account
+  annotations: { }
+  # serviceAccount.name -- the name of the service account to use; if not set and create is true, a name is generated using the fullname template
+  name:
+
+# podSecurityContext -- specifies security settings for a pod
+podSecurityContext: { }
+# fsGroup: 2000
+
+# securityContext -- specifies security settings for a container
+securityContext: { }
+#  capabilities:
+#    drop:
+#    - ALL
+#  readOnlyRootFilesystem: true
+#  runAsNonRoot: true
+#  runAsUser: 1000
+
+service:
+  # service.type -- service type
+  type: ClusterIP
+  # service.ports -- service ports
+  ports:
+    - name: http-metrics
+      port: 80
+      targetPort: http-metrics
+
+# resources -- custom resource configuration
+resources: { }
+#  limits:
+#    cpu: 100m
+#    memory: 128Mi
+#  requests:
+#    cpu: 100m
+#    memory: 128Mi
+
+# nodeSelector -- node for scheduler pod assignment
+nodeSelector: { }
+
+# tolerations -- tolerations for scheduler pod assignment
+tolerations: [ ]
+
+# affinity -- affinity for scheduler pod assignment
+affinity: { }
+
+# volumeMounts -- additional volume mounts
+volumeMounts: [ ]
+#  - name: cache
+#    mountPath: /data/gitlab-runner/cache
+#  - name: docker-socket
+#    mountPath: /var/run
+
+# volumes -- additional volumes
+volumes: [ ]
+#  - name: cache
+#    emptyDir: {}
+#  - name: docker-socket
+#    emptyDir: { }
+
+livenessProbe:
+  httpGet:
+    # livenessProbe.httpGet.path -- path for liveness probe
+    path: /debug/jobs/list
+    # livenessProbe.httpGet.port -- port for liveness probe
+    port: http-metrics
+
+readinessProbe:
+  httpGet:
+    # readinessProbe.httpGet.path -- path for readiness probe
+    path: /debug/jobs/list
+    # readinessProbe.httpGet.port -- port for readiness probe
+    port: http-metrics
+
+# env -- additional environment variables for the deployment
+env: [ ]
+#  - name: CI_SERVER_URL
+#    value: https://gitlab.domain.com/
+#  - name: REGISTRATION_TOKEN
+#    value: XXXXXXXXX
+
+# config -- gitlab-runner config
+config: |-
+  [[runners]]
+  executor = "shell"
+
+# additionalContainers -- extra containers
+additionalContainers: [ ]
+#  - name: dind
+#    image: docker:20.10.14-dind-alpine3.15
+#    securityContext:
+#      privileged: true
+#    args:
+#      - --group=root
+#    env:
+#      - name: DOCKER_TLS_CERTDIR
+#        value: ""
+#    volumeMounts:
+#      - name: docker-socket
+#        mountPath: /var/run
+
+# additionalResources -- list of additional resources to create (are processed via `tpl` function)
+additionalResources: [ ]
+#  - |
+#    apiVersion: rbac.authorization.k8s.io/v1
+#    kind: ClusterRole
+#    metadata:
+#      name: {{ .Release.Namespace }}-{{ include "gitlab-runner.fullname" . }}
+#    rules:
+#      - apiGroups:
+#          - '*'
+#        resources:
+#          - '*'
+#        verbs:
+#          - '*'
+#  - |
+#    apiVersion: rbac.authorization.k8s.io/v1
+#    kind: ClusterRoleBinding
+#    metadata:
+#      name: {{ .Release.Namespace }}-{{ include "gitlab-runner.fullname" . }}
+#    roleRef:
+#      apiGroup: rbac.authorization.k8s.io
+#      kind: ClusterRole
+#      name: {{ .Release.Namespace }}-{{ include "gitlab-runner.fullname" . }}
+#    subjects:
+#      - kind: ServiceAccount
+#        name: {{ include "gitlab-runner.serviceAccountName" . }}
+#        namespace: {{ .Release.Namespace }}

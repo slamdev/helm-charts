@@ -1,0 +1,121 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "gitlab-runner.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "gitlab-runner.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+{{- with .Values.strategy }}
+  strategy:
+    {{ toYaml . | nindent 4 }}
+{{- end }}
+  selector:
+    matchLabels:
+      {{- include "gitlab-runner.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "gitlab-runner.selectorLabels" . | nindent 8 }}
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      serviceAccountName: {{ include "gitlab-runner.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+        - name: registrator
+          image: "{{ .Values.image.repository }}:{{ include "gitlab-runner.tag" . }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args:
+            - register
+            - --non-interactive
+          env:
+          {{- with .Values.env }}
+            {{- . | toYaml | nindent 12 }}
+          {{- end}}
+            - name: CONFIG_FILE
+              value: /opt/gitlab-runner-config/config.toml
+            - name: TEMPLATE_CONFIG_FILE
+              value: /opt/gitlab-runner-configmap/config.template.toml
+            - name: RUNNER_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+          volumeMounts:
+            - name: configmap
+              mountPath: /opt/gitlab-runner-configmap
+              readOnly: true
+            - name: config
+              mountPath: /opt/gitlab-runner-config
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ include "gitlab-runner.tag" . }}"
+          args:
+            - run
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http-metrics
+              containerPort: 9252
+          livenessProbe:
+            {{- toYaml .Values.livenessProbe | nindent 12 }}
+          readinessProbe:
+            {{- toYaml .Values.readinessProbe | nindent 12 }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          env:
+            - name: CONFIG_FILE
+              value: /opt/gitlab-runner-config/config.toml
+            - name: LISTEN_ADDRESS
+              value: ":9252"
+            - name: RUNNER_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+        {{- with .Values.env }}
+            {{- toYaml . | nindent 12 }}
+        {{- end }}
+          lifecycle:
+            preStop:
+              exec:
+                command:
+                  - gitlab-runner
+                  - unregister
+                  - --all-runners
+          volumeMounts:
+            - name: config
+              mountPath: /opt/gitlab-runner-config
+        {{- with .Values.volumeMounts }}
+            {{- toYaml . | nindent 12 }}
+        {{- end }}
+      {{- range .Values.additionalContainers }}
+        - {{ toYaml . | nindent 10 }}
+      {{- end}}
+      volumes:
+        - name: configmap
+          configMap:
+            name: {{ include "gitlab-runner.fullname" . }}
+        - name: config
+          emptyDir: { }
+    {{- with .Values.volumes }}
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
