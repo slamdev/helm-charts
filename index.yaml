@@ -1698,6 +1698,22 @@ entries:
     urls:
     - https://github.com/slamdev/helm-charts/releases/download/gitlab-omnibus-0.0.1/gitlab-omnibus-0.0.1.tgz
     version: 0.0.1
+  gitlab-runner:
+  - apiVersion: v2
+    appVersion: v15.3.0
+    created: "2022-08-30T15:30:33.053778588Z"
+    description: Helm chart to deploy [gitlab-runner](https://gitlab.com/gitlab-org/gitlab-runner).
+    digest: 9cc3a1985a0b408847f4596ab1e0d83895683fdcf4ed208f19eb86e5ce1b7fed
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/gitlab-runner
+    icon: https://gitlab.com/uploads/-/system/project/avatar/250833/runner_logo.png?width=32
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: gitlab-runner
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/gitlab-runner-0.0.1/gitlab-runner-0.0.1.tgz
+    version: 0.0.1
   gke-preemptible-notifier:
   - apiVersion: v2
     appVersion: v0.0.3
@@ -3219,4 +3235,4 @@ entries:
     urls:
     - https://github.com/slamdev/helm-charts/releases/download/zeppelin-0.0.1/zeppelin-0.0.1.tgz
     version: 0.0.1
-generated: "2022-08-29T07:22:34.931902975Z"
+generated: "2022-08-30T15:30:33.054717694Z"
