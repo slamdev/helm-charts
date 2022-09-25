@@ -157,7 +157,7 @@ cleanregCronJob:
     # cleanregCronJob.image.repository -- image repository
     repository: hcguersoy/cleanreg
     # cleanregCronJob.image.tag -- image tag (chart's appVersion value will be used if not set)
-    tag: v0.8.0
+    tag: v0.8.1
     # cleanregCronJob.image.pullPolicy -- image pull policy
     pullPolicy: IfNotPresent
 
