@@ -11,15 +11,11 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: {{ include "altinity-clickhouse-operator.fullname" . }}-metrics
+  name: {{ printf "%s-metrics" (include "altinity-clickhouse-operator.fullname" .) }}
   namespace: {{ .Release.Namespace }}
-  labels:
-    clickhouse.altinity.com/chop: 0.19.1
-    {{- include "altinity-clickhouse-operator.labels" . | nindent 4 }}
+  labels: {{ include "altinity-clickhouse-operator.labels" . | nindent 4 }}
 spec:
   ports:
     - port: 8888
       name: clickhouse-operator-metrics
-      targetPort: metrics
-  selector:
-    {{- include "altinity-clickhouse-operator.selectorLabels" . | nindent 4 }}
+  selector: {{ include "altinity-clickhouse-operator.selectorLabels" . | nindent 4 }}

@@ -14,47 +14,23 @@ apiVersion: apps/v1
 metadata:
   name: {{ include "altinity-clickhouse-operator.fullname" . }}
   namespace: {{ .Release.Namespace }}
-  labels:
-    clickhouse.altinity.com/chop: 0.19.1
-    {{- include "altinity-clickhouse-operator.labels" . | nindent 4 }}
+  labels: {{ include "altinity-clickhouse-operator.labels" . | nindent 4 }}
 spec:
   replicas: 1
   selector:
-    matchLabels:
-      {{- include "altinity-clickhouse-operator.selectorLabels" . | nindent 6 }}
+    matchLabels: {{ include "altinity-clickhouse-operator.selectorLabels" . | nindent 6 }}
   template:
     metadata:
-      labels:
-        {{- include "altinity-clickhouse-operator.selectorLabels" . | nindent 8 }}
+      labels: {{ include "altinity-clickhouse-operator.selectorLabels" . | nindent 8 }}
       annotations:
-        prometheus.io/port: '8888'
-        prometheus.io/scrape: 'true'
+        {{ toYaml .Values.podAnnotations | nindent 8 }}
+        checksum/files: {{ include (print $.Template.BasePath "/generated/ConfigMap-etc-clickhouse-operator-files.yaml") . | sha256sum }}
         checksum/confd-files: {{ include (print $.Template.BasePath "/generated/ConfigMap-etc-clickhouse-operator-confd-files.yaml") . | sha256sum }}
         checksum/configd-files: {{ include (print $.Template.BasePath "/generated/ConfigMap-etc-clickhouse-operator-configd-files.yaml") . | sha256sum }}
-        checksum/files: {{ include (print $.Template.BasePath "/generated/ConfigMap-etc-clickhouse-operator-files.yaml") . | sha256sum }}
         checksum/templatesd-files: {{ include (print $.Template.BasePath "/generated/ConfigMap-etc-clickhouse-operator-templatesd-files.yaml") . | sha256sum }}
         checksum/usersd-files: {{ include (print $.Template.BasePath "/generated/ConfigMap-etc-clickhouse-operator-usersd-files.yaml") . | sha256sum }}
-        {{- if .Values.podAnnotations }}
-        {{- toYaml .Values.podAnnotations | nindent 8 }}
-        {{- end }}
     spec:
-    {{- with .Values.imagePullSecrets }}
-      imagePullSecrets:
-      {{- toYaml . | nindent 8 }}
-    {{- end }}
       serviceAccountName: {{ include "altinity-clickhouse-operator.serviceAccountName" . }}
-    {{- with .Values.nodeSelector }}
-      nodeSelector:
-        {{- toYaml . | nindent 8 }}
-    {{- end }}
-    {{- with .Values.affinity }}
-      affinity:
-        {{- toYaml . | nindent 8 }}
-    {{- end }}
-    {{- with .Values.tolerations }}
-      tolerations:
-        {{- toYaml . | nindent 8 }}
-    {{- end }}
       volumes:
         - name: etc-clickhouse-operator-folder
           configMap:
@@ -73,20 +49,8 @@ spec:
             name: {{ include "altinity-clickhouse-operator.fullname" . }}-usersd-files
       containers:
         - name: {{ .Chart.Name }}
-          image: "{{ .Values.operator.image.repository }}:{{ include "altinity-clickhouse-operator.operator.tag" . }}"
+          image: {{ .Values.operator.image.repository }}:{{ include "altinity-clickhouse-operator.operator.tag" . }}
           imagePullPolicy: {{ .Values.operator.image.pullPolicy }}
-          {{- if .Values.operator.command }}
-          command:
-            {{- range $value := .Values.operator.command }}
-            - {{ $value | quote }}
-            {{- end }}
-          {{- end }}
-          {{- if .Values.operator.args }}
-          args:
-            {{- range $value := .Values.operator.args }}
-            - {{ $value | quote }}
-            {{- end }}
-          {{- end }}
           volumeMounts:
             - name: etc-clickhouse-operator-folder
               mountPath: /etc/clickhouse-operator
@@ -147,26 +111,11 @@ spec:
                 resourceFieldRef:
                   containerName: {{ .Chart.Name }}
                   resource: limits.memory
-          {{- with .Values.operator.env }}
-            {{- toYaml . | nindent 12 }}
-          {{- end }}
-          resources:
-            {{- toYaml .Values.operator.resources | nindent 12 }}
+            {{ with .Values.operator.env }}{{ toYaml . | nindent 12 }}{{ end }}
+          resources: {{ toYaml .Values.operator.resources | nindent 12 }}
         - name: metrics-exporter
-          image: "{{ .Values.metrics.image.repository }}:{{ include "altinity-clickhouse-operator.metrics.tag" . }}"
+          image: {{ .Values.metrics.image.repository }}:{{ include "altinity-clickhouse-operator.metrics.tag" . }}
           imagePullPolicy: {{ .Values.metrics.image.pullPolicy }}
-          {{- if .Values.metrics.command }}
-          command:
-            {{- range $value := .Values.metrics.command }}
-            - {{ $value | quote }}
-            {{- end }}
-          {{- end }}
-          {{- if .Values.metrics.args }}
-          args:
-            {{- range $value := .Values.metrics.args }}
-            - {{ $value | quote }}
-            {{- end }}
-          {{- end }}
           volumeMounts:
             - name: etc-clickhouse-operator-folder
               mountPath: /etc/clickhouse-operator
@@ -181,9 +130,10 @@ spec:
           ports:
             - containerPort: 8888
               name: metrics
-        {{- with .Values.metrics.env }}
+          resources: {{ toYaml .Values.metrics.resources | nindent 12 }}
           env:
-          {{- toYaml . | nindent 12 }}
-        {{- end }}
-          resources:
-            {{- toYaml .Values.metrics.resources | nindent 12 }}
+            {{ with .Values.metrics.env }}{{ toYaml . | nindent 12 }}{{ end }}
+      imagePullSecrets: {{ toYaml .Values.imagePullSecrets | nindent 8 }}
+      nodeSelector: {{ toYaml .Values.nodeSelector | nindent 8 }}
+      affinity: {{ toYaml .Values.affinity | nindent 8 }}
+      tolerations: {{ toYaml .Values.tolerations | nindent 8 }}
