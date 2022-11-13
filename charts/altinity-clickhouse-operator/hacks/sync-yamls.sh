@@ -81,6 +81,9 @@ function process() {
   ServiceAccount)
     update_serviceaccount_resource "${processed_file}"
     ;;
+  Secret)
+    update_secret_resource "${processed_file}"
+    ;;
   CustomResourceDefinition) ;;
 
   *)
@@ -151,6 +154,7 @@ function update_deployment_resource() {
   yq e -i '.spec.template.spec.containers[1].image |= "{{ .Values.metrics.image.repository }}:{{ include \"altinity-clickhouse-operator.metrics.tag\" . }}"' "${file}"
   yq e -i '.spec.template.spec.containers[1].imagePullPolicy |= "{{ .Values.metrics.image.pullPolicy }}"' "${file}"
   yq e -i '.spec.template.spec.containers[1].resources |= "{{ toYaml .Values.metrics.resources | nindent 12 }}"' "${file}"
+  yq e -i '(.spec.template.spec.containers[1].env[] | select(.valueFrom.resourceFieldRef.containerName == "clickhouse-operator") | .valueFrom.resourceFieldRef.containerName) = "{{ .Chart.Name }}"' "${file}"
   yq e -i '.spec.template.spec.containers[1].env += ["{{ with .Values.metrics.env }}{{ toYaml . | nindent 12 }}{{ end }}"]' "${file}"
 
   perl -pi -e "s/'{{ toYaml .Values.podAnnotations \| nindent 8 }}': null/{{ toYaml .Values.podAnnotations \| nindent 8 }}/g" "${file}"
@@ -234,6 +238,36 @@ function update_serviceaccount_resource() {
   yq e -i '.metadata.annotations |= "{{ toYaml .Values.serviceAccount.annotations | nindent 4 }}"' "${file}"
 
   printf '%s\n%s\n' '{{- if .Values.serviceAccount.create -}}' "$(cat "${file}")" >"${file}"
+  printf '%s\n%s\n' "$(cat "${file}")" '{{- end -}}' >"${file}"
+
+  perl -pi -e "s/'//g" "${file}"
+}
+
+function update_secret_resource() {
+  readonly file="${1}"
+  readonly name=$(yq e '.metadata.name' "${file}")
+
+  if [ "${name}" != 'clickhouse-operator' ]; then
+    echo "do not know how to process ${name} secret"
+    exit 1
+  fi
+
+  yq e -i '.metadata.name |= "{{ include \"altinity-clickhouse-operator.fullname\" . }}"' "${file}"
+  yq e -i '.metadata.namespace |= "{{ .Release.Namespace }}"' "${file}"
+  yq e -i '.metadata.labels |= "{{ include \"altinity-clickhouse-operator.labels\" . | nindent 4 }}"' "${file}"
+
+  yq e -i '.data.username |= "{{ .Values.secret.username | b64enc }}"' "${file}"
+  yq e -i '.data.password |= "{{ .Values.secret.password | b64enc }}"' "${file}"
+
+  readonly username=$(yq e '.stringData.username' "${file}")
+  yq e -i '.secret.username |= "'"${username}"'"' "${values_yaml}"
+
+  readonly password=$(yq e '.stringData.password' "${file}")
+  yq e -i '.secret.password |= "'"${password}"'"' "${values_yaml}"
+
+  yq e -i 'del(.stringData)' "${file}"
+
+  printf '%s\n%s\n' '{{- if .Values.secret.create -}}' "$(cat "${file}")" >"${file}"
   printf '%s\n%s\n' "$(cat "${file}")" '{{- end -}}' >"${file}"
 
   perl -pi -e "s/'//g" "${file}"
