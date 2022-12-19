@@ -1853,6 +1853,21 @@ entries:
   gradle-cache:
   - apiVersion: v2
     appVersion: "11.0"
+    created: "2022-12-19T21:36:42.270645736Z"
+    description: Helm chart to deploy [gradle-cache](https://docs.gradle.com/build-cache-node/).
+    digest: f4e2093d48f50a29a1d444d41a6e203f081032fc07da4c3f49f78ec05487f75f
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/gradle-cache
+    icon: https://gradle.org/icon/favicon-32x32.png
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: gradle-cache
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/gradle-cache-0.1.4/gradle-cache-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
+    appVersion: "11.0"
     created: "2022-02-18T17:23:54.5022924Z"
     description: Helm chart to deploy [gradle-cache](https://docs.gradle.com/build-cache-node/).
     digest: df00ceb9241f28b0cbb5f11791138652c586f1d3e656c7cdf8b5caf91a703ff0
@@ -3286,4 +3301,4 @@ entries:
     urls:
     - https://github.com/slamdev/helm-charts/releases/download/zeppelin-0.0.1/zeppelin-0.0.1.tgz
     version: 0.0.1
-generated: "2022-11-13T11:21:57.325801755Z"
+generated: "2022-12-19T21:36:42.271481635Z"
