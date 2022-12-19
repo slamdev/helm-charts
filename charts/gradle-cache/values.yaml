@@ -86,6 +86,8 @@ ingress:
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
+  # ingress.ingressClassName -- ingress name of the IngressClass cluster resource
+  ingressClassName: ""
 
 # resources -- custom resource configuration
 resources: {}

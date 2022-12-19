@@ -31,6 +31,7 @@ Helm chart to deploy [gradle-cache](https://docs.gradle.com/build-cache-node/).
 | ingress.enabled | bool | `false` | enables Ingress for gradle-cache |
 | ingress.hosts | list | `[]` | ingress accepted hostnames |
 | ingress.tls | list | `[]` | ingress TLS configuration |
+| ingress.ingressClassName | string | `""` | ingress name of the IngressClass cluster resource |
 | livenessProbe.httpGet.path | string | `"/"` | path for liveness probe |
 | livenessProbe.httpGet.port | string | `"http"` | port for liveness probe |
 | nameOverride | string | `""` | override name of the chart |
