@@ -130,6 +130,8 @@ additionalResources: [ ]
 #       mykey: my-value
 
 garbageCollectCronJob:
+  # garbageCollectCronJob.podAnnotations -- pod annotations
+  podAnnotations: { }
   # garbageCollectCronJob.successfulJobsHistoryLimit -- the number of successful finished jobs to retain
   successfulJobsHistoryLimit: 3
   # garbageCollectCronJob.failedJobsHistoryLimit -- the number of failed finished jobs to retain
@@ -152,6 +154,9 @@ garbageCollectCronJob:
 #      memory: 128Mi
 
 cleanregCronJob:
+
+  # cleanregCronJob.podAnnotations -- pod annotations
+  podAnnotations: {}
 
   image:
     # cleanregCronJob.image.repository -- image repository

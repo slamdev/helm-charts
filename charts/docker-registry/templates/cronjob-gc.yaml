@@ -6,6 +6,8 @@ metadata:
   labels:
     {{- include "docker-registry.labels" . | nindent 4 }}
     app.kubernetes.io/component: garbage-collect
+  annotations:
+    {{- toYaml .Values.garbageCollectCronJob.annotations | nindent 4 }}
 spec:
   concurrencyPolicy: Forbid
   successfulJobsHistoryLimit: {{ .Values.garbageCollectCronJob.successfulJobsHistoryLimit }}
@@ -22,6 +24,8 @@ spec:
           labels:
             {{- include "docker-registry.selectorLabels" . | nindent 12 }}
             app.kubernetes.io/component: garbage-collect
+          annotations:
+            {{- toYaml .Values.garbageCollectCronJob.podAnnotations | nindent 12 }}
         spec:
           restartPolicy: {{ .Values.garbageCollectCronJob.restartPolicy }}
         {{- with .Values.imagePullSecrets }}

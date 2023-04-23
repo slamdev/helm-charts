@@ -3,7 +3,7 @@ name: docker-registry
 description: |-
   Helm chart to deploy [docker-registry](https://github.com/distribution/distribution).
 type: application
-version: 0.0.3
+version: 0.0.4
 appVersion: 2.8.1
 home: https://github.com/slamdev/helm-charts/tree/master/charts/docker-registry
 icon: https://docs.docker.com/favicons/docs@2x.ico

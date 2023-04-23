@@ -1,6 +1,6 @@
 # docker-registry
 
-![Version: 0.0.3](https://img.shields.io/badge/Version-0.0.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.8.1](https://img.shields.io/badge/AppVersion-2.8.1-informational?style=flat-square)
+![Version: 0.0.4](https://img.shields.io/badge/Version-0.0.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.8.1](https://img.shields.io/badge/AppVersion-2.8.1-informational?style=flat-square)
 
 Helm chart to deploy [docker-registry](https://github.com/distribution/distribution).
 
@@ -25,6 +25,7 @@ Helm chart to deploy [docker-registry](https://github.com/distribution/distribut
 | cleanregCronJob.image.repository | string | `"hcguersoy/cleanreg"` | image repository |
 | cleanregCronJob.image.tag | string | `"v0.8.0"` | image tag (chart's appVersion value will be used if not set) |
 | cleanregCronJob.imagePullSecrets | list | `[]` | image pull secret for private images |
+| cleanregCronJob.podAnnotations | object | `{}` | pod annotations |
 | cleanregCronJob.podSecurityContext | object | `{}` | specifies security settings for a pod |
 | cleanregCronJob.resources | object | `{}` | custom resource configuration |
 | cleanregCronJob.restartPolicy | string | `"Never"` | container restart policy |
@@ -41,6 +42,7 @@ Helm chart to deploy [docker-registry](https://github.com/distribution/distribut
 | garbageCollectCronJob.deleteUntagged | bool | `true` | delete manifests that are not currently referenced via tag |
 | garbageCollectCronJob.dryRun | bool | `false` | do everything except remove the blobs |
 | garbageCollectCronJob.failedJobsHistoryLimit | int | `1` | the number of failed finished jobs to retain |
+| garbageCollectCronJob.podAnnotations | object | `{}` | pod annotations |
 | garbageCollectCronJob.resources | object | `{}` | custom resource configuration |
 | garbageCollectCronJob.restartPolicy | string | `"Never"` | container restart policy |
 | garbageCollectCronJob.schedule | string | `"@daily"` | the schedule in Cron format, see https://en.wikipedia.org/wiki/Cron |
