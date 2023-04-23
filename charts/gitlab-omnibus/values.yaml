@@ -243,6 +243,8 @@ gitlabConf: |-
 backupCronJob:
   # backupCronJob.enabled -- enable scheduled backups
   enabled: true
+  # backupCronJob.podAnnotations -- pod annotations
+  podAnnotations: { }
   # backupCronJob.schedule -- how often to run backaup job
   schedule: "@daily"
   # backupCronJob.image -- image

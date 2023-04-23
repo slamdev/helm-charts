@@ -21,6 +21,8 @@ spec:
           labels:
             {{- include "gitlab.selectorLabels" . | nindent 12 }}
             component: 'backup'
+          annotations:
+            {{- toYaml .Values.backupCronJob.podAnnotations | nindent 12 }}
         spec:
         {{- with .Values.imagePullSecrets }}
           imagePullSecrets:

@@ -1,6 +1,6 @@
 # gitlab-omnibus
 
-![Version: 0.1.2](https://img.shields.io/badge/Version-0.1.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 15.2.1-ee.0](https://img.shields.io/badge/AppVersion-15.2.1--ee.0-informational?style=flat-square)
+![Version: 0.1.3](https://img.shields.io/badge/Version-0.1.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 15.2.1-ee.0](https://img.shields.io/badge/AppVersion-15.2.1--ee.0-informational?style=flat-square)
 
 Helm chart to deploy [Omnibus Gitlab](https://docs.gitlab.com/omnibus/).
 
@@ -21,6 +21,7 @@ Helm chart to deploy [Omnibus Gitlab](https://docs.gitlab.com/omnibus/).
 | backupCronJob.command | list | `["gitlab-backup","create","SKIP=uploads,builds,artifacts,terraform_state,registry,pages,packages","GZIP_RSYNCABLE=yes","STRATEGY=copy"]` | command to execute in gitlab container |
 | backupCronJob.enabled | bool | `true` | enable scheduled backups |
 | backupCronJob.image | string | `"daedalusproject/base_kubectl"` | image |
+| backupCronJob.podAnnotations | object | `{}` | pod annotations |
 | backupCronJob.resources | object | `{"requests":{"cpu":"10m","memory":"32Mi"}}` | custom resource configuration |
 | backupCronJob.schedule | string | `"@daily"` | how often to run backaup job |
 | containerPorts | list | `[{"containerPort":8005,"name":"http"},{"containerPort":22,"name":"ssh"}]` | ports exposed by the container |
