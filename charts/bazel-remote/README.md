@@ -26,7 +26,7 @@ Helm chart to deploy [bazel-remote](https://github.com/buchgr/bazel-remote).
 | image.repository | string | `"buchgr/bazel-remote-cache"` | image repository |
 | image.tag | string | `""` | image tag (chart's appVersion value will be used if not set) |
 | imagePullSecrets | list | `[]` | image pull secret for private images |
-| kind | string | `"Deployment"` | resource type to operate bazel-remote, can be StatefulSet or Deployment |
+| kind | string | `"Deployment"` | resource type to operate bazel-remote, can be StatefulSet, Deployment or DaemonSet |
 | livenessProbe.httpGet.path | string | `"/status"` | path for liveness probe |
 | livenessProbe.httpGet.port | string | `"http"` | port for liveness probe |
 | nameOverride | string | `""` | override name of the chart |
@@ -48,6 +48,7 @@ Helm chart to deploy [bazel-remote](https://github.com/buchgr/bazel-remote).
 | startupProbe.httpGet.path | string | `"/status"` |  |
 | startupProbe.httpGet.port | string | `"http"` |  |
 | tolerations | list | `[]` | tolerations for scheduler pod assignment |
+| updateStrategy | object | `{}` | configure automated rolling updates for pods |
 | volumeClaimTemplates | list | `[]` | volume claim templates; used only when 'kind: StatefulSet' |
 | volumeMounts | list | `[]` | additional volume mounts |
 | volumes | list | `[]` | additional volumes |

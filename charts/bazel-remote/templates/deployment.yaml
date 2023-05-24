@@ -17,4 +17,8 @@ spec:
       {{- include "bazel-remote.selectorLabels" . | nindent 6 }}
   template:
     {{- include "bazel-remote.pod" . | nindent 4 }}
+{{- with .Values.updateStrategy }}
+  strategy:
+    {{- toYaml . | nindent 4 }}
+{{- end }}
 {{- end }}

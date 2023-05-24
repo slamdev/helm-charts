@@ -1,4 +1,4 @@
-# kind -- resource type to operate bazel-remote, can be StatefulSet or Deployment
+# kind -- resource type to operate bazel-remote, can be StatefulSet, Deployment or DaemonSet
 kind: Deployment
 
 # replicaCount -- number of replicas for bazel-remote deployment.
@@ -143,3 +143,10 @@ conf: |-
   access_log_level: none
   port: 8080
   grpc_port: 9092
+
+# updateStrategy -- configure automated rolling updates for pods
+updateStrategy: {}
+  # rollingUpdate:
+  #   maxSurge: 0
+  #   maxUnavailable: 25%
+  # type: RollingUpdate
