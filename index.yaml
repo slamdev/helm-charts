@@ -2501,6 +2501,22 @@ entries:
     urls:
     - https://github.com/slamdev/helm-charts/releases/download/kube-resource-report-0.0.1/kube-resource-report-0.0.1.tgz
     version: 0.0.1
+  marge-bot:
+  - apiVersion: v2
+    appVersion: 0.11.0
+    created: "2023-06-07T21:51:49.22911139Z"
+    description: Helm chart to deploy [marge-bot](https://github.com/hiboxsystems/marge-bot).
+    digest: 606e8be0aa4191f1feb45f7ed172fa35a054683aab6490c041a18717ee36ed8c
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/marge-bot
+    icon: https://docs.gitlab.com/assets/images/gitlab-logo.svg
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: marge-bot
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/marge-bot-0.0.1/marge-bot-0.0.1.tgz
+    version: 0.0.1
   nginx:
   - apiVersion: v2
     appVersion: 1.19.10
@@ -3331,4 +3347,4 @@ entries:
     urls:
     - https://github.com/slamdev/helm-charts/releases/download/zeppelin-0.0.1/zeppelin-0.0.1.tgz
     version: 0.0.1
-generated: "2023-04-23T12:15:20.956302642Z"
+generated: "2023-06-07T21:51:49.229888694Z"
