@@ -1,0 +1,12 @@
+apiVersion: v2
+name: marge-bot
+description: |-
+  Helm chart to deploy [marge-bot](https://github.com/hiboxsystems/marge-bot).
+type: application
+version: 0.0.1
+appVersion: "0.11.0"
+home: https://github.com/slamdev/helm-charts/tree/master/charts/marge-bot
+icon: https://docs.gitlab.com/assets/images/gitlab-logo.svg
+maintainers:
+  - name: slamdev
+    email: valentin.fedoskin@gmail.com
