@@ -1,6 +1,6 @@
-{{- if eq .Values.kind "StatefulSet" }}
+{{- if eq .Values.kind "DaemonSet" }}
 apiVersion: apps/v1
-kind: StatefulSet
+kind: DaemonSet
 metadata:
   name: {{ include "bazel-remote.fullname" . }}
   namespace: {{ .Release.Namespace }}
@@ -11,19 +11,13 @@ metadata:
   labels:
     {{- include "bazel-remote.labels" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       {{- include "bazel-remote.selectorLabels" . | nindent 6 }}
-  serviceName: {{ include "bazel-remote.fullname" . }}
   template:
     {{- include "bazel-remote.pod" . | nindent 4 }}
-{{- with .Values.volumeClaimTemplates }}
-  volumeClaimTemplates:
-    {{- toYaml . | nindent 4 }}
-{{- end }}
-{{- with .Values.updateStrategy }}
+  {{- with .Values.updateStrategy }}
   updateStrategy:
     {{- toYaml . | nindent 4 }}
-{{- end }}
+  {{- end }}
 {{- end }}
