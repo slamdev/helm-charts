@@ -33,6 +33,7 @@ Helm chart to deploy [bazel-remote](https://github.com/buchgr/bazel-remote).
 | nodeSelector | object | `{}` | node for scheduler pod assignment |
 | podAnnotations | object | `{}` | annotations to add to the pod |
 | podSecurityContext | object | `{}` | specifies security settings for a pod |
+| priorityClassName | string | `""` | set priority class for a pod |
 | readinessProbe.httpGet.path | string | `"/status"` | path for readiness probe |
 | readinessProbe.httpGet.port | string | `"http"` | port for readiness probe |
 | replicaCount | int | `1` | number of replicas for bazel-remote deployment. |

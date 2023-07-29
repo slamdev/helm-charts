@@ -150,3 +150,6 @@ updateStrategy: {}
   #   maxSurge: 0
   #   maxUnavailable: 25%
   # type: RollingUpdate
+
+# priorityClassName -- set priority class
+# priorityClassName: system-cluster-critical

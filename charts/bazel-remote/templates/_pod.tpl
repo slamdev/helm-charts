@@ -66,5 +66,7 @@ spec:
   tolerations:
     {{- toYaml . | nindent 4 }}
 {{- end }}
-
+{{- with .Values.priorityClassName }}
+  priorityClassName: {{ . }}
+{{- end }}
 {{- end -}}
