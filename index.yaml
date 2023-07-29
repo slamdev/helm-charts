@@ -450,6 +450,21 @@ entries:
   bazel-remote:
   - apiVersion: v2
     appVersion: v2.4.1
+    created: "2023-07-29T19:42:00.21945881Z"
+    description: Helm chart to deploy [bazel-remote](https://github.com/buchgr/bazel-remote).
+    digest: 1f9e3d7248810b0589099cddd4937c61cc2b1196e026fbe88964a3fb6ab03cb7
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/bazel-remote
+    icon: https://bazel.build/images/bazel-icon.svg
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: bazel-remote
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/bazel-remote-0.0.6/bazel-remote-0.0.6.tgz
+    version: 0.0.6
+  - apiVersion: v2
+    appVersion: v2.4.1
     created: "2023-06-11T09:37:37.076944907Z"
     description: Helm chart to deploy [bazel-remote](https://github.com/buchgr/bazel-remote).
     digest: a5dff09ddb9c230f0ff2fa1da2b7f0b8d3d434892cca1e7fac52668136cc9a3e
@@ -3362,4 +3377,4 @@ entries:
     urls:
     - https://github.com/slamdev/helm-charts/releases/download/zeppelin-0.0.1/zeppelin-0.0.1.tgz
     version: 0.0.1
-generated: "2023-06-11T09:37:37.077996513Z"
+generated: "2023-07-29T19:42:00.220599136Z"
