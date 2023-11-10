@@ -6,6 +6,13 @@ image:
   # image.pullPolicy -- image pull policy
   pullPolicy: IfNotPresent
 
+initContainer:
+  image:
+    # initContainer.image.repository -- image repository for initContainer
+    repository: busybox
+    # initContainer.image.tag -- image tag for initContainer
+    tag: "1.33.0"
+
 # imagePullSecrets -- image pull secret for private images
 imagePullSecrets: []
 # nameOverride -- override name of the chart
