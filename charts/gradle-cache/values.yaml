@@ -11,7 +11,7 @@ initContainer:
     # initContainer.image.repository -- image repository for initContainer
     repository: busybox
     # initContainer.image.tag -- image tag for initContainer
-    tag: "1.33.0"
+    tag: "1.36.1"
 
 # imagePullSecrets -- image pull secret for private images
 imagePullSecrets: []
