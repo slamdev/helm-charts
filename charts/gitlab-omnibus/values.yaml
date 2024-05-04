@@ -264,3 +264,18 @@ backupCronJob:
   #  limits:
   #    cpu: 100m
   #    memory: 128Mi
+
+ingress:
+  enabled: false
+  #enabled: true
+  className: "traefik"
+  hosts:
+    - host: gitlab.example.com
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls:
+    - secretName: Some-secret
+      hosts:
+        - gitlab.example.com
+
