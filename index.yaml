@@ -1481,6 +1481,21 @@ entries:
   gitlab-omnibus:
   - apiVersion: v2
     appVersion: 15.2.1-ee.0
+    created: "2026-02-09T12:05:46.685933369Z"
+    description: Helm chart to deploy [Omnibus Gitlab](https://docs.gitlab.com/omnibus/).
+    digest: bfe875d49c30f1a83988333f5ccf668d225d9f94338a4e41aaaab2147c171431
+    home: https://github.com/slamdev/helm-charts/tree/master/charts/gitlab-omnibus
+    icon: https://docs.gitlab.com/assets/images/gitlab-logo.svg
+    maintainers:
+    - email: valentin.fedoskin@gmail.com
+      name: slamdev
+    name: gitlab-omnibus
+    type: application
+    urls:
+    - https://github.com/slamdev/helm-charts/releases/download/gitlab-omnibus-0.1.4/gitlab-omnibus-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
+    appVersion: 15.2.1-ee.0
     created: "2023-04-23T12:15:20.954013955Z"
     description: Helm chart to deploy [Omnibus Gitlab](https://docs.gitlab.com/omnibus/).
     digest: 82d3776abef7f81587b0b0bebc7ee6c182085c591e54039f4e32391e92b80dbf
@@ -3407,4 +3422,4 @@ entries:
     urls:
     - https://github.com/slamdev/helm-charts/releases/download/zeppelin-0.0.1/zeppelin-0.0.1.tgz
     version: 0.0.1
-generated: "2023-11-28T22:11:57.915493395Z"
+generated: "2026-02-09T12:05:46.686616835Z"
