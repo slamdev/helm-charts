@@ -56,6 +56,12 @@ spec:
               path: /-/readiness?token={{.Values.healthCheckToken}}
               port: http
         {{- end }}
+        {{- if .Values.postStartCommand }}
+          lifecycle:
+            postStart:
+              exec:
+                command: {{ .Values.postStartCommand }}
+        {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:

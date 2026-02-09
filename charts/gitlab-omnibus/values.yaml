@@ -161,6 +161,12 @@ envFrom: []
 #  - configMapRef:
 #      name: gitlab-cm
 
+# postStartCommand -- command to execute in gitlab container after start
+postStartCommand: []
+# - /bin/bash
+# - -c
+# - echo Hello
+
 # additionalResources -- list of additional resources to create (are processed via `tpl` function)
 additionalResources: []
 # - |
