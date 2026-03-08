@@ -60,7 +60,7 @@ spec:
           lifecycle:
             postStart:
               exec:
-                command: {{ .Values.postStartCommand }}
+                command: {{ .Values.postStartCommand | toYaml | nindent 18 }}
         {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
