@@ -21,6 +21,9 @@ serviceAccount:
   # serviceAccount.name -- the name of the service account to use; if not set and create is true, a name is generated using the fullname template
   name:
 
+# priorityClassName -- priority class name for the pod
+# priorityClassName: high-priority
+
 # podSecurityContext -- specifies security settings for a pod
 podSecurityContext: {}
 #  fsGroup: 2000
