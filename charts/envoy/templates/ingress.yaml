@@ -38,13 +38,13 @@ spec:
           - path: {{ . }}
           {{- if semverCompare "<1.19-0" $.Capabilities.KubeVersion.GitVersion }}
             backend:
-              serviceName: {{ $fullName }}
+              serviceName: {{ default (include "envoy.fullname" $) ($.Values.service.name) }}
               servicePort: {{ $svcPort }}
           {{- else }}
             pathType: ImplementationSpecific
             backend:
               service:
-                name: {{ $fullName }}
+                name: {{ default (include "envoy.fullname" $) ($.Values.service.name) }}
                 port:
                   number: {{ $svcPort }}
           {{- end }}

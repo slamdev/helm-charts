@@ -40,6 +40,8 @@ podSecurityContext: {}
 # fsGroup: 2000
 
 service:
+  # service.name -- name of the service (defaults to the fullname template)
+  name: ""
   # service.type -- service type
   type: ClusterIP
   # service.ports -- list of service ports
